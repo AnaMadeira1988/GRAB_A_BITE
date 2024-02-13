@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_13_193622) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_13_194023) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_13_193622) do
     t.index ["user_id"], name: "index_guests_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.date "date"
+    t.text "content"
+    t.integer "cleanliness"
+    t.integer "food"
+    t.integer "experience"
+    t.integer "location"
+    t.integer "accessibility"
+    t.bigint "user_id", null: false
+    t.bigint "guest_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_reviews_on_guest_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -66,4 +82,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_13_193622) do
   add_foreign_key "bites", "users"
   add_foreign_key "guests", "bites"
   add_foreign_key "guests", "users"
+  add_foreign_key "reviews", "guests"
+  add_foreign_key "reviews", "users"
 end
