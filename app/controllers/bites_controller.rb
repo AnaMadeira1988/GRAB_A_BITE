@@ -1,0 +1,2 @@
+class BitesController < ApplicationController
+end
