@@ -1,6 +1,7 @@
 <%= render 'shared/banner' %>
 
 <div class="container form-sign-up border p-4">
+
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -15,24 +16,29 @@
       <%= f.input :first_name,
                     required: true,
                     autofocus: true,
-                    input_html: { placeholder: "John" }%>
+                    input_html: { placeholder: "e.g: John" }%>
       <%= f.input :last_name,
                   required: true,
                   autofocus: true,
-                  input_html: { placeholder: "Doe" }%>
+                  input_html: { placeholder: "e.g: Doe" }%>
       <%= f.input :birth_date,
+                  as: :date,
+                  html5: true,
                   required: true,
                   autofocus: true %>
       <%= f.input :gender,
-                  required: true,
-                  autofocus: true %>
+                  collection: ['Male', 'Female', 'I prefer not to say'],
+                  prompt: 'Choose your gender',
+                  required: true %>
       <%= f.input :pronouns,
                   required: false,
                   autofocus: true,
-                  input_html: { placeholder: "he/him" }%>
+                  input_html: { placeholder: "e.g: he/him" }%>
       <%= f.input :nationality,
+                  as: :country,
                   required: false,
-                  autofocus: true %>
+                  autofocus: true,
+                  prompt: 'Choose your nationality' %>
       <%= f.input :phone_number,
                   required: true,
                   autofocus: true %>
@@ -45,7 +51,7 @@
       <%= f.input :description,
                   required: true,
                   autofocus: true,
-                  input_html: { placeholder: "Tell us hou cool you are!" }%>
+                  input_html: { placeholder: "Tell us why you are joining Grab'a'Bite! 😁" } %>
       <%= f.input :password,
                 hint: "leave it blank if you don't want to change it",
                 required: false,
@@ -59,7 +65,7 @@
                 input_html: { autocomplete: "current-password" } %>
     </div>
 
-    <div class="form-actions">
+    <div class="form-actions mb-3">
       <%= f.button :submit, "Update" %>
     </div>
   <% end %>
