@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mb-4">
   <h2>Sign up</h2>
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -9,47 +9,19 @@
       <%= f.input :first_name,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "First name" }%>
+                  input_html: { placeholder: "e.g: John" }%>
       <%= f.input :last_name,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "Last name" }%>
+                  input_html: { placeholder: "e.g: Doe" }%>
       <%= f.input :birth_date,
                   as: :date,
                   html5: true,
                   required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "Birth date" }%>
-      <%= f.input :gender,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "Gender" }%>
-      <%= f.input :pronouns,
-                  required: false,
-                  autofocus: true,
-                  input_html: { autocomplete: "Pronouns" }%>
-      <%= f.input :nationality,
-                  required: false,
-                  autofocus: true,
-                  input_html: { autocomplete: "Nationality" }%>
+                  autofocus: true %>
       <%= f.input :phone_number,
                   required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "Phone number" }%>
-      <%= f.input :address,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "Address" }%>
-      <%= f.input :languages,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "Languages" }%>
-
-      <%= f.input :description,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "Description" }%>
-
+                  autofocus: true %>
       <%= f.input :email,
                   required: true,
                   autofocus: true,
@@ -63,8 +35,8 @@
                   input_html: { autocomplete: "New-password" } %>
     </div>
 
-    <div class="form-actions">
-      <%= f.button :submit, "Sign up" %>
+    <div class="form-actions mb-3">
+      <%= f.button :submit, "Sign up", class:"btn btn-outline-dark" %>
     </div>
   <% end %>
 
