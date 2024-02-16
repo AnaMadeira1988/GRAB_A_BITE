@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "bites#index"
 
-  resources :bites, only: [:new, :create]
+  resources :bites, only: [:new, :create, :edit, :update]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
