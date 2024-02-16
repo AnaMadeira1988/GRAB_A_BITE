@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "bites#index"
 
-  resources :bites, only: %I[new create]
-
   get '/users/:id', to: 'users#show', as: 'user'
+  
+  resources :bites, only: [:new, :create, :edit, :update]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

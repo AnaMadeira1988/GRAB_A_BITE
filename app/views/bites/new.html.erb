@@ -1,23 +1,7 @@
-<div class="container mb-4">
+<% images = [ "bite_banner1.jpg","bite_banner2.jpg", "bite_banner3.jpg","bite_banner4.jpg","bite_banner5.jpg", "bite_banner6.jpg" ]%>
+<%= render 'shared/banner', images: images %>
 
-  <%= simple_form_for @bite do |f| %>
-    <%= f.input :name, as: :string, require: true, input_html: { placeholder: 'e.g: Seafood Spaghetti 🍝' } %>
-    <%= f.input :date, as: :date, html5: true, required: true %>
-    <%= f.input :dietary_options, as: :text, required: true %>
-    <%= f.input :price, as: :float, required: true %>
-    <%= f.input :meal_type,
-                required: true,
-                label: 'Meal',
-                collection: ['Breakfast', 'Lunch', 'Brunch', 'Dinner', 'Dessert', 'Snack', 'Drinks', 'Other'],
-                prompt: 'Choose your meal' %>
-    <%= f.input :local_drinks, as: :boolean, required: true %>
-    <%= f.input :dessert, as: :boolean, required: true %>
-    <%= f.input :number_of_guests, as: :integer, required: true, input_html: { min: 1, value: 1 } %>
-    <%= f.input :local_experience, as: :text, required: true %>
-    <%= f.input :location, as: :text, required: true %>
-    <%= f.input :address, as: :text, required: true %>
-    <%= f.input :accessibility, as: :text, required: true %>
-    <%= f.button :submit, class: 'btn btn-outline-dark' %>
-  <% end %>
-
+<div class="container form-sign-up border border-dark p-3 mb-4">
+  <h2 class="text-center mb-3 mt-2 fw-bolder">Add a Bite</h2>
+  <%= render 'shared/bite_form', bite: @bite %>
 </div>

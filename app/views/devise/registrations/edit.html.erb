@@ -1,6 +1,7 @@
-<%= render 'shared/banner' %>
+<% images = [ "banner1.jpg","banner5.jpg","banner6.jpg","banner7.jpg" ]%>
+<%= render 'shared/banner', images: images %>
 
-<div class="container form-sign-up border p-4">
+<div class="container form-sign-up border p-4 mb-4">
 
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 

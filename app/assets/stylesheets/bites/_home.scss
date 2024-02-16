@@ -1,6 +1,8 @@
 // Specific CSS for your home-page
 body {
-  background: linear-gradient(30deg, rgba(151, 162, 159, 0.8) 0,20%, rgba(208, 151, 130, 0.8));
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
