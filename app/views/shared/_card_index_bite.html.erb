@@ -1,0 +1,24 @@
+<div class="card-card-bite">
+    <%= image_tag 'banner4.jpg', class: "image-card-bite" %>
+    <div class="details-card-bite">
+        <%= image_tag 'banner1.jpg', class:"avatar-card-bite" %>
+        <p><strong><%= bite.name.capitalize %></strong></p>
+        <p><small><%= bite.location.capitalize %></small></p>
+        <p><i class="fa-regular fa-calendar"></i> <%= bite.date %><span class="rating-card-bite">⭐️4</span></p>
+
+        <div class="drink-dessert">
+          <div style="display: flex; justify-content: space-between;">
+            <div>
+              <i class="fa-solid fa-users"></i> <%= bite.number_of_guests %>
+              <i class="fa-solid fa-euro-sign"></i> <%= bite.price %>
+            </div>
+            <div>
+              <i class="fa-solid fa-martini-glass"></i>
+              <input type="checkbox" id="alcohol" name="alcohol" value="true" <%= bite.local_drinks ? 'checked' : '' %> disabled>
+              <i class="fa-solid fa-cake-candles"></i>
+              <input type="checkbox" id="dessert" name="dessert" value="true" <%= bite.dessert ? 'checked' : '' %> disabled>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
