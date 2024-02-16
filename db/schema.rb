@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_15_135718) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_16_194539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_15_135718) do
     t.boolean "dessert"
     t.integer "number_of_guests"
     t.text "local_experience"
-    t.text "location"
+    t.string "city"
     t.text "address"
     t.text "accessibility"
     t.datetime "created_at", null: false
