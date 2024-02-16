@@ -1,0 +1,23 @@
+<div class="container">
+  <%= image_tag "https://avatars.githubusercontent.com/u/145844680?v=4", class: "avatar-extra-large", alt: "avatar-large" %>
+  <h5><strong>Host Stats</strong></h5>
+  <% review = @user.review %>
+    <% if review.any? %>
+      <% cleanliness_avg = review.average(:cleanliness) %>
+      <% location_avg = review.average(:location) %>
+      <% food_avg = review.average(:food) %>
+      <% experience_avg = review.average(:experience) %>
+      <% accessibility_avg = review.average(:accessibility) %>
+
+      <h5><i class="fa-solid fa-star fa-sm" style="color: #FFD43B;"></i> <%= experience_avg %></h5>
+
+      <div class="rating-bars">
+        <% [cleanliness_avg, location_avg, accessibility_avg, food_avg].each do |rating| %>
+          <div class="bar" style="width: <%= rating * 10 %>%;"></div>
+        <% end %>
+      </div>
+
+    <% else %>
+      <h6><%= @user.name %> hasn't hosted yet!</h6>
+    <% end %>
+</div>
