@@ -1,8 +1,6 @@
 class BitesController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
-  #def new
-    #@bite = current_user.bites.new
-  #end
+
   def index
   end
 
