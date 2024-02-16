@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon" style="background-color: rgba(167, 93, 93, 0.8);">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
+    <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "logo2.png" %>
     <% end %>
 
@@ -12,7 +12,7 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "New Bite", "#", class: "nav-link btn btn-outline-light custom-btn" %>
+            <%= link_to "New Bite", new_bite_path, class: "nav-link btn btn-outline-light custom-btn" %>
           </li>
           <li class="nav-item">
             <%= link_to "Dashboard", "#", class: "nav-link btn btn-outline-light custom-btn" %>
