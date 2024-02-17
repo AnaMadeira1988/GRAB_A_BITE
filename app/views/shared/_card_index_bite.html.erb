@@ -13,10 +13,10 @@
     </div>
 
     <div class="drink-dessert text-body-secondary">
-      <p><i class="fa-regular fa-calendar fs-6"></i> <%= bite.date %>
+      <p><i class="fa-regular fa-calendar fs-6"></i> <%= bite.date.strftime("%d-%m-%Y") %>
       <div style="display: flex; justify-content: space-between">
         <div>
-          <i class="fa-solid fa-users"></i> <%= bite.number_of_guests %>
+          <span><i class="fa-solid fa-users"></i> <%= bite.number_of_guests %></span>
 
           <% if bite.local_drinks %>
             <i class="fa-solid fa-martini-glass"></i>

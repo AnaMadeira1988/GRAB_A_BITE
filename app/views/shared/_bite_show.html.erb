@@ -5,8 +5,8 @@
     <div class="modal-content rounded-5">
       <div class="modal-header">
         <div class="d-flex flex-column ps-3 pt-2">
-          <h3 class="modal-title fw-bold" id="biteModalLabel"><%= bite.name.capitalize %><span class="fs-6 fw-light"> (<%= bite.meal_type %>)</span></h3>
-          <h6><%= bite.city.capitalize %> | <%= bite.date %></h6>
+          <h3 class="modal-title fw-bold" id="biteModalLabel"><%= bite.name.capitalize %></h3>
+          <h6><%= bite.city.capitalize %> | <%= bite.meal_type %> | <%= bite.date.strftime("%d-%m-%Y") %></h6>
         </div>
 
         <button type="button" class="btn-close pe-5" data-bs-dismiss="modal" aria-label="Close" style="margin-top: -30px;"></button>
@@ -19,10 +19,10 @@
             <%= image_tag 'banner1.jpg', class:"d-block w-100", alt: bite.name %>
           </div>
           <div class="carousel-item">
-            <%= image_tag 'banner2.jpg', class:"d-block w-100", alt: bite.name  %>
+            <%= image_tag 'banner2.jpg', class:"d-block w-100", alt: bite.name %>
           </div>
           <div class="carousel-item">
-            <%= image_tag 'banner3.jpg', class:"d-block w-100", alt: bite.name  %>
+            <%= image_tag 'banner3.jpg', class:"d-block w-100", alt: bite.name %>
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -44,7 +44,7 @@
 
           <!-- Labels -->
           <div class="fs-5 col-2 text-end">
-            <i class="fa-solid fa-users"></i> <%= bite.number_of_guests %>
+            <span><i class="fa-solid fa-users"></i> <%= bite.number_of_guests %></span>
 
             <% if bite.local_drinks %>
               <i class="fa-solid fa-martini-glass"></i>
@@ -58,14 +58,14 @@
 
 
         <!-- Inject reviews and ratings -->
-        <div>
-          <div class="d-flex">
+        <div class="d-flex">
+          <div class="d-flex flex-column">
             <%= image_tag 'banner1.jpg', class:"avatar-card-bite" %>
-            <p class="fs-5 fw-semibold" style=" margin-top: 5px; margin-left: 5px;"><%= "#{bite.user.first_name} #{bite.user.last_name}" %></p>
+            <p class="text-end" style="margin: -12px 0 0 37px;"><i class="fa-solid fa-star" style="color: #ffd500;"></i><span>4</span></p>
           </div>
-          <div class="d-flex">
-            <p style="margin-left: 37px; margin-top: -13px;  margin-bottom: 0;"><i class="fa-solid fa-star" style="color: #ffd500;"></i><span>4</span></p>
-            <p style="margin-left: 85px; margin-top: -18px; margin-bottom: 0;">(579 reviews)</p>
+          <div class="d-flex flex-column">
+            <p class="fs-5 fw-semibold mb-0"><%= "#{bite.user.first_name} #{bite.user.last_name}" %></p>
+            <p class="text-end">(579 reviews)</p>
           </div>
         </div>
 
@@ -74,21 +74,21 @@
         <div class="card" style="border: none;">
           <div class="card-body">
           <blockquote class="blockquote mb-0">
-            <h4 style="margin-left: -10px"> Who am I? </h4>
-            <p> <%= bite.user.description %> </p>
+            <h4 style="margin-left: -10px" class="fs-5"> Who am I? </h4>
+            <p class="text-body-tertiary fst-italic"> <%= bite.user.description %> </p>
           </blockquote>
           <hr>
           <blockquote class="blockquote mb-0">
-            <h4 style="margin-left: -10px"> What surprises do I have? </h4>
-            <p> <%= bite.local_experience %> </p>
+            <h4 style="margin-left: -10px" class="fs-5"> What makes this gathering special? </h4>
+            <p class="text-body-tertiary fst-italic"> <%= bite.local_experience %> </p>
           </blockquote>
           </div>
         </div>
       </div>
 
       <div class="modal-footer" style="padding-right: 30px; border-top: none;">
-        <span class="my-auto mr-2">Only for <span style="font-size: 25px; font-weight: bold;"><%= bite.price %>€</span></span>
-        <button type="button" class="btn btn-success rounded" data-bs-dismiss="modal">Book</button>
+        <span class="mx-2" style="margin-bottom: -8px;">Only for <span style="font-size: 40px; font-weight: bold;"><%= bite.price %>€</span></span>
+        <button type="button" class="btn btn-success fs-3 text-light px-4" style="border-radius: 8px;" data-bs-dismiss="modal">Book</button>
       </div>
     </div>
   </div>
