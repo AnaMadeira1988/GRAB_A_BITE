@@ -1,0 +1,50 @@
+
+
+<!-- Modal -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content rounded-5">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <%= image_tag 'banner1.jpg', class:"d-block w-100", style:"border-top-left-radius: 25px; border-top-right-radius: 25px;" %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag 'banner2.jpg', class:"d-block w-100" %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag 'banner3.jpg', class:"d-block w-100" %>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </a>
+      </div>
+      <div class="modal-header">
+        <h5 class="modal-title" id="productModalLabel"><%= @bite_1.name %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Description:</strong> <%= @bite_1.dietary_options %></p>
+        <p><strong>Price:</strong> <%= @bite_1.price %></p>
+        <p><strong>Created at:</strong> <%= @bite_1.created_at.strftime("%B %d, %Y") %></p>
+        <hr>
+        <h5>Hosted by <%= @user_1.first_name %></h5>
+        <p><%= @user_1.description %></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

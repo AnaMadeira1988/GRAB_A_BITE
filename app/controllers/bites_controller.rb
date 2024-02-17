@@ -4,10 +4,9 @@ class BitesController < ApplicationController
 
   def index
     @bites = Bite.all
-  end
-
-  def new
     @bite = Bite.new
+    @bite_1 = Bite.first
+    @user_1 = User.first
   end
 
   def create

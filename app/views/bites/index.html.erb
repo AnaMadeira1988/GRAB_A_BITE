@@ -10,3 +10,13 @@
     </div>
   </div>
 </div>
+
+<!-- New bite Modal -->
+<%= render 'shared/bite_form', bite: @bite %>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+  View Bite
+</button>
+
+<%= render 'shared/bite_show', bite: @bite%>
