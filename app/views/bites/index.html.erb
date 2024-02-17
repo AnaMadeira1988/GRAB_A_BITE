@@ -2,7 +2,7 @@
   <div class="cards-container justify-content-center">
     <div class="cards">
       <% @bites.each do |bite| %>
-        <a href="" data-bs-toggle="modal" data-bs-target="#biteModal<%= bite.id %>" class="link-dark link-underline link-underline-opacity-0">
+        <a data-bs-toggle="modal" data-bs-target="#biteModal<%= bite.id %>" class="link-dark link-underline link-underline-opacity-0">
           <%= render 'shared/card_index_bite', bite: bite %>
         </a>
 
