@@ -1,7 +1,7 @@
 .card-card-bite {
   border-radius: 2%;
   margin: 10px;
-  width: 300px;
+  width: 350px;
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
@@ -15,18 +15,26 @@
 .avatar-card-bite {
   float: right;
   border-radius: 50%;
+  border-color: rgb(22, 22, 22);
   width: 50px;
   height: 50px;
   text-align: right;
-  margin-bottom: 10px;
 }
 
 .details-card-bite {
   background-color: white;
-  padding: 10px;
+  padding: 10px 15px;
+}
 
+.fixed-name-city-height {
+  height: 90px;
+  overflow: hidden;
 }
 
 .rating-card-bite {
   float: right;
+}
+
+.drink-dessert {
+  color: grey
 }

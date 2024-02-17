@@ -1,12 +1,9 @@
-<h1>Bites/index</h1>
-<div class="container">
-  <div class="cards-container">
+<div class="container justify-content-center">
+  <div class="cards-container justify-content-center">
     <div class="cards">
-
       <% @bites.each do |bite| %>
         <%= render 'shared/card_index_bite', bite: bite %>
       <% end %>
-
     </div>
   </div>
 </div>

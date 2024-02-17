@@ -1,24 +1,36 @@
 <div class="card-card-bite">
-    <%= image_tag 'banner4.jpg', class: "image-card-bite" %>
-    <div class="details-card-bite">
+  <%= image_tag 'banner4.jpg', class: "image-card-bite" %>
+  <div class="details-card-bite">
+    <div class="fixed-name-city-height d-flex justify-content-between" style="position: relative;">
+      <div>
+        <p class="mb-0 fs-5"><strong><%= bite.name.capitalize %></strong></p>
+        <p class="my-0"><small><%= bite.city.capitalize %></small></p>
+      </div>
+      <div class="d-flex flex-column justify-content-center">
         <%= image_tag 'banner1.jpg', class:"avatar-card-bite" %>
-        <p><strong><%= bite.name.capitalize %></strong></p>
-        <p><small><%= bite.city.capitalize %></small></p>
-        <p><i class="fa-regular fa-calendar"></i> <%= bite.date %><span class="rating-card-bite">⭐️4</span></p>
-
-        <div class="drink-dessert">
-          <div style="display: flex; justify-content: space-between;">
-            <div>
-              <i class="fa-solid fa-users"></i> <%= bite.number_of_guests %>
-              <i class="fa-solid fa-euro-sign"></i> <%= bite.price %>
-            </div>
-            <div>
-              <i class="fa-solid fa-martini-glass"></i>
-              <input type="checkbox" id="alcohol" name="alcohol" value="true" <%= bite.local_drinks ? 'checked' : '' %> disabled>
-              <i class="fa-solid fa-cake-candles"></i>
-              <input type="checkbox" id="dessert" name="dessert" value="true" <%= bite.dessert ? 'checked' : '' %> disabled>
-            </div>
-          </div>
-        </div>
+        <p class="text-end"><i class="fa-solid fa-star" style="color: #ffd500;"></i><span>4</span></p>
+      </div>
     </div>
+
+    <div class="drink-dessert text-body-secondary">
+      <p><i class="fa-regular fa-calendar fs-6"></i> <%= bite.date %>
+      <div style="display: flex; justify-content: space-between">
+        <div>
+          <i class="fa-solid fa-users"></i> <%= bite.number_of_guests %>
+
+          <% if bite.local_drinks %>
+            <i class="fa-solid fa-martini-glass"></i>
+          <% end %>
+
+          <% if bite.dessert %>
+            <i class="fa-solid fa-ice-cream fa-lg" style="color: #050505;"></i>
+          <% end %>
+        </div>
+
+        <div class="d-flex align-items-end justify-content-end text-black">
+          <span class="fw-semibold fs-4"><%= bite.price %> <i class="fa-solid fa-euro-sign fa-sm" style="color: #000000;"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
