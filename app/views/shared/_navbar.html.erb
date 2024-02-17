@@ -12,7 +12,9 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "New Bite", new_bite_path, class: "nav-link btn btn-outline-light custom-btn" %>
+            <button type="button" class="btn btn-outline-light custom-btn p-2" data-bs-toggle="modal" data-bs-target="#new-bite">
+              New Bite
+            </button>
           </li>
           <li class="nav-item">
             <%= link_to "Dashboard", "#", class: "nav-link btn btn-outline-light custom-btn" %>
@@ -29,8 +31,8 @@
           </li>
         <% else %>
           <li class="nav-item d-flex">
-             <%= link_to "Login", new_user_session_path, class: "nav-link btn btn-outline-light custom-btn mr-2" %>
-             <%= link_to "Sign up", new_user_registration_path, class: "nav-link btn btn-outline-light custom-btn" %>
+            <%= link_to "Login", new_user_session_path, class: "nav-link btn btn-outline-light custom-btn mr-2" %>
+            <%= link_to "Sign up", new_user_registration_path, class: "nav-link btn btn-outline-light custom-btn" %>
           </li>
         <% end %>
       </ul>

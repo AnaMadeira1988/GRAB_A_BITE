@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   root to: "bites#index"
 
   get '/users/:id', to: 'users#show', as: 'user'
-  
-  resources :bites, only: [:new, :create, :edit, :update]
+
+  resources :bites, only: [:create, :edit, :update]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
