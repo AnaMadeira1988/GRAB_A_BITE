@@ -11,6 +11,8 @@
 
         <button type="button" class="btn-close pe-5" data-bs-dismiss="modal" aria-label="Close" style="margin-top: -30px;"></button>
       </div>
+
+
       <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -34,32 +36,58 @@
       </div>
       <div class="modal-body pt-0">
 
-        <!-- working on Bite tags  -->
-        <div>
-          <div class="mt-1">
-            <p>#vegan #glutenfree #halal #elevators #ramp #firstfloor</p>
+        <!-- Inject tags here (dietary_options/accessibility)  -->
+        <div class="row justify-content-between mt-2">
+          <div class="col-9">
+            <p class="fw-bolder">#vegan #glutenfree #halal #elevators #ramp #firstfloor</p>
+          </div>
+
+          <!-- Labels -->
+          <div class="fs-5 col-2 text-end">
+            <i class="fa-solid fa-users"></i> <%= bite.number_of_guests %>
+
+            <% if bite.local_drinks %>
+              <i class="fa-solid fa-martini-glass"></i>
+            <% end %>
+
+            <% if bite.dessert %>
+              <i class="fa-solid fa-ice-cream fa-lg" style="color: #050505;"></i>
+            <% end %>
           </div>
         </div>
 
 
-        <!-- working on avatar section of bite show -->
-        <div class="d-flex flex-column justify-content-center">
-          <%= image_tag 'banner1.jpg', class:"avatar-card-bite" %>
-          <p class="text-end"><i class="fa-solid fa-star" style="color: #ffd500;"></i><span>4</span></p>
+        <!-- Inject reviews and ratings -->
+        <div>
+          <div class="d-flex">
+            <%= image_tag 'banner1.jpg', class:"avatar-card-bite" %>
+            <p class="fs-5 fw-semibold" style=" margin-top: 5px; margin-left: 5px;"><%= "#{bite.user.first_name} #{bite.user.last_name}" %></p>
+          </div>
+          <div class="d-flex">
+            <p style="margin-left: 37px; margin-top: -13px;  margin-bottom: 0;"><i class="fa-solid fa-star" style="color: #ffd500;"></i><span>4</span></p>
+            <p style="margin-left: 85px; margin-top: -18px; margin-bottom: 0;">(579 reviews)</p>
+          </div>
         </div>
 
 
-
-        <p><strong>Description:</strong> <%= bite.dietary_options %></p>
-        <p><strong>Price:</strong> <%= bite.price %></p>
-        <p><strong>Created at:</strong> <%= bite.created_at.strftime("%B %d, %Y") %></p>
-        <hr>
-        <h5>Hosted by <%= bite.user.first_name %></h5>
-        <p><%= bite.user.description %></p>
+        <!-- working on description section of bite show -->
+        <div class="card" style="border: none;">
+          <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <h4 style="margin-left: -10px"> Who am I? </h4>
+            <p> <%= bite.user.description %> </p>
+          </blockquote>
+          <hr>
+          <blockquote class="blockquote mb-0">
+            <h4 style="margin-left: -10px"> What surprises do I have? </h4>
+            <p> <%= bite.local_experience %> </p>
+          </blockquote>
+          </div>
+        </div>
       </div>
 
-      <!-- working on avatar section of booking/price -->
-      <div class="modal-footer">
+      <div class="modal-footer" style="padding-right: 30px; border-top: none;">
+        <span class="my-auto mr-2">Only for <span style="font-size: 25px; font-weight: bold;"><%= bite.price %>€</span></span>
         <button type="button" class="btn btn-success rounded" data-bs-dismiss="modal">Book</button>
       </div>
     </div>
