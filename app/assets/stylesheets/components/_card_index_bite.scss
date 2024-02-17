@@ -38,3 +38,11 @@
 .drink-dessert {
   color: grey
 }
+
+.card-hover-shadow {
+  transition: box-shadow 0.3s;
+}
+
+.card-hover-shadow:hover {
+  box-shadow: 0 0 30px rgba(167, 93, 93, 0.8);
+}

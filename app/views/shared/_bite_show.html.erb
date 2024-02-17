@@ -1,49 +1,66 @@
 
-
 <!-- Modal -->
-<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+<div class="modal fade" id="biteModal<%= bite.id %>" tabindex="-1" aria-labelledby="biteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content rounded-5">
-      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
-          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
-        </ol>
+      <div class="modal-header">
+        <div class="d-flex flex-column ps-3 pt-2">
+          <h3 class="modal-title fw-bold" id="biteModalLabel"><%= bite.name.capitalize %><span class="fs-6 fw-light"> (<%= bite.meal_type %>)</span></h3>
+          <h6><%= bite.city.capitalize %> | <%= bite.date %></h6>
+        </div>
+
+        <button type="button" class="btn-close pe-5" data-bs-dismiss="modal" aria-label="Close" style="margin-top: -30px;"></button>
+      </div>
+      <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <%= image_tag 'banner1.jpg', class:"d-block w-100", style:"border-top-left-radius: 25px; border-top-right-radius: 25px;" %>
+            <%= image_tag 'banner1.jpg', class:"d-block w-100", alt: bite.name %>
           </div>
           <div class="carousel-item">
-            <%= image_tag 'banner2.jpg', class:"d-block w-100" %>
+            <%= image_tag 'banner2.jpg', class:"d-block w-100", alt: bite.name  %>
           </div>
           <div class="carousel-item">
-            <%= image_tag 'banner3.jpg', class:"d-block w-100" %>
+            <%= image_tag 'banner3.jpg', class:"d-block w-100", alt: bite.name  %>
           </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
-        </a>
+        </button>
       </div>
-      <div class="modal-header">
-        <h5 class="modal-title" id="productModalLabel"><%= @bite_1.name %></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Description:</strong> <%= @bite_1.dietary_options %></p>
-        <p><strong>Price:</strong> <%= @bite_1.price %></p>
-        <p><strong>Created at:</strong> <%= @bite_1.created_at.strftime("%B %d, %Y") %></p>
+      <div class="modal-body pt-0">
+
+        <!-- working on Bite tags  -->
+        <div>
+          <div class="mt-1">
+            <p>#vegan #glutenfree #halal #elevators #ramp #firstfloor</p>
+          </div>
+        </div>
+
+
+        <!-- working on avatar section of bite show -->
+        <div class="d-flex flex-column justify-content-center">
+          <%= image_tag 'banner1.jpg', class:"avatar-card-bite" %>
+          <p class="text-end"><i class="fa-solid fa-star" style="color: #ffd500;"></i><span>4</span></p>
+        </div>
+
+
+
+        <p><strong>Description:</strong> <%= bite.dietary_options %></p>
+        <p><strong>Price:</strong> <%= bite.price %></p>
+        <p><strong>Created at:</strong> <%= bite.created_at.strftime("%B %d, %Y") %></p>
         <hr>
-        <h5>Hosted by <%= @user_1.first_name %></h5>
-        <p><%= @user_1.description %></p>
+        <h5>Hosted by <%= bite.user.first_name %></h5>
+        <p><%= bite.user.description %></p>
       </div>
+
+      <!-- working on avatar section of booking/price -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success rounded" data-bs-dismiss="modal">Book</button>
       </div>
     </div>
   </div>
