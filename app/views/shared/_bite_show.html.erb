@@ -44,14 +44,14 @@
 
           <!-- Labels -->
           <div class="fs-5 col-2 text-end">
-            <span><i class="fa-solid fa-users"></i> <%= bite.number_of_guests %></span>
+            <span><i class="fa-solid fa-users" title="Hosts up to <%= bite.number_of_guests %> guest(s)"></i> <%= bite.number_of_guests %></span>
 
             <% if bite.local_drinks %>
-              <i class="fa-solid fa-martini-glass"></i>
+              <i class="fa-solid fa-martini-glass" title="This meal might contain wine!"></i>
             <% end %>
 
             <% if bite.dessert %>
-              <i class="fa-solid fa-ice-cream fa-lg" style="color: #050505;"></i>
+              <i class="fa-solid fa-ice-cream fa-lg" title="Dessert is included!" style="color: #050505;"></i>
             <% end %>
           </div>
         </div>
