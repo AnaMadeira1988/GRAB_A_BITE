@@ -15,9 +15,9 @@
         <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
       <% end %>
       <%= f.input :first_name,
-                    required: true,
-                    autofocus: true,
-                    input_html: { placeholder: "e.g: John" }%>
+                  required: true,
+                  autofocus: true,
+                  input_html: { placeholder: "e.g: John" }%>
       <%= f.input :last_name,
                   required: true,
                   autofocus: true,
@@ -26,7 +26,8 @@
                   as: :date,
                   html5: true,
                   required: true,
-                  autofocus: true %>
+                  autofocus: true,
+                  input_html: { max: Date.today - 12.years } %>
       <%= f.input :gender,
                   collection: ['Male', 'Female', 'I prefer not to say'],
                   prompt: 'Choose your gender',

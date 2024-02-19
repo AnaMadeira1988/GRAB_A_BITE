@@ -12,8 +12,16 @@
 
   <body>
     <%= render "shared/navbar" %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+
+
+    <% if notice %>
+    <div data-controller="alerts" data-alerts-notice-value="<%= notice %>"></div>
+    <% end %>
+
+    <% if alert %>
+      <div data-controller="alerts" data-alerts-alert-value="<%= alert %>"></div>
+    <% end %>
+
     <%= yield %>
     <%= render "shared/footer" %>
   </body>

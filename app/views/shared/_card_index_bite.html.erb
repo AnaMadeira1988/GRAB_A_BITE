@@ -1,6 +1,34 @@
 <div class="card-card-bite card-hover-shadow">
-  <%= image_tag 'banner4.jpg', class: "image-card-bite" %>
-  <div class="details-card-bite">
+
+  <!-- Carousel -->
+
+  <div id="biteCardIndex<%= bite.id%>" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <%= image_tag 'bite_banner1.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag 'bite_banner2.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag 'bite_banner3.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button"
+      data-bs-target="#biteCardIndex<%= bite.id%>" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button"
+      data-bs-target="#biteCardIndex<%= bite.id%>" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <!-- Card body -->
+
+  <div class="details-card-bite"  role="button" data-bs-toggle="modal" data-bs-target="#biteModal<%= bite.id %>">
     <div class="fixed-name-city-height d-flex justify-content-between" style="position: relative;">
       <div>
         <p class="mb-0 fs-5"><strong><%= bite.name.capitalize %></strong></p>

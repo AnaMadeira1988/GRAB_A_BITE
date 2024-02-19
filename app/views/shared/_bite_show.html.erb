@@ -3,17 +3,28 @@
 <div class="modal fade" id="biteModal<%= bite.id %>" tabindex="-1" aria-labelledby="biteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content rounded-5">
+
+      <!-- Modal header -->
       <div class="modal-header">
         <div class="d-flex flex-column ps-3 pt-2">
           <h3 class="modal-title fw-bold" id="biteModalLabel"><%= bite.name.capitalize %></h3>
           <h6><%= bite.city.capitalize %> | <%= bite.meal_type %> | <%= bite.date.strftime("%d-%m-%Y") %></h6>
         </div>
+        <div class="me-3">
 
-        <button type="button" class="btn-close pe-5" data-bs-dismiss="modal" aria-label="Close" style="margin-top: -30px;"></button>
+          <% if bite.user == current_user %>
+
+            <%= link_to edit_bite_path(bite), class:"link-underline link-underline-opacity-0 text-secondary ps-3" do %>
+              <i class="fa-solid fa-pen-to-square" style="font-size: 20px;" title="Edit"></i>
+            <% end %>
+          <% end %>
+
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-top: -30px;" title="Close"></button>
+        </div>
       </div>
 
-
-      <div id="carouselExample" class="carousel slide">
+      <!-- Carousel -->
+      <div id="biteModalCarousel<%= bite.id%>" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
             <%= image_tag 'banner1.jpg', class:"d-block w-100", alt: bite.name %>
@@ -25,21 +36,26 @@
             <%= image_tag 'banner3.jpg', class:"d-block w-100", alt: bite.name %>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#biteModalCarousel<%= bite.id%>" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#biteModalCarousel<%= bite.id%>" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      <div class="modal-body pt-0">
+
+      <!-- Modal content -->
+      <div class="modal-body py-0">
 
         <!-- Inject tags here (dietary_options/accessibility)  -->
         <div class="row justify-content-between mt-2">
           <div class="col-9">
-            <p class="fw-bolder">#vegan #glutenfree #halal #elevators #ramp #firstfloor</p>
+              <p class="fw-bolder">
+                <%= bite.dietary_options.gsub(/[^\w_]+/, ' ').split.map { |str| "##{str}"}.join(' ') if bite.dietary_options  %>
+                <%= bite.accessibility.gsub(/[^\w_]+/, ' ').split.map { |str| "##{str}"}.join(' ') if bite.accessibility  %>
+              </p>
           </div>
 
           <!-- Labels -->
@@ -72,7 +88,7 @@
 
         <!-- working on description section of bite show -->
         <div class="card" style="border: none;">
-          <div class="card-body">
+          <div class="card-body pb-1">
           <blockquote class="blockquote mb-0">
             <h4 style="margin-left: -10px" class="fs-5"> Who am I? </h4>
             <p class="text-body-tertiary fst-italic"> <%= bite.user.description %> </p>
@@ -86,9 +102,15 @@
         </div>
       </div>
 
+      <!-- Modal footer -->
       <div class="modal-footer" style="padding-right: 30px; border-top: none;">
         <span class="mx-2" style="margin-bottom: -8px;">Only for <span style="font-size: 40px; font-weight: bold;"><%= bite.price %>€</span></span>
-        <button type="button" class="btn btn-success fs-3 text-light px-4" style="border-radius: 8px;" data-bs-dismiss="modal">Book</button>
+
+        <% if bite.user == current_user %>
+          <button type="button" class="btn btn-warning fs-3 text-light px-4" style="border-radius: 8px;" data-bs-dismiss="modal">Dashboard</button>
+        <% else %>
+          <%= button_to 'Book', book_bite_path(bite.id), method: :post, class:"btn btn-success fs-3 text-light px-4", style:"border-radius: 8px;" %>
+        <% end %>
       </div>
     </div>
   </div>

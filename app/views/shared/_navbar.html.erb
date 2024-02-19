@@ -12,9 +12,7 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <button type="button" class="btn btn-outline-light custom-btn p-2" data-bs-toggle="modal" data-bs-target="#new-bite">
-              New Bite
-            </button>
+            <%= link_to "New bite", new_bite_path, class: "nav-link btn btn-outline-light custom-btn" %>
           </li>
           <li class="nav-item">
             <%= link_to "Dashboard", "#", class: "nav-link btn btn-outline-light custom-btn" %>
