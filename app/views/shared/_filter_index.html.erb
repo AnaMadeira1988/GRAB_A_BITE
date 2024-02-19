@@ -1,0 +1,88 @@
+<%= form_with(url: root_path, method: "get", html: {id: 'filter-index'}) do |f|%>
+  <div class="form-control-lg">
+
+    <div class="mb-3">
+      <%= f.label :city, "Choose a city" %>
+      <%= f.select :city, options_for_select(Bite.all.map{|bite| bite.city }.uniq, params[:city]),prompt: "Choose your host", class: 'filter-field' %>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <%= f.label :date_start, "From" %>
+        <%= f.date_field :date_start, value: params[:date_start],class: 'filter-field' %>
+      </div>
+      <div class="col-md-6 mb-3">
+        <%= f.label :date_start, "Until" %>
+        <%= f.date_field :date_end, value: params[:date_end],class: 'filter-field' %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <%= f.label :price_min, "From" %>
+        <%= f.number_field :price_min, value: params[:price_min], placeholder: "5€",class: 'filter-field' %>
+      </div>
+      <div class="col-md-6 mb-3">
+        <%= f.label :price_max, "To" %>
+        <%= f.number_field :price_max, value: params[:price_max], placeholder: "10€",class: 'filter-field' %>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <%= f.label :meal_type, "Meal type" %>
+      </div>
+      <div class="col-md-12">
+        <%= f.select :meal_type, options_for_select(['Breakfast', 'Lunch', 'Brunch', 'Dinner', 'Dessert', 'Snack', 'Drinks', 'Other'], params[:meal_type]), prompt: 'Choose your meal',class: 'filter-field' %>
+      </div>
+    </div>
+
+    <div class="mb-3 mt-3">
+      <%= f.label :number_field, "Number of guests" %>
+      <%= f.number_field :number_of_guests, value: params[:number_of_guests],class: 'filter-field' %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :dietary_options, "Dietary options" %>
+      <%= f.select :dietary_options, options_for_select(['vegan', 'vegetarian', 'low_carb','halal', 'gluten_free', 'keto', 'lactose_free', 'kosher'], params[:dietary_options]), prompt: "Choose dietary options",class: 'filter-field' %>
+    </div>
+
+    <div class="mb-3">
+      <i class="fa-solid fa-ice-cream fa-lg" style="color: #050505;"></i>
+      <%= f.check_box :local_drinks, checked: params[:local_drinks],class: 'filter-field' %>
+      <i class="fa-solid fa-martini-glass"></i>
+      <%= check_box_tag :dessert, params[:dessert],class: 'filter-field' %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :host, "Choose a host" %>
+      <%= f.select :host, options_for_select(User.all.map {|user| "#{user.first_name.capitalize!}" if user.bites.present?}.compact, params[:host]), prompt: "Choose your host",class: 'filter-field' %>
+    </div>
+
+    <%= f.submit "Filter" %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('filter-index');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Iterate through form elements with class 'filter-field'
+      var elements = form.getElementsByClassName('filter-field');
+      for (var i = 0; i < elements.length; i++) {
+        var input = elements[i];
+
+        // Disable the input if it's empty or has a default value
+        if (input.value === "" || input.value === input.placeholder) {
+          input.disabled = true;
+        }
+      }
+
+      // Submit the form with disabled inputs removed
+      form.submit();
+    });
+  });
+</script>
