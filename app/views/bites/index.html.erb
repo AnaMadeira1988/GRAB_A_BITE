@@ -1,17 +1,16 @@
-<div class="container justify-content-center">
+<div class="container justify-content-center my-4">
   <div class="cards-container justify-content-center">
     <div class="cards">
       <% @bites.each do |bite| %>
-        <a data-bs-toggle="modal" data-bs-target="#biteModal<%= bite.id %>" class="link-dark link-underline link-underline-opacity-0">
-          <%= render 'shared/card_index_bite', bite: bite %>
-        </a>
+        <% unless bite.guest%>
 
-        <!-- Creates a Modal specific to each Bite card -->
-        <%= render 'shared/bite_show', bite: bite %>
+          <!-- Creates a card for each Bite -->
+          <%= render 'shared/card_index_bite', bite: bite %>
+
+          <!-- Creates a Modal specific to each Bite card -->
+          <%= render 'shared/bite_show', bite: bite %>
+        <% end%>
       <% end %>
     </div>
   </div>
 </div>
-
-<!-- New bite Modal -->
-<%= render 'shared/bite_form', bite: @bite %>

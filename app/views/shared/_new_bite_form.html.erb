@@ -59,8 +59,5 @@
 
     <%= f.input :local_experience, as: :text, input_html: { placeholder: 'e.g: I will teach you "Foxtrot" dance 🕺🏽💃🏽' }   %>
 
-    <div class="d-flex justify-content-between">
-      <%= link_to "Delete", bite, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-danger text-light ms-2" %>
-      <%= f.button :submit, class: 'btn btn-success text-body-secondary me-2 ' %>
-    </div>
+    <%= f.button :submit, class: 'btn btn-success text-success-emphasis text-body-secondary me-2' %>
 <% end %>
