@@ -1,30 +1,19 @@
 class BitesController < ApplicationController
-  before_action :set_bite, only: %i[ edit update destroy]
+  before_action :set_bite, only: %i[show edit update destroy]
   skip_before_action :authenticate_user!, only: :index
 
   def index
     @bites = Bite.all
 
-    @bites = @bites.where(city: params[:city]) if params[:city].present?
-    @bites = @bites.where('date >= ?', params[:date_start]) if params[:date_start].present?
-    @bites = @bites.where('date <= ?', params[:date_end]) if params[:date_end].present?
-    @bites = @bites.where('price >= ?', params[:price_min]) if params[:price_min].present?
-    @bites = @bites.where('price <= ?', params[:price_max]) if params[:price_max].present?
-    @bites = @bites.where(meal_type: params[:meal_type]) if params[:meal_type].present?
-    @bites = @bites.where('number_of_guests >= ?', params[:number_of_guests]) if params[:number_of_guests].present?
-    @bites = @bites.where(dietary_options: params[:dietary_options]) if params[:dietary_options].present?
-    @bites = @bites.where(dessert: params[:dessert]) if params[:dessert].present?
-    @bites = @bites.where(local_drinks: params[:local_drinks]) if params[:local_drinks].present?
-    if params[:host].present?
-      host = User.find_by(first_name: params[:host])
-      @bites = @bites.where(user_id: host.id) if host
-    end
-    @bites = @bites.order(:date)
+    @bites = filter(@bites, params)
+  end
+
+  def show
+    @guest = @bite.guest if @bite.guest
   end
 
   def new
     @bite = Bite.new
-
   end
 
   def create
@@ -59,7 +48,7 @@ class BitesController < ApplicationController
     @guest = Guest.new(user: current_user, bite: @bite)
 
     if @guest.save
-      redirect_to root_path, notice: 'Bite was successfully booked.'
+      redirect_to @bite, notice: 'Bite was successfully booked. Pending confirmation from host.'
     else
       redirect_to root_path, alert: 'Bite could not be booked.'
     end
@@ -75,5 +64,23 @@ class BitesController < ApplicationController
 
   def set_bite
     @bite = Bite.find(params[:id])
+  end
+
+  def filter(bites, params)
+    bites = bites.where(city: params[:city]) if params[:city].present?
+    bites = bites.where('date >= ?', params[:date_start]) if params[:date_start].present?
+    bites = bites.where('date <= ?', params[:date_end]) if params[:date_end].present?
+    bites = bites.where('price >= ?', params[:price_min]) if params[:price_min].present?
+    bites = bites.where('price <= ?', params[:price_max]) if params[:price_max].present?
+    bites = bites.where(meal_type: params[:meal_type]) if params[:meal_type].present?
+    bites = bites.where('number_of_guests >= ?', params[:number_of_guests]) if params[:number_of_guests].present?
+    bites = bites.where(dietary_options: params[:dietary_options]) if params[:dietary_options].present?
+    bites = bites.where(dessert: params[:dessert]) if params[:dessert].present?
+    bites = bites.where(local_drinks: params[:local_drinks]) if params[:local_drinks].present?
+    if params[:host].present?
+      host = User.find_by(first_name: params[:host])
+      bites = bites.where(user_id: host.id) if host
+    end
+    bites.order(:date)
   end
 end
