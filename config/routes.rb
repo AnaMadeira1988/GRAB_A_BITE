@@ -4,12 +4,13 @@ Rails.application.routes.draw do
 
   get '/users/:id', to: 'users#show', as: 'user'
 
-  resources :bites, only: [:new, :create, :edit, :update, :destroy] do
+  resources :bites, only: [:new, :show, :create, :edit, :update, :destroy] do
     member do
       post 'book', to: 'bites#book'
     end
   end
 
+  resources :guests, only: [:destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
