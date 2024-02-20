@@ -3,48 +3,27 @@ class BitesController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
 
   def index
-    @bites = Bite.all.sort_by(&:date)
+    @bites = Bite.all
+
+    @bites = @bites.where(city: params[:city]) if params[:city].present?
+    @bites = @bites.where('date >= ?', params[:date_start]) if params[:date_start].present?
+    @bites = @bites.where('date <= ?', params[:date_end]) if params[:date_end].present?
+    @bites = @bites.where('price >= ?', params[:price_min]) if params[:price_min].present?
+    @bites = @bites.where('price <= ?', params[:price_max]) if params[:price_max].present?
+    @bites = @bites.where(meal_type: params[:meal_type]) if params[:meal_type].present?
+    @bites = @bites.where('number_of_guests >= ?', params[:number_of_guests]) if params[:number_of_guests].present?
+    @bites = @bites.where(dietary_options: params[:dietary_options]) if params[:dietary_options].present?
+    @bites = @bites.where(dessert: params[:dessert]) if params[:dessert].present?
+    @bites = @bites.where(local_drinks: params[:local_drinks]) if params[:local_drinks].present?
+    if params[:host].present?
+      host = User.find_by(first_name: params[:host])
+      @bites = @bites.where(user_id: host.id) if host
+    end
+    @bites = @bites.order(:date)
   end
 
   def new
     @bite = Bite.new
-
-    if params[:date_start].present? && params[:date_end].present?
-      @bites = @bites.where('date BETWEEN ? AND ?', params[:date_start],params[:date_end])
-    end
-
-    if params[:dietary_options].present?
-      @bites = @bites.where(dietary_options: params[:dietary_options])
-    end
-
-    if params[:price].present?
-      @bites = @bites.where(price: params[:price])
-    end
-
-    if params[:meal_type].present?
-      @bites = @bites.where(meal_type: params[:meal_type])
-    end
-
-    if params[:local_drinks].present?
-      @bites = @bites.where(local_drinks: params[:local_drinks] == '1')
-    end
-
-    if params[:dessert].present?
-      @bites = @bites.where(dessert: params[:dessert] == '1')
-    end
-
-    if params[:number_of_guests].present?
-      @bites = @bites.where(number_of_guests: params[:number_of_guests])
-    end
-
-    if params[:city].present?
-      @bites = @bites.where(city: params[:city])
-    end
-
-    # if params[:host].present?
-    #   @bites = User.where(first_name: params[:host]).bites
-    # end
-
 
   end
 
