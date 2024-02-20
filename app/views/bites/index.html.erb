@@ -1,5 +1,6 @@
-
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button>
+<div class="d-flex justify-content-end">
+  <%= button_tag "Filter", class: "btn btn-light filter-button px-3", type: "button", "data-bs-toggle": "offcanvas", "data-bs-target": "#offcanvasWithBothOptions", "aria-controls": "offcanvasWithBothOptions" %>
+</div>
 
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
   <div class="offcanvas-header">
@@ -15,6 +16,7 @@
 
   <div class="cards-container justify-content-center">
     <div class="cards">
+
       <% @bites.each do |bite| %>
         <% unless bite.guest%>
 
@@ -23,6 +25,7 @@
 
           <!-- Creates a Modal specific to each Bite card -->
           <%= render 'shared/bite_show', bite: bite %>
+
         <% end%>
       <% end %>
     </div>
