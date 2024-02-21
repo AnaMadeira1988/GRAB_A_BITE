@@ -22,6 +22,7 @@
                   required: true,
                   autofocus: true,
                   input_html: { placeholder: "e.g: Doe" }%>
+      <%= f.input :photo, as: :file %>
       <%= f.input :birth_date,
                   as: :date,
                   html5: true,

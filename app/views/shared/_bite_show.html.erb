@@ -2,7 +2,7 @@
 <!-- Modal -->
 <div class="modal fade" id="biteModal<%= bite.id %>" tabindex="-1" aria-labelledby="biteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
-    <div class="modal-content rounded-5">
+    <div class="modal-content rounded-5" data-controller='toggle'>
 
       <!-- Modal header -->
       <div class="modal-header">
@@ -26,15 +26,17 @@
       <!-- Carousel -->
       <div id="biteModalCarousel<%= bite.id%>" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <%= image_tag 'banner1.jpg', class:"d-block w-100", alt: bite.name %>
-          </div>
-          <div class="carousel-item">
-            <%= image_tag 'banner2.jpg', class:"d-block w-100", alt: bite.name %>
-          </div>
-          <div class="carousel-item">
-            <%= image_tag 'banner3.jpg', class:"d-block w-100", alt: bite.name %>
-          </div>
+          <% bite.photos.each_with_index do |photo, index| %>
+            <% if index == 0 %>
+              <div class="carousel-item active">
+              <%= cl_image_tag photo.key, class:"d-block w-100",width: 798, height:532, crop: :fill %>
+              </div>
+            <% else %>
+              <div class="carousel-item">
+                <%= cl_image_tag photo.key, class:"d-block w-100",width: 798, height:532, crop: :fill %>
+              </div>
+            <% end %>
+          <% end %>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#biteModalCarousel<%= bite.id%>" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -100,16 +102,57 @@
           </blockquote>
           </div>
         </div>
+
+      <!-- Under construction -->
+
+      <div class="card p-2 d-none" data-toggle-target='toggleableDisplay'>
+        <form >
+          <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" class="form-control" id="cardNumber" placeholder="**** **** **** ****" disabled>
+          </div>
+          <div class="form-group">
+            <label for="cardName">Cardholder Name</label>
+            <input type="text" class="form-control" id="cardName" placeholder="John Doe" disabled>
+          </div>
+          <div class="form-row d-flex justify-content-between">
+            <div class="form-group col-md-7">
+              <label for="expiryDate">Expiry Date</label>
+              <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" disabled>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="cvv">CVV</label>
+              <input type="text" class="form-control" id="cvv" placeholder="***" disabled>
+            </div>
+          </div>
+        </form>
       </div>
+      </div>
+
 
       <!-- Modal footer -->
       <div class="modal-footer" style="padding-right: 30px; border-top: none;">
         <span class="mx-2" style="margin-bottom: -8px;">Only for <span style="font-size: 40px; font-weight: bold;"><%= bite.price %>€</span></span>
 
         <% if bite.user == current_user %>
-          <button type="button" class="btn btn-warning fs-3 text-light px-4" style="border-radius: 8px;" data-bs-dismiss="modal">Dashboard</button>
+          <%= button_to 'Manage booking', bite_path(bite), method: :get, class: "btn btn-warning fs-3 text-light px-4", style: "border-radius: 8px;" %>
         <% else %>
-          <%= button_to 'Book', book_bite_path(bite.id), method: :post, class:"btn btn-success fs-3 text-light px-4", style:"border-radius: 8px;" %>
+
+          <!-- Payment Buttons container -->
+          <div class="d-none d-flex" data-toggle-target="toggleablePaymentButtons">
+
+            <!-- Cancel payment button -->
+            <button class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover border border-0 me-2"
+              data-toggle-target="toggleableCancelButton" data-action="click->toggle#cancelPayment">
+              Cancel payment
+            </button>
+
+            <!-- Finalize payment button -->
+            <%= button_to 'Pay now', book_bite_path(bite.id), method: :post, class:"btn btn-success fs-3 text-light px-4", style:"border-radius: 8px;",data: {toggle_target: "toggleableFinalizeButton"} %>
+          </div>
+
+          <!-- Book button -->
+            <button class="btn btn-success fs-3 text-light px-4" style="border-radius: 8px;" data-toggle-target="toggleableBookButton" data-action="click->toggle#togglePayment">Book now</button>
         <% end %>
       </div>
     </div>

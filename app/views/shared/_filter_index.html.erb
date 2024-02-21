@@ -3,7 +3,7 @@
 
     <div class="mb-3">
       <%= label_tag :city, "Choose a city" %>
-      <%= select_tag :city, options_for_select(Bite.all.map{|bite| bite.city }.uniq, params[:city]),prompt: "Choose your host", class: 'filter-field' %>
+      <%= select_tag :city, options_for_select(Bite.all.map{|bite| bite.city }.uniq, params[:city]),prompt: "Choose your city", class: 'filter-field' %>
     </div>
 
     <div class="row">
@@ -45,6 +45,11 @@
     <div class="mb-3">
       <%= label_tag :dietary_options, "Dietary options" %>
       <%= select_tag :dietary_options, options_for_select(['vegan', 'vegetarian', 'low_carb','halal', 'gluten_free', 'keto', 'lactose_free', 'kosher'], params[:dietary_options]), prompt: "Choose dietary options",class: 'filter-field' %>
+    </div>
+
+    <div class="mb-3">
+      <%= label_tag :accessibility, "Dietary options" %>
+      <%= select_tag :accessibility, options_for_select(['elevator', 'ramp', 'ground_floor'], params[:accessibility]), prompt: "Choose accessibility options",class: 'filter-field' %>
     </div>
 
     <div class="mb-3">

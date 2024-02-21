@@ -1,7 +1,3 @@
-<div class="d-flex justify-content-end">
-  <%= button_tag "Filter", class: "btn btn-light filter-button px-3", type: "button", "data-bs-toggle": "offcanvas", "data-bs-target": "#offcanvasWithBothOptions", "aria-controls": "offcanvasWithBothOptions" %>
-</div>
-
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title fs-4 fw-bolder ms-3 mt-4" id="offcanvasWithBothOptionsLabel">Filter your bites</h5>
@@ -12,22 +8,24 @@
   </div>
 </div>
 
+
 <div class="container justify-content-center my-4">
 
-  <div class="cards-container justify-content-center">
-    <div class="cards">
-
-      <% @bites.each do |bite| %>
-        <% unless bite.guest%>
-
-          <!-- Creates a card for each Bite -->
-          <%= render 'shared/card_index_bite', bite: bite %>
-
-          <!-- Creates a Modal specific to each Bite card -->
-          <%= render 'shared/bite_show', bite: bite %>
-
-        <% end%>
-      <% end %>
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-end w-100">
+      <%= button_tag "Filter", class: "btn btn-light filter-button", type: "button", "data-bs-toggle": "offcanvas", "data-bs-target": "#offcanvasWithBothOptions", "aria-controls": "offcanvasWithBothOptions" %>
+    </div>
+    <div class="cards-container justify-content-center">
+      <div class="cards">
+        <% @bites.each do |bite| %>
+          <% unless bite.guest%>
+            <!-- Creates a card for each Bite -->
+            <%= render 'shared/card_index_bite', bite: bite %>
+            <!-- Creates a Modal specific to each Bite card -->
+            <%= render 'shared/bite_show', bite: bite %>
+          <% end%>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

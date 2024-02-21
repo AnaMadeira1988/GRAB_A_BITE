@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
 
     # For additional in app/views/devise/registrations/edit.html.erb
     devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name
-    birth_date gender pronouns nationality address languages phone_number description ])
+    birth_date gender pronouns nationality address languages phone_number description photo])
   end
 end

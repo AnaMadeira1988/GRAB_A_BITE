@@ -8,6 +8,15 @@ class BitesController < ApplicationController
     @bites = filter(@bites, params)
   end
 
+  def dashboard
+    @bites = Bite.where(user: current_user)
+
+    @booked_bites = @bites.select do |bite|
+      bite.guest.present?
+    end
+
+  end
+
   def show
     accessing_user = current_user == @bite.user || (@bite.guest && current_user == @bite.guest.user) || @bite.guest.nil?
     @guest = @bite.guest if @bite.guest
@@ -22,7 +31,7 @@ class BitesController < ApplicationController
     @bite = Bite.new(bite_params.merge(user: current_user))
 
     if @bite.save!
-      redirect_to root_path, notice: 'Bite was successfully created.'
+      redirect_to @bite, notice: 'Bite was successfully created.'
     else
       render :new, status: 422
     end
@@ -61,7 +70,7 @@ class BitesController < ApplicationController
   def bite_params
     params.require(:bite).permit(:name, :date,
                                  :price, :meal_type, :local_drinks, :dessert, :number_of_guests,
-                                 :local_experience, :city, :address, dietary_options: [], accessibility: [])
+                                 :local_experience, :city, :address, dietary_options: [], accessibility: [], photos: [])
   end
 
   def set_bite
@@ -76,7 +85,8 @@ class BitesController < ApplicationController
     bites = bites.where('price <= ?', params[:price_max]) if params[:price_max].present?
     bites = bites.where(meal_type: params[:meal_type]) if params[:meal_type].present?
     bites = bites.where('number_of_guests >= ?', params[:number_of_guests]) if params[:number_of_guests].present?
-    bites = bites.where(dietary_options: params[:dietary_options]) if params[:dietary_options].present?
+    bites = bites.where("dietary_options LIKE ?", "%#{params[:dietary_options]}%") if params[:dietary_options].present?
+    bites = bites.where("accessibility LIKE ?", "%#{params[:accessibility]}%") if params[:accessibility].present?
     bites = bites.where(dessert: params[:dessert]) if params[:dessert].present?
     bites = bites.where(local_drinks: params[:local_drinks]) if params[:local_drinks].present?
     if params[:host].present?

@@ -29,22 +29,24 @@
               <%= link_to "Something else here", "#", class: "dropdown-item" %>
             </div>
           </div>
-             
-        <!-- Working here -->
 
           <li class="nav-item dropdown">
             <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
+
+              <% if current_user.photo.attached? %>
+                <%= cl_image_tag current_user.photo.key, class: "avatar",crop: :crop %>
+              <% else %>
+                <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar" %>
+              <% end %>
+
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "My booked bites", "#", class: "dropdown-item" %>
+              <%= link_to "My booked bites", dashboard_path, class: "dropdown-item" %>
               <%= link_to 'Account settings', edit_user_registration_path, class: "dropdown-item" %>
 
               <%= link_to 'Log out', destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
-
-          <!-- Working here -->
 
         <% else %>
           <li class="nav-item d-flex">

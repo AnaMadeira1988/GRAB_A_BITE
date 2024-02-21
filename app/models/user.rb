@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :bites, dependent: :destroy
   # has_many :reviews, dependent: :destroy
   has_many :guests, dependent: :destroy
+  has_one_attached :photo
 
   validates_presence_of :first_name, :last_name, :phone_number
   validates :phone_number, uniqueness: true, format: { with: /\A[0-9]{10}\z/, message: "Please enter a valid phone number" }

@@ -1,8 +1,9 @@
 class Bite < ApplicationRecord
   belongs_to :user
   has_one :guest, dependent: :destroy
+  has_many_attached :photos
 
-  validates_presence_of :name, :date, :number_of_guests, :city, :address, :price
+  validates_presence_of :name, :date, :number_of_guests, :city, :address, :price, :photos
   validates_length_of :name, minimum: 3, maximum: 40
 
   validates_numericality_of :number_of_guests, greater_than_or_equal_to: 1
