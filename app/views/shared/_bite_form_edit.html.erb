@@ -59,6 +59,8 @@
 
     <%= f.input :local_experience, as: :text, input_html: { placeholder: 'e.g: I will teach you "Foxtrot" dance 🕺🏽💃🏽' }   %>
 
+    <%= f.input :photos, as: :file,label: 'Add photos', input_html: { multiple: true } %>
+
     <div class="d-flex justify-content-between">
       <%= link_to "Delete", bite, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-danger text-light ms-2" %>
       <%= f.button :submit, class: 'btn btn-success text-body-secondary me-2 ' %>

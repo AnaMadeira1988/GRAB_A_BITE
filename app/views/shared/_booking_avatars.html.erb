@@ -1,0 +1,13 @@
+  <div class="d-flex justify-content-center align-items-end">
+    <%= image_tag 'profile_picture1.png', class:"img-fluid rounded-circle", style:"width: 100px; height: 120px; margin-right: -50px;" %>
+    <%= image_tag 'handshake.png', class:"img-fluid", style:"width: 80px; height: 50px; margin-bottom: -3px; z-index: 1;" %>
+    <%= image_tag 'profile_picture2.png', class:"img-fluid rounded-circle", style:"width: 100px; height: 90px; margin-left: -40px; margin-bottom: 15px;" %>
+  </div>
+
+
+  <div class="row text-center mt-3">
+    <div class="col">
+      <h3 class="fw-bold"><%= @bite.name.capitalize %></h3>
+      <h6><%= @bite.city.capitalize %> | <%= @bite.meal_type %> | <%= @bite.date.strftime("%d-%m-%Y") %></h6>
+    </div>
+  </div>

@@ -1,95 +1,148 @@
-<% images = [ "banner1.jpg" ]%>
-<%= render 'shared/banner', images: images %>
-<div class="container border p-4 mb-4">
-
-  <div class="container">
-    <div class="title">
-      <div class="d-flex flex-column ps-3 pt-2 mb-3">
-        <h3 class="modal-title fw-bold" id="biteModalLabel"><%= @bite.name.capitalize %></h3>
-        <h6><%= @bite.city.capitalize %> | <%= @bite.meal_type %></h6>
-        <h6><i class="fa-solid fa-location-dot fa-sm" style="color: #414244;"></i> <%= @bite.address %></h6>
-      </div>
+<div class="container">
+  <!-- Title div -->
+  <div class="title bg-light mb-2 d-flex justify-content-between align-items-center rounded-5">
+    <div class="d-flex flex-column ps-3 pt-2 mb-1 mx-2">
       <div>
-        <%= @bite.date.strftime("%d %b %y") %>
+        <h2 class="modal-title fw-bold" id="biteModalLabel"><%= bite.name.capitalize %></h2>
+        <h-4><%= bite.city.capitalize %> | <%= bite.meal_type %></h-4>
+      </div>
+      <div class="mt-2 mb-2">
+        <h5 class="mb-0"><i class="fa-solid fa-location-dot fa-sm" style="color: #414244;"></i> <%= bite.address %></h6>
+      </div>
+    </div>
+    <div class="fs-4 px-4">
+      <%= bite.date.strftime("%d %b %y") %>
+    </div>
+  </div>
+
+  <!-- IMAGES line -->
+  <div class="row mb-4 p-0">
+    <div class="col-lg-4 col-md-6">
+      <div class="flex-column gap-3">
+        <div class="card rounded-5 mb-3">
+
+          <%= cl_image_tag bite.photos.first.key, class:"d-block w-100",width: 402, height:268, crop: :fill,style: 'border-radius: 20px;' %>
+
+        </div>
+
+        <div class="card w-100" id="map-small" style="height: 190px; border-radius: 20px;" data-controller='geocoder'
+            data-geocoder-city-value='<%= bite.city %>' >
+        </div>
       </div>
     </div>
 
-
-    <!-- IMAGES line -->
-    <div class="row mb-4 p-0 ">
-      <div class="col-lg-4 col-md-6">
-        <div class="card flex-column">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-          <hr>
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="card rounded-5">
+        <%= cl_image_tag bite.photos.second.key, class:"d-block w-100",width: 400 , height: 474, crop: :fill,style: 'border-radius: 20px;' %>
       </div>
+    </div>
 
-
-      <div class="col-lg-4 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="col-lg-4 col-md-6">
+      <div class="card rounded-5" style="background-image: url('<%= cl_image_path bite.photos.third.key, width:400, height: 474, crop: :fill %>'); background-size: cover; background-position: center; border-radius: 20px; width: 400px; height: 474px;">
+        <div class="d-flex justify-content-end" data-controller='toggle'>
+          <div class="d-flex justify-content-center align-items-end rounded-5" style="background-color: rgba(255, 255, 255, 0.2); cursor:pointer; --bs-bg-opacity: .5;" data-toggle-target='toggleableElem' data-action='mouseover->toggle#addBg'>
+            <%= image_tag 'profile_picture1.png', class:"img-fluid rounded-circle", style:"width: 100px; height: 120px; margin-right: -50px; object-fit: cover;" %>
+            <%= image_tag 'handshake.png', class:"img-fluid", style:"width: 80px; height: 50px; margin-bottom: -3px; z-index: 1;" %>
+            <%= image_tag 'profile_picture2.png', class:"img-fluid rounded-circle", style:"width: 100px; height: 90px; margin-left: -40px; margin-bottom: 15px; object-fit: cover;" %>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-        <!-- DESCRIPTION line -->
+  <!-- DESCRIPTION line -->
   <div class="row mb-4">
-    <div class=" col-lg-8 col-md-12">
-      <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
+    <!-- Bite DESCRIPTION Card -->
 
-      <div class="col-lg-4 col-md-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
+    <div class="col-lg-8 col-md-12">
+      <div class="card h-100 rounded-5">
+        <div class="card-header bg-transparent pt-3">
+          <h4 class="card-title ms-2 mb-1">What's so special about this Bite:</h4>
+        </div>
+        <div class="card-body px-4">
+          <p class="card-text mb-2">
+            <span class="me-1"><i class="fa-solid fa-wheat-awn-circle-exclamation"></i></span>
+              This bite is:
+            <span class="fw-bolder">
+                <%= bite.dietary_options.gsub(/[^\w_]+/, ' ').split.map { |str| "##{str}"}.join(' ') if bite.dietary_options %>
+              </span>
+            </p>
+          <p class="card-text mb-2">
+            <span class="me-1"><i class="fa-solid fa-universal-access"></i></span>
+            This location offers these accesibilty options:
+            <span class="fw-bolder">
+              <%= bite.accessibility.gsub(/[^\w_]+/, ' ').split.map { |str| "##{str}"}.join(' ') if bite.accessibility %>
+            </span></p>
+
+          <% if bite.dessert.present? || bite.local_drinks.present? %>
+            <p class="card-text mb-2">
+              <span class="me-1"><i class="fa-solid fa-gem"></i></span>
+              Included in this bite:
+              <span class="fw-bolder">
+                <%= "#Dessert" if bite.dessert %>
+                <%= "#Local drinks" if bite.local_drinks %>
+              </span>
+            </p>
+          <% end %>
+
         </div>
       </div>
     </div>
 
-          <!-- MAP line -->
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+    <!-- DESCRIPTION Host & Guest Card-->
+    <div class="col-lg-4 col-md-12">
+      <div class="card rounded-5 h-100">
+        <% if current_user == bite.user %> <%# Host view %>
+          <div class="card-header bg-transparent pt-3">
+            <h4 class="card-title ms-2 mb-1">Know more about your guest:</h4>
           </div>
-        </div>
+          <div class="card-body ps-4 pe-2 row">
+            <div class="col-12">
+              <% if guest && guest.user.description.present?  %>
+                <p class="card-text"><%= guest.user.description %></p>
+              <% elsif guest %>
+                <p class="card-text">Your guest has not provided a description yet.</p>
+              <% else %>
+                <p class="card-text">You have no guest yet.</p>
+              <% end %>
+            </div>
+            <div class="col-12 d-flex justify-content-end align-items-end mt-3">
+              <%= link_to 'Visit profile','#', class:"btn btn-outline-primary rounded-4 me-2 fs-5"  %>
+            </div>
+          </div>
+        <% else %> <%# Guest view %>
+          <div class="card-header bg-transparent pt-3">
+            <h4 class="card-title ms-2">Know more about your host:</h4>
+          </div>
+          <div class="card-body ps-4 pe-2 row">
+            <div class="col-12">
+              <% unless bite.user.description.blank?  %>
+                <p class="card-text"><%= bite.user.description %></p>
+              <% else %>
+                <p class="card-text">Your host has not provided a description yet.</p>
+              <% end %>
+            </div>
+            <div class="col-12 d-flex justify-content-end align-items-end mt-3">
+              <%= link_to 'Visit profile','#', class:"btn btn-outline-primary rounded-4 me-2 fs-5"  %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
+
+
+  <!-- MAP line to be shown only if Bite booked-->
+  <% map_access_granted = (guest && current_user == guest.user) || current_user == bite.user %>
+  <% if map_access_granted %>
+    <div class="row rounded-5">
+      <div class="col-12 rounded-5">
+        <div class="card rounded-5">
+          <div class="card-body rounded-5" id="map-big" style="height: 400px;" data-controller='geocoder'
+            data-geocoder-address-value='<%= bite.address %>' >
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

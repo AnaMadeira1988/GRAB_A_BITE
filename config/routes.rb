@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/dashboard', to: 'bites#dashboard', as: 'dashboard'
+
   resources :guests, only: [:update, :destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

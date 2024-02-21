@@ -59,5 +59,7 @@
 
     <%= f.input :local_experience, as: :text, input_html: { placeholder: 'e.g: I will teach you "Foxtrot" dance 🕺🏽💃🏽' }   %>
 
+    <%= f.input :photos, as: :file,label: 'Add photos', input_html: { multiple: true } %>
+
     <%= f.button :submit, class: 'btn btn-success text-success-emphasis text-body-secondary me-2' %>
 <% end %>
