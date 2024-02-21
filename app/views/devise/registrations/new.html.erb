@@ -21,11 +21,12 @@
                   input_html: { placeholder: "e.g: Doe" }%>
       <%= f.input :phone_number,
                   required: true,
-                  autofocus: true %>
+                  autofocus: true,
+                  input_html: { placeholder: '0172 3800916' } %>
       <%= f.input :email,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "Email" }%>
+                  input_html: { autocomplete: "Email", placeholder: 'john.doe@gmail.com' }%>
       <%= f.input :password,
                   required: true,
                   hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
@@ -35,10 +36,15 @@
                   input_html: { autocomplete: "New-password" } %>
     </div>
 
-    <div class="form-actions mb-3">
-      <%= f.button :submit, "Sign up", class:"btn btn-outline-dark" %>
+    <div class="form-actions mb-3 d-flex justify-content-between">
+      <div class="d-flex">
+        <p class="mb-0 me-2">Already have an account?</p>
+        <%= render "devise/shared/links" %>
+      </div>
+
+      <%= f.button :submit, "Sign up", class:"btn btn-success text-light rounded-4 px-3 fs-5" %>
     </div>
   <% end %>
 
-  <%= render "devise/shared/links" %>
+
 </div>
