@@ -3,13 +3,15 @@ class BitesController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
 
   def index
-    @bites = Bite.all
+    @bites = Bite.where('date >= ?', Date.today)
 
     @bites = filter(@bites, params)
   end
 
   def show
+    accessing_user = current_user == @bite.user || (@bite.guest && current_user == @bite.guest.user) || @bite.guest.nil?
     @guest = @bite.guest if @bite.guest
+    redirect_to root_path, alert: 'Bite not found' unless accessing_user
   end
 
   def new

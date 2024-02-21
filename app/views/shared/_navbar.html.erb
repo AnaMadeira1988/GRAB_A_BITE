@@ -17,6 +17,7 @@
           <li class="nav-item">
             <%= link_to "Dashboard", "#", class: "nav-link btn btn-outline-light custom-btn" %>
           </li>
+
           <div class="nav-item dropdown m-15" style="padding: 25px;">
           <a href="#" class="sino" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa-regular fa-bell fa-lg m-13" id="notification" style="bottom: 23px;position: absolute;right: 23px;color: black;"></i>
@@ -28,16 +29,23 @@
               <%= link_to "Something else here", "#", class: "dropdown-item" %>
             </div>
           </div>
+             
+        <!-- Working here -->
+
           <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
+            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
+            </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              <%= link_to "My booked bites", "#", class: "dropdown-item" %>
+              <%= link_to 'Account settings', edit_user_registration_path, class: "dropdown-item" %>
+
+              <%= link_to 'Log out', destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
+
+          <!-- Working here -->
+
         <% else %>
           <li class="nav-item d-flex">
             <%= link_to "Login", new_user_session_path, class: "nav-link btn btn-outline-light custom-btn mr-2" %>

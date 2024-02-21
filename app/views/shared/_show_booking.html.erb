@@ -1,0 +1,95 @@
+<% images = [ "banner1.jpg" ]%>
+<%= render 'shared/banner', images: images %>
+<div class="container border p-4 mb-4">
+
+  <div class="container">
+    <div class="title">
+      <div class="d-flex flex-column ps-3 pt-2 mb-3">
+        <h3 class="modal-title fw-bold" id="biteModalLabel"><%= @bite.name.capitalize %></h3>
+        <h6><%= @bite.city.capitalize %> | <%= @bite.meal_type %></h6>
+        <h6><i class="fa-solid fa-location-dot fa-sm" style="color: #414244;"></i> <%= @bite.address %></h6>
+      </div>
+      <div>
+        <%= @bite.date.strftime("%d %b %y") %>
+      </div>
+    </div>
+
+
+    <!-- IMAGES line -->
+    <div class="row mb-4 p-0 ">
+      <div class="col-lg-4 col-md-6">
+        <div class="card flex-column">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+          <hr>
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-4 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+        <!-- DESCRIPTION line -->
+  <div class="row mb-4">
+    <div class=" col-lg-8 col-md-12">
+      <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <!-- MAP line -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
