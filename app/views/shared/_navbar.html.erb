@@ -17,7 +17,17 @@
           <li class="nav-item">
             <%= link_to "Dashboard", "#", class: "nav-link btn btn-outline-light custom-btn" %>
           </li>
-          <i class="fa-regular fa-bell fa-2x m-13" id="notification"></i>
+          <div class="nav-item dropdown m-15" style="padding: 25px;">
+          <a href="#" class="sino" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa-regular fa-bell fa-lg m-13" id="notification" style="bottom: 23px;position: absolute;right: 23px;color: black;"></i>
+          <span style="position: absolute;bottom: 29px;right: 6px;background: red;color: white;border-radius: 50%;padding: 0 5px;">10</span>
+          </a>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"style="width: 300px;">
+              <%= link_to "Action", "#", class: "dropdown-item" %>
+              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "Something else here", "#", class: "dropdown-item" %>
+            </div>
+          </div>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
