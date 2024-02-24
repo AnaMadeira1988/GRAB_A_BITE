@@ -1,14 +1,104 @@
-<div class="container justify-content-center my-4">
-  <div class="d-flex flex-column">
-    <div class="cards-container justify-content-center">
-      <div class="cards">
-        <% @booked_bites.each do |bite| %>
-          <!-- Creates a card for each Bite -->
-          <%= render 'shared/card_index_bite', bite: bite %>
-          <!-- Creates a Modal specific to each Bite card -->
-          <%= render 'shared/bite_show', bite: bite %>
+
+<div class="row me-0">
+  <!-- main content -->
+  <div class="col-9 pe-0" data-controller="dashboard">
+    <div class="mt-4 ms-4 bg-light me-0 custom-rounded-top">
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-between align-items-center">
+          <ul class="nav nav-tabs pb-1" style="cursor:pointer; border-bottom: none;">
+            <li class="nav-item">
+              <a class="nav-link active text-secondary text-dark" style="border-top-left-radius:2em;" aria-current="page"
+                data-dashboard-target="openBitesLink" data-action="click->dashboard#openBites">Open Bites</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary"
+                data-dashboard-target= 'bookedBitesLink' data-action="click->dashboard#bookedBites">Booked</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary"
+                data-dashboard-target= 'pendingBitesLink' data-action="click->dashboard#pendingBites">Pending
+                <strong><%= "(#{@pending_bites.size})" unless @pending_bites.empty?%></strong></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">Favourites</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">Bites History</a>
+            </li>
+          </ul>
+          <div class="form-check form-switch form-check-reverse me-5 pt-2 fs-4">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+            <label class="form-check-label" form="flexSwitchCheckReverse">Guest</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Open Bites content -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3"
+      style="height: 86vh;" data-dashboard-target= 'openBites'>
+
+
+      <% if @open_bites.empty? %>
+        <h3 class="text-secondary w-100"> No open bites available 😭</h3>
+      <% else %>
+        <% @open_bites.each do |b| %>
+          <%= render 'shared/dashboard_card', bite: b %>
         <% end %>
+      <% end %>
+    </div>
+
+    <!-- Booked Bites content -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
+      style="height: 86vh;" data-dashboard-target= 'bookedBites'>
+
+      <% if @booked_bites.empty? %>
+        <h3 class="text-secondary w-100"> No booked bites available 😭</h3>
+      <% else %>
+        <% @booked_bites.each do |b| %>
+          <%= render 'shared/dashboard_card', bite: b %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- Pending Bites content -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
+      style="height: 86vh;" data-dashboard-target= 'pendingBites'>
+
+      <% if @pending_bites.empty? %>
+        <h3 class="text-secondary w-100"> No pending bites available 😭</h3>
+      <% else %>
+        <% @pending_bites.each do |b| %>
+          <%= render 'shared/dashboard_card', bite: b %>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+
+  <!-- stats content -->
+  <div class="col-3 h-100 me-0">
+    <div class="container mt-4 bg-light rounded-5" style="height: 91vh;">
+      <div class="card-header text-center p-2">
+        <h2>🍩Stats🍩</h2>
+      </div>
+      <!-- 👆header👆-->
+
+      <!-- 👇stats donut👇-->
+      <div class="card-body" >
+        <div class="chart">
+          <canvas data-controller="charts"
+            data-charts-bites-value="<%= { "Open Bites": @open_bites.size,
+                                          "Pending Bites": @pending_bites.size,
+                                          "Booked Bites": @booked_bites.size}.to_json %>">
+          <!-- TODO: Display polar area chart below -->
+          </canvas>
+        </div>
       </div>
     </div>
   </div>
+
+
 </div>

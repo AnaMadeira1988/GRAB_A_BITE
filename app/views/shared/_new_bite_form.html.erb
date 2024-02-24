@@ -2,7 +2,7 @@
     <%= f.input :name, as: :string, require: true, input_html: { placeholder: 'e.g: Seafood Spaghetti 🍝' } %>
     <%= f.input :date, as: :date, html5: true, required: true, input_html: { min: Date.today + 1, max: Date.today + 6.months } %>
     <%= f.input :number_of_guests, as: :integer, required: true, input_html: { min: 1, value: 1 } %>
-    <%= f.input :price, as: :float, input_html: {min: 1}, required: true %>
+    <%= f.input :price, as: :integer, input_html: {min: 1, max: 999}, required: true %>
     <%= f.input :city, as: :string, required: true %>
     <%= f.input :address, as: :text, required: true %>
     <%= f.input :meal_type,
@@ -17,7 +17,7 @@
 
         <div class="btn-group w-100" role="group" aria-label="Basic checkbox toggle button group">
           <input type="hidden" name="bite[accessibility][]" value="" autocomplete="off">
-          <% ['elevator', 'ramp', 'ground_floor'].each do |choice| %>
+          <% ['elevator', 'ramp', 'ground floor'].each do |choice| %>
             <input type="checkbox" class="btn-check" id="bite_accessibility_<%= choice %>"
               autocomplete="off" value="<%= choice %>" name="bite[accessibility][]">
             <label class="btn btn-outline-success text-success-emphasis" for="bite_accessibility_<%= choice %>"><%= choice %></label>
@@ -32,7 +32,7 @@
 
       <div class="btn-group w-100" role="group" aria-label="Basic checkbox toggle button group">
         <input type="hidden" name="bite[dietary_options][]" value="" autocomplete="off">
-        <% ['vegan', 'vegetarian', 'halal', 'gluten_free', 'keto', 'lactose_free', 'kosher'].each do |choice| %>
+        <% ['vegan', 'vegetarian', 'halal', 'gluten free', 'keto', 'lactose free', 'kosher'].each do |choice| %>
           <input type="checkbox" class="btn-check" id="bite_dietary_options_<%= choice %>"
             autocomplete="off" value="<%= choice %>" name="bite[dietary_options][]">
           <label class="btn btn-outline-success text-success-emphasis" for="bite_dietary_options_<%= choice %>"><%= choice %></label>
@@ -59,7 +59,7 @@
 
     <%= f.input :local_experience, as: :text, input_html: { placeholder: 'e.g: I will teach you "Foxtrot" dance 🕺🏽💃🏽' }   %>
 
-    <%= f.input :photos, as: :file,label: 'Add photos', input_html: { multiple: true } %>
+    <%# f.input :photos, as: :file,label: 'Add photos', input_html: { multiple: true } %>
 
     <%= f.button :submit, class: 'btn btn-success text-success-emphasis text-body-secondary me-2' %>
 <% end %>
