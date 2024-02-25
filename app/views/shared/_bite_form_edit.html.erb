@@ -17,7 +17,7 @@
 
         <div class="btn-group w-100" role="group" aria-label="Basic checkbox toggle button group">
           <input type="hidden" name="bite[accessibility][]" value="" autocomplete="off">
-          <% ['elevator', 'ramp', 'ground_floor'].each do |choice| %>
+          <% ['elevator', 'ramp', 'ground floor'].each do |choice| %>
             <input type="checkbox" class="btn-check" id="bite_accessibility_<%= choice %>"
               autocomplete="off" value="<%= choice %>" name="bite[accessibility][]">
             <label class="btn btn-outline-success text-success-emphasis" for="bite_accessibility_<%= choice %>"><%= choice %></label>
@@ -32,7 +32,7 @@
 
       <div class="btn-group w-100" role="group" aria-label="Basic checkbox toggle button group">
         <input type="hidden" name="bite[dietary_options][]" value="" autocomplete="off">
-        <% ['vegan', 'vegetarian', 'halal', 'gluten_free', 'keto', 'lactose_free', 'kosher'].each do |choice| %>
+        <% ['vegan', 'vegetarian', 'halal', 'gluten free', 'keto', 'lactose free', 'kosher'].each do |choice| %>
           <input type="checkbox" class="btn-check" id="bite_dietary_options_<%= choice %>"
             autocomplete="off" value="<%= choice %>" name="bite[dietary_options][]">
           <label class="btn btn-outline-success text-success-emphasis" for="bite_dietary_options_<%= choice %>"><%= choice %></label>

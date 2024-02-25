@@ -3,7 +3,6 @@
   margin: 10px;
   width: 350px;
   border: 1px solid #ccc;
-  border-radius: 5px;
   overflow: hidden;
 }
 
@@ -22,13 +21,9 @@
 }
 
 .details-card-bite {
+  width: 348;
   background-color: white;
   padding: 10px 15px;
-}
-
-.fixed-name-city-height {
-  height: 90px;
-  overflow: hidden;
 }
 
 .rating-card-bite {
@@ -41,8 +36,22 @@
 
 .card-hover-shadow {
   transition: box-shadow 0.3s;
+  box-shadow: 0 0 20px rgba(104, 104, 104, 0.5);
 }
 
 .card-hover-shadow:hover {
-  box-shadow: 0 0 30px rgba(167, 93, 93, 0.8);
+  box-shadow: 0 0 20px rgba(46, 46, 46, 0.5);
+}
+
+.dashboard_card {
+  text-decoration: none !important;
+  margin: 10px;
+  width: 350px;
+  border: none;
+  overflow: hidden;
+}
+
+.col a{
+  color: #000000;
+  text-decoration: none;
 }

@@ -4,7 +4,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-   <%= render 'shared/filter_index', bites: @bites %>
+    <%= render 'shared/filter_index', bites: @bites %>
   </div>
 </div>
 
@@ -15,17 +15,18 @@
     <div class="d-flex justify-content-end w-100">
       <%= button_tag "Filter", class: "btn btn-light filter-button", type: "button", "data-bs-toggle": "offcanvas", "data-bs-target": "#offcanvasWithBothOptions", "aria-controls": "offcanvasWithBothOptions" %>
     </div>
-    <div class="cards-container justify-content-center">
-      <div class="cards">
+
+      <div class="row row-cols-1 row-cols-md-3 row-cols-xxl-4 g-3 mt-1">
+
         <% @bites.each do |bite| %>
           <% unless bite.guest%>
             <!-- Creates a card for each Bite -->
-            <%= render 'shared/card_index_bite', bite: bite %>
-            <!-- Creates a Modal specific to each Bite card -->
-            <%= render 'shared/bite_show', bite: bite %>
+              <%= render 'shared/card_index_bite', bite: bite %>
+              <!-- Creates a Modal specific to each Bite card -->
+              <%= render 'shared/bite_show', bite: bite %>
           <% end%>
         <% end %>
+
       </div>
-    </div>
   </div>
 </div>

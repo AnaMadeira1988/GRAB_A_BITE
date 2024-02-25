@@ -1,0 +1,8 @@
+.scrollable-content {
+  overflow-y: scroll;
+  scroll-padding-top: 0;
+}
+
+.scrollable-content::-webkit-scrollbar {
+  display: none;
+}

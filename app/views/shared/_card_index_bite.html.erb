@@ -1,80 +1,61 @@
-<div class="card-card-bite card-hover-shadow rounded-5">
+<div class="col">
+  <div class="card-card-bite w-100 card-hover-shadow rounded-5">
 
-  <!-- Carousel -->
+    <!-- Carousel -->
 
-  <div id="biteCardIndex<%= bite.id%>" class="carousel slide">
-    <div class="carousel-inner">
-      <!-- if photos uploaded -->
-      <% if bite.photos.attached? %>
-        <% bite.photos.each_with_index do |photo, index| %>
-          <% if index == 0 %>
-            <div class="carousel-item active">
-            <%= cl_image_tag photo.key, class:"d-block w-100",width: 348, height:230, crop: :fill %>
-            </div>
-          <% else %>
-            <div class="carousel-item">
+    <div id="biteCardIndex<%= bite.id%>" class="carousel slide">
+      <div class="carousel-inner">
+        <!-- if photos uploaded -->
+        <% if bite.photos.attached? %>
+          <% bite.photos.each_with_index do |photo, index| %>
+            <% if index == 0 %>
+              <div class="carousel-item active">
               <%= cl_image_tag photo.key, class:"d-block w-100",width: 348, height:230, crop: :fill %>
-            </div>
+              </div>
+            <% else %>
+              <div class="carousel-item">
+                <%= cl_image_tag photo.key, class:"d-block w-100",width: 348, height:230, crop: :fill %>
+              </div>
+            <% end %>
           <% end %>
+
+        <!-- if No photos uploaded -->
+        <% else %>
+          <div class="carousel-item active">
+            <%= image_tag 'bite_banner1.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag 'bite_banner2.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag 'bite_banner3.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
+          </div>
         <% end %>
 
-      <!-- if No photos uploaded -->
-      <% else %>
-        <div class="carousel-item active">
-          <%= image_tag 'bite_banner1.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag 'bite_banner2.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag 'bite_banner3.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
-        </div>
-      <% end %>
-
-    </div>
-    <button class="carousel-control-prev" type="button"
-      data-bs-target="#biteCardIndex<%= bite.id%>" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button"
-      data-bs-target="#biteCardIndex<%= bite.id%>" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-
-  <!-- Card body -->
-
-  <div class="details-card-bite"  role="button" data-bs-toggle="modal" data-bs-target="#biteModal<%= bite.id %>">
-    <div class="fixed-name-city-height d-flex justify-content-between" style="position: relative;">
-      <div>
-        <p class="mb-0 fs-5"><strong><%= bite.name.capitalize %></strong></p>
-        <p class="my-0"><small><%= bite.city.capitalize %></small></p>
       </div>
-      <div class="d-flex flex-column justify-content-center">
-        <%= image_tag 'banner1.jpg', class:"avatar-card-bite" %>
-        <p class="text-end"><i class="fa-solid fa-star" style="color: #ffd500;"></i><span>4</span></p>
-      </div>
+      <button class="carousel-control-prev" type="button"
+        data-bs-target="#biteCardIndex<%= bite.id%>" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button"
+        data-bs-target="#biteCardIndex<%= bite.id%>" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
 
-    <div class="drink-dessert text-body-secondary">
-      <p><i class="fa-regular fa-calendar fs-6"></i> <%= bite.date.strftime("%d-%m-%Y") %>
-      <div style="display: flex; justify-content: space-between">
+    <!-- Card body -->
+
+    <div class="details-card-bite"  role="button" data-bs-toggle="modal" data-bs-target="#biteModal<%= bite.id %>">
+      <h5 class="mb-0 fw-semibold"><%= bite.name.capitalize %></h5>
+      <div class="fixed-name-city-height d-flex justify-content-between align-items-end" style="position: relative;">
+        <div class="text-body-tertiary">
+          <p class="my-0 fs-5"><small><%= bite.city.capitalize %></small></p>
+          <p class="fs-5"> <%= bite.date.strftime("%d %b %Y") %>
+        </div>
         <div>
-          <span><i class="fa-solid fa-users"></i> <%= bite.number_of_guests %></span>
-
-          <% if bite.local_drinks %>
-            <i class="fa-solid fa-martini-glass"></i>
-          <% end %>
-
-          <% if bite.dessert %>
-            <i class="fa-solid fa-ice-cream fa-lg" style="color: #050505;"></i>
-          <% end %>
-        </div>
-
-        <div class="d-flex align-items-end justify-content-end text-black">
-          <span class="fw-semibold fs-4"><%= bite.price %> <i class="fa-solid fa-euro-sign fa-sm" style="color: #000000;"></i></span>
+          <p class="mb-0 fs-3"><span class="fw-medium"><%= bite.price %>€</p>
         </div>
       </div>
     </div>

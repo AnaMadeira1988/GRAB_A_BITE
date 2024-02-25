@@ -9,12 +9,15 @@ class BitesController < ApplicationController
   end
 
   def dashboard
-    @bites = Bite.where(user: current_user)
+    @bites_all = Bite.all
 
-    @booked_bites = @bites.select do |bite|
-      bite.guest.present?
-    end
+    @my_bites = Bite.where(user: current_user)
 
+    @open_bites = @my_bites.select { |bite| bite.guest.nil? }
+
+    @booked_bites = @my_bites.select { |bite| bite.guest.present? && bite.guest.confirmed == true }
+
+    @pending_bites = @my_bites.select { |bite| bite.guest.present? && bite.guest.confirmed.nil? }
   end
 
   def show
@@ -28,7 +31,11 @@ class BitesController < ApplicationController
   end
 
   def create
-    @bite = Bite.new(bite_params.merge(user: current_user))
+    modified_params = bite_params.merge(user: current_user)
+    modified_params[:dietary_options] = modified_params[:dietary_options].reject(&:empty?).map { |str| "##{str}".delete(' ') }.join(' ')
+    modified_params[:accessibility] = modified_params[:accessibility].reject(&:empty?).map { |str| "##{str}".delete(' ') }.join(' ')
+
+    @bite = Bite.new(modified_params)
 
     if @bite.save!
       redirect_to @bite, notice: 'Bite was successfully created.'
@@ -68,9 +75,10 @@ class BitesController < ApplicationController
   private
 
   def bite_params
-    params.require(:bite).permit(:name, :date,
-                                 :price, :meal_type, :local_drinks, :dessert, :number_of_guests,
-                                 :local_experience, :city, :address, dietary_options: [], accessibility: [], photos: [])
+    params.require(:bite).permit( :name, :date,
+                                  :price, :meal_type, :local_drinks, :dessert, :number_of_guests,
+                                  :local_experience, :city, :address, dietary_options: [], accessibility: [],
+                                  photos: [])
   end
 
   def set_bite
