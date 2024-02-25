@@ -2,7 +2,6 @@
   <div class="card-card-bite w-100 card-hover-shadow rounded-5">
 
     <!-- Carousel -->
-
     <div id="biteCardIndex<%= bite.id%>" class="carousel slide">
       <div class="carousel-inner">
         <!-- if photos uploaded -->
@@ -22,13 +21,7 @@
         <!-- if No photos uploaded -->
         <% else %>
           <div class="carousel-item active">
-            <%= image_tag 'bite_banner1.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
-          </div>
-          <div class="carousel-item">
-            <%= image_tag 'bite_banner2.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
-          </div>
-          <div class="carousel-item">
-            <%= image_tag 'bite_banner3.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
+            <%= image_tag 'dish_placeholder', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
           </div>
         <% end %>
 
@@ -46,7 +39,6 @@
     </div>
 
     <!-- Card body -->
-
     <div class="details-card-bite"  role="button" data-bs-toggle="modal" data-bs-target="#biteModal<%= bite.id %>">
       <h5 class="mb-0 fw-semibold"><%= bite.name.capitalize %></h5>
       <div class="fixed-name-city-height d-flex justify-content-between align-items-end" style="position: relative;">

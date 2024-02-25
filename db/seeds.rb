@@ -14,7 +14,7 @@ puts "Destroying old bites..."
 puts "Creating bites..."
 User.all.each do |user|
   4.times do
-    bite_params = {name: Faker::Food.dish,
+    bite_params = {name: Faker::Food.dish[0..24],
                     date: Faker::Date.between(from: Date.today + 1, to: 2.weeks.from_now),
                     dietary_options: ['vegan', 'vegetarian', 'low_carb','halal', 'gluten_free', 'keto', 'lactose_free', 'kosher'].sample(3).join(' '),
                     price: rand(5.2...29.99).round(2),
