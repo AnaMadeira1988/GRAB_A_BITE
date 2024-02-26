@@ -29,7 +29,7 @@
     <!-- Dietary options checkboxes -->
     <fieldset class="mb-3 check_boxes required bite_dietary_options w-100">
       <legend class="col-form-label pt-0">Dietary options <abbr title="required">*</abbr></legend>
-
+      <label for="dietary_options" class="fs-6 text-secondary">Choose all that apply</label>
       <div class="btn-group w-100" role="group" aria-label="Basic checkbox toggle button group">
         <input type="hidden" name="bite[dietary_options][]" value="" autocomplete="off">
         <% ['Vegan', 'Vegetarian', 'Halal', 'Gluten Free', 'Keto', 'Lactose Free', 'Kosher'].each do |choice| %>
@@ -62,6 +62,6 @@
     <%= f.input :photos, as: :file,label: 'Add photos', input_html: { multiple: true } %>
     <div class="d-flex justify-content-between">
       <%= link_to "Back to homepage", root_path, class:"btn btn-light" %>
-      <%= f.button :submit, class: 'btn btn-success text-success-emphasis text-body-secondary me-2' %>
+      <%= f.button :submit, class: 'btn btn-success text-success-emphasis text-body-secondary me-2 rounded-pill' %>
     </div>
 <% end %>

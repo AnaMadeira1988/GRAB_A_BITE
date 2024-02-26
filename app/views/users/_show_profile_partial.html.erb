@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="mt-2">
+      <h5><strong>Host Stats</strong></h5>
+    </div>
+    <div class="position-relative">
+      <%= image_tag "https://avatars.githubusercontent.com/u/145844680?v=4", class: "avatar-extra-large", alt: "avatar-large" %>
+      <div class="d-flex position-absolute justify-content-center align-items-center bottom-0 end-0 pt-2 px-2 bg-white rounded" style="--bs-bg-opacity: .3;">
+        <% review = @user.review %>
+            <% if review.any? %>
+              <h5><i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i><span class="text-sm fw-medium"><% experience_avg = review.average(:experience) %></span></h5>
+            <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% review = @user.review %>
+    <% if review.any? %>
+      <% cleanliness_avg = review.average(:cleanliness) %>
+      <% location_avg = review.average(:location) %>
+      <% food_avg = review.average(:food) %>
+      <% accessibility_avg = review.average(:accessibility) %>
+
+    <div class="rating-bars p-4">
+      <% ratings = { "Cleanliness" => cleanliness_avg, "Location" => location_avg, "Accessibility" => accessibility_avg, "Food" => food_avg } %>
+      <% ratings.each do |label, rating| %>
+        <div>
+          <div>
+            <%= "#{label} (#{rating}/10)" %>
+          </div>
+          <div class="bg-secondary bg-gradient rounded">
+            <div class="bar bg-success" style="width: <%= rating.to_i * 10 %>%;"></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <% else %>
+      <h6><%= @user.name %> hasn't hosted yet!</h6>
+    <% end %>
+</div>
