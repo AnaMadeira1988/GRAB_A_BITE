@@ -1,0 +1,56 @@
+.button-prev {
+  position: absolute;
+  top: 55%;
+  left: 0;
+  z-index: 999;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 10px 15px 7px 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: rgba(180, 180, 180, 0.2);
+  }
+}
+
+.button-next {
+  position: absolute;
+  top: 55%;
+  right: 0;
+  z-index: 999;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 10px 10px 7px 15px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: rgba(180, 180, 180, 0.2);
+  }
+}
+
+.button-fave {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  z-index: 999;
+  background-color: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.508);
+  margin: 10px 10px 7px 15px;
+  font-size: 25px;
+  cursor: pointer;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.753);
+  }
+}
+
+.button-fave.active {
+  color: red;
+}

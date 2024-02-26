@@ -24,9 +24,6 @@
                 <strong class="text-dark"><%= "(#{@pending_bites.size})" unless @pending_bites.empty?%></strong></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-secondary" href="#">Favourites</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link text-secondary"
               data-dashboard-target= 'historyBitesLink' data-action="click->dashboard#historyBites">Bites History</a>
             </li>
@@ -148,9 +145,6 @@
               <a class="nav-link text-secondary"
                 data-dashboard-target= 'guestPendingBitesLink' data-action="click->dashboard#guestPendingBites">Pending
                 <strong class="text-dark"><%= "(#{@guest_pending_bites.size})" unless @guest_pending_bites.empty?%></strong></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" href="#">Favourites</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-secondary"
