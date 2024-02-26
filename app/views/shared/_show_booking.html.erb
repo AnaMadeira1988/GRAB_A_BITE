@@ -187,30 +187,30 @@
   <!-- Buttons -->
   <div class="row mt-4">
     <div class="col d-flex justify-content-end text-end">
-      <span class="mx-2" style="margin-bottom: -8px;">Only for <span style="font-size: 40px; font-weight: bold;"><%= @bite.price %>€</span></span>
+      <span class="mx-2" style="margin-bottom: -8px;">Only for <span style="font-size: 40px; font-weight: bold;"><%= bite.price %>€</span></span>
 
 
-      <% if @guest && current_user == @guest.user %>  <!-- Guest View -->
-        <% if @guest.confirmed == true %>  <!-- if Booking is confirmed -->
-          <%= button_to 'Cancel', guest_path(@guest), method: :delete, data: {turbo_confirm: 'Are you sure?'}, class:"btn btn-danger fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
+      <% if guest && current_user == guest.user %>  <!-- Guest View -->
+        <% if guest.confirmed == true %>  <!-- if Booking is confirmed -->
+          <%= button_to 'Cancel', guest_path(guest), method: :delete, data: {turbo_confirm: 'Are you sure?'}, class:"btn btn-danger fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
           <button type="button" class="btn btn-success fs-3 text-light px-4" style="border-radius: 8px;" data-bs-dismiss="modal" disabled>Booked</button>
 
-        <% elsif @guest %> <!-- if Booking is pending -->
+        <% elsif guest %> <!-- if Booking is pending -->
           <div class="d-flex">
-            <%= button_to 'Cancel', guest_path(@guest), method: :delete, data: {turbo_confirm: 'Are you sure?'}, class:"btn btn-danger fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
+            <%= button_to 'Cancel', guest_path(guest), method: :delete, data: {turbo_confirm: 'Are you sure?'}, class:"btn btn-danger fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
             <button type="button" class="btn btn-warning fs-3 text-light px-4" style="border-radius: 8px;" disabled data-bs-dismiss="modal">Pending</button>
           </div>
         <% end %>
 
-      <% elsif current_user == @bite.user %>  <!-- Host View -->
-        <% if @guest && @guest.confirmed == true %> <!-- if Booking is confirmed -->
-          <%= button_to 'Cancel', guest_path(@guest), method: :delete, data: {turbo_confirm: 'This booking has already been finalized. Are you sure you want to cancel it?'}, class:"btn btn-danger fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
+      <% elsif current_user == bite.user %>  <!-- Host View -->
+        <% if guest && guest.confirmed == true %> <!-- if Booking is confirmed -->
+          <%= button_to 'Cancel', guest_path(guest), method: :delete, data: {turbo_confirm: 'This booking has already been finalized. Are you sure you want to cancel it?'}, class:"btn btn-danger fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
           <button type="button" class="btn btn-primary fs-3 text-light px-4" style="border-radius: 8px;" disabled data-bs-dismiss="modal" disabled>Booked</button>
 
-        <% elsif @guest %> <!-- if Booking is pending -->
+        <% elsif guest %> <!-- if Booking is pending -->
           <div class="d-flex">
-            <%= button_to 'Decline', guest_path(@guest), method: :delete, data: {turbo_confirm: 'Are you sure?'}, class:"btn btn-danger fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
-            <%= button_to 'Confirm', guest_path(@guest), method: :patch, class:"btn btn-success fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
+            <%= button_to 'Decline', guest_path(guest), method: :delete, data: {turbo_confirm: 'Are you sure?'}, class:"btn btn-danger fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
+            <%= button_to 'Confirm', guest_path(guest), method: :patch, class:"btn btn-success fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
           </div>
 
         <% else %>  <!-- if no guest is booked -->
@@ -218,7 +218,7 @@
             <%= link_to 'Dashboard', dashboard_path, class:"btn btn-warning fs-3 text-dark px-4", style:"border-radius: 8px;" %>
         <% end %>
       <% else %> <!-- if available for booking -->
-            <%= button_to 'Book Now', book_bite_path(@bite.id), method: :post, class:"btn btn-primary fs-3 text-light px-4", style:"border-radius: 8px;" %>
+            <%= button_to 'Book Now', book_bite_path(bite.id), method: :post, class:"btn btn-primary fs-3 text-light px-4", style:"border-radius: 8px;" %>
       <% end %>
     </div>
   </div>
