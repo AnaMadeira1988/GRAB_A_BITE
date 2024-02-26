@@ -22,4 +22,8 @@ export default class extends Controller {
     const toggleables = [this.toggleableDisplayTarget, this.toggleablePaymentButtonsTarget, this.toggleableBookButtonTarget];
     toggleables.forEach(toggleable => toggleable.classList.toggle('d-none'));
   }
+
+  toggleNotif() {
+    this.toggleableElemTarget.classList.add('d-none');
+  }
 }

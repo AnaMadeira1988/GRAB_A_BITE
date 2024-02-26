@@ -9,7 +9,7 @@
           <%= cl_image_tag bit.photos[0].key, class:"d-block w-100",width: 348, height:230, crop: :fill %>
         <!-- if No photos uploaded -->
         <% else %>
-            <%= image_tag 'bite_banner2.jpg', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
+            <%= image_tag 'dish_placeholder', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
         <% end %>
       </div>
 

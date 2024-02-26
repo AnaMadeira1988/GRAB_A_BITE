@@ -1,5 +1,6 @@
 class BitesController < ApplicationController
   before_action :set_bite, only: %i[show edit update destroy]
+  before_action :set_pending_bites, only: %i[dashboard index show edit]
   skip_before_action :authenticate_user!, only: :index
 
   def index
@@ -10,19 +11,35 @@ class BitesController < ApplicationController
 
   def dashboard
     @bites_all = Bite.all
-
     @my_bites = Bite.where(user: current_user)
 
-    @open_bites = @my_bites.select { |bite| bite.guest.nil? }
+    @expired_bites = @my_bites.select do |bite|
+      bite.date < Date.today && (bite.guest.nil? || (bite.guest.present? && bite.guest.confirmed.nil?))
+    end.sort_by(&:date).reverse
 
-    @booked_bites = @my_bites.select { |bite| bite.guest.present? && bite.guest.confirmed == true }
+    @history_bites = @my_bites.select { |bite| bite.date < Date.today && bite.guest.present? && bite.guest.confirmed == true }
+                              .sort_by(&:date).reverse
 
-    @pending_bites = @my_bites.select { |bite| bite.guest.present? && bite.guest.confirmed.nil? }
+    @open_bites = @my_bites.select { |bite| bite.guest.nil? && bite.date >= Date.today }.sort_by(&:date)
+
+    @booked_bites = @my_bites.select { |bite| bite.guest.present? && bite.guest.confirmed == true && bite.date >= Date.today }
+                             .sort_by(&:date)
+
+    @guest_pending_bites = Bite.joins(:guest).where(guests: { confirmed: nil, user: current_user })
+                               .select { |bite| bite.date >= Date.today }.sort_by(&:date)
+
+    @guest_booked_bites = Bite.joins(:guest).where(guests: { confirmed: true, user: current_user })
+                              .select { |bite| bite.date >= Date.today }.sort_by(&:date)
+
+    @guest_history_bites = Bite.joins(:guest).where(guests: { confirmed: true, user: current_user })
+                               .select { |bite| bite.date < Date.today }
   end
 
   def show
-    accessing_user = current_user == @bite.user || (@bite.guest && current_user == @bite.guest.user) || @bite.guest.nil?
-    @guest = @bite.guest if @bite.guest
+    @guest = @bite.guest if @bite.guest.present?
+    @guest.destroy if @guest.present? && @guest.confirmed.nil? && @bite.date < Date.today
+    accessing_user = current_user == @bite.user || (@guest && current_user == @guest.user) || (@guest.nil? && @bite.date >= Date.today)
+
     redirect_to root_path, alert: 'Bite not found' unless accessing_user
   end
 
@@ -32,8 +49,10 @@ class BitesController < ApplicationController
 
   def create
     modified_params = bite_params.merge(user: current_user)
-    modified_params[:dietary_options] = modified_params[:dietary_options].reject(&:empty?).map { |str| "##{str}".delete(' ') }.join(' ')
-    modified_params[:accessibility] = modified_params[:accessibility].reject(&:empty?).map { |str| "##{str}".delete(' ') }.join(' ')
+    modified_params[:dietary_options] = modified_params[:dietary_options].reject(&:empty?)
+                                                                         .map { |str| "##{str}".delete(' ') }.join(' ')
+    modified_params[:accessibility] = modified_params[:accessibility].reject(&:empty?)
+                                                                     .map { |str| "##{str}".delete(' ') }.join(' ')
 
     @bite = Bite.new(modified_params)
 
@@ -44,7 +63,14 @@ class BitesController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    if @bite.user != current_user
+      return redirect_to root_path, alert: 'You are not authorized to edit this bite.'
+    end
+    if @bite.guest.present?
+      return redirect_to root_path, alert: 'You cannot edit a bite that has been booked.'
+    end
+  end
 
   def update
     if @bite.update(bite_params)
@@ -62,6 +88,7 @@ class BitesController < ApplicationController
   def book
     @bite = Bite.find(params[:id])
     return if @bite.user == current_user
+    return redirect_to root_path, alert: "Cannot book! Bite expired!" if @bite.date < Date.today
 
     @guest = Guest.new(user: current_user, bite: @bite)
 
@@ -83,6 +110,11 @@ class BitesController < ApplicationController
 
   def set_bite
     @bite = Bite.find(params[:id])
+  end
+
+  def set_pending_bites
+    @pending_bites = Bite.where(user: current_user)
+                         .select { |bite| bite.guest.present? && bite.guest.confirmed.nil? && bite.date >= Date.today }.sort_by(&:date)
   end
 
   def filter(bites, params)

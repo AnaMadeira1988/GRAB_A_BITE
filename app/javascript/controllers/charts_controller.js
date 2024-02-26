@@ -22,15 +22,12 @@ export default class extends Controller {
           label: 'My Bite stats',
           data,
           backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
+            'rgb(140, 185, 189)',
+            'rgb(246, 177, 122)',
+            'rgb(199, 220, 167)'
           ],
           hoverOffset: 4
         }]
-      },
-      options: {
-        animation: false // Disable animation
       }
     });
   }
