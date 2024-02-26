@@ -2,13 +2,13 @@
 <!-- Modal -->
 <div class="modal fade" id="biteModal<%= bite.id %>" tabindex="-1" aria-labelledby="biteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
-    <div class="modal-content rounded-5" data-controller='toggle'>
+    <div class="modal-content rounded-5">
 
       <!-- Modal header -->
       <div class="modal-header">
         <div class="d-flex flex-column ps-3 pt-2">
-          <h3 class="modal-title fw-bold" id="biteModalLabel"><%= bite.name.capitalize %></h3>
-          <h6><%= bite.city.capitalize %> | <%= bite.meal_type %> | <%= bite.date.strftime("%d %b %Y") %></h6>
+          <h3 class="modal-title fw-bold" id="biteModalLabel"><%= bite.name.capitalize %><span class="fw-normal fs-5"> (<%= bite.date.strftime("%d %b %Y") %>)</span></h3>
+          <h6><%= bite.city.capitalize %> | <%= bite.meal_type %></h6>
         </div>
         <div class="me-3">
 
@@ -23,14 +23,11 @@
         </div>
       </div>
 
-      <!-- Carousel -->
+        <!-- Carousel -->
       <div id="biteModalCarousel<%= bite.id%>" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
 
-
-          <!--Development only/ Change before Heroku push -->
           <% if bite.photos.attached? %>
-
 
             <% bite.photos.each_with_index do |photo, index| %>
               <% if index == 0 %>
@@ -45,7 +42,7 @@
             <% end %>
           <% else %>
             <div class="carousel-item active">
-              <%= image_tag 'banner1.jpg', class:"d-block w-100",width: 798, height:532 %>
+              <%= image_tag 'dish_placeholder', class:"d-block w-100",width: 798, height:532 %>
             </div>
 
           <% end %>
@@ -61,7 +58,7 @@
         </button>
       </div>
 
-      <!-- Modal content -->
+        <!-- Modal content -->
       <div class="modal-body py-0">
 
         <!-- Inject tags here (dietary_options/accessibility)  -->
@@ -82,7 +79,7 @@
             <% end %>
 
             <% if bite.dessert %>
-              <i class="fa-solid fa-ice-cream fa-lg" title="Dessert is included!" style="color: #050505;"></i>
+              <i class="fa-solid fa-ice-cream fa-lg" title="Dessert is included!"></i>
             <% end %>
           </div>
         </div>
@@ -95,7 +92,7 @@
             <% if bite.user.photo.attached? %>
               <%= cl_image_tag bite.user.photo.key, class: "avatar",crop: :crop %>
             <% else %>
-              <%= image_tag 'banner1.jpg',class: "avatar" %>
+              <%= image_tag 'unknown',class: "avatar" %>
             <% end %>
             <p class="text-end" style="margin: -12px 0 0 37px;"><i class="fa-solid fa-star" style="color: #ffd500;"></i><span>4</span></p>
           </div>
@@ -109,42 +106,25 @@
         <!-- Description section of bite show -->
         <div class="card" style="border: none;">
           <div class="card-body pb-1">
-          <blockquote class="blockquote mb-0">
-            <h4 style="margin-left: -10px" class="fs-5"> Who am I? </h4>
-            <p class="text-body-tertiary fst-italic"> <%= bite.user.description %> </p>
-          </blockquote>
-          <hr>
-          <blockquote class="blockquote mb-0">
-            <h4 style="margin-left: -10px" class="fs-5"> What makes this gathering special? </h4>
-            <p class="text-body-tertiary fst-italic"> <%= bite.local_experience %> </p>
-          </blockquote>
+
+            <% unless bite.user.description.blank? %>
+              <blockquote class="blockquote mb-0">
+                <h4 style="margin-left: -10px" class="fs-5"> Who am I? </h4>
+                <p class="text-body-tertiary fst-italic"> <%= bite.user.description %> </p>
+              </blockquote>
+            <% end %>
+            <% unless bite.local_experience.blank? %>
+              <hr>
+              <blockquote class="blockquote mb-0">
+                <h4 style="margin-left: -10px" class="fs-5"> What makes this gathering special? </h4>
+                <p class="text-body-tertiary fst-italic"> <%= bite.local_experience %> </p>
+              </blockquote>
+            <% end %>
           </div>
         </div>
 
-      <!-- Under construction -->
 
-      <div class="card p-2 d-none" data-toggle-target='toggleableDisplay'>
-        <form >
-          <div class="form-group">
-            <label for="cardNumber">Card Number</label>
-            <input type="text" class="form-control" id="cardNumber" placeholder="**** **** **** ****" disabled>
-          </div>
-          <div class="form-group">
-            <label for="cardName">Cardholder Name</label>
-            <input type="text" class="form-control" id="cardName" placeholder="John Doe" disabled>
-          </div>
-          <div class="form-row d-flex justify-content-between">
-            <div class="form-group col-md-7">
-              <label for="expiryDate">Expiry Date</label>
-              <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" disabled>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="cvv">CVV</label>
-              <input type="text" class="form-control" id="cvv" placeholder="***" disabled>
-            </div>
-          </div>
-        </form>
-      </div>
+
       </div>
 
 
@@ -153,24 +133,9 @@
         <span class="mx-2" style="margin-bottom: -8px;">Only for <span style="font-size: 40px; font-weight: bold;"><%= bite.price %>€</span></span>
 
         <% if bite.user == current_user %>
-          <%= button_to 'Manage booking', bite_path(bite), method: :get, class: "btn btn-warning fs-3 text-light px-4", style: "border-radius: 8px;" %>
+          <%= button_to 'Dashboard', dashboard_path, method: :get, class: "btn btn-warning fs-3 text-light px-4", style: "border-radius: 8px;" %>
         <% else %>
-
-          <!-- Payment Buttons container -->
-          <div class="d-none d-flex" data-toggle-target="toggleablePaymentButtons">
-
-            <!-- Cancel payment button -->
-            <button class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover border border-0 me-2"
-              data-toggle-target="toggleableCancelButton" data-action="click->toggle#cancelPayment">
-              Cancel payment
-            </button>
-
-            <!-- Finalize payment button -->
-            <%= button_to 'Pay now', book_bite_path(bite.id), method: :post, class:"btn btn-success fs-3 text-light px-4", style:"border-radius: 8px;",data: {toggle_target: "toggleableFinalizeButton"} %>
-          </div>
-
-          <!-- Book button -->
-            <button class="btn btn-success fs-3 text-light px-4" style="border-radius: 8px;" data-toggle-target="toggleableBookButton" data-action="click->toggle#togglePayment">Book now</button>
+            <%= button_to 'Book now', book_bite_path(bite.id), method: :post, class:"btn btn-success fs-3 text-light px-4", style:"border-radius: 8px;",data: {toggle_target: "toggleableFinalizeButton"} %>
         <% end %>
       </div>
     </div>

@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon" style="background-color: rgba(202,157,157);">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon " style="background-color: rgba(202,157,157);">
   <div class="container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "logo2.png" %>
@@ -18,25 +18,37 @@
             <%= link_to "Dashboard", dashboard_path, class: "nav-link btn btn-outline-light custom-btn" %>
           </li>
 
-          <div class="nav-item dropdown m-15" style="padding: 25px;">
-          <a href="#" class="sino" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa-regular fa-bell fa-lg m-13" id="notification" style="bottom: 23px;position: absolute;right: 23px;color: black;"></i>
-          <span style="position: absolute;bottom: 29px;right: 6px;background: red;color: white;border-radius: 50%;padding: 0 5px;">10</span>
-          </a>
+          <!--Notification Dropdown -->
+          <div class="nav-item dropdown" style="padding: 25px;" data-controller="toggle">
+            <a href="#" class="sino" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-action="click->toggle#toggleNotif" >
+            <i class="fa-regular fa-bell fa-lg m-13" id="notification" style="bottom: 23px;position: absolute;right: 23px;color: black;"></i>
+
+            <% unless @pending_bites.nil? ||  @pending_bites.empty? %>
+              <span  style="position: absolute; bottom: 29px; right: 6px; background: red; color: white; border-radius: 50%; padding: 0 5px; width: 25px; height: 25px; display: flex; justify-content: center; align-items: center;"  data-toggle-target="toggleableElem" >
+                <%= @pending_bites.size <= 9 ? @pending_bites.size : "9+" %>
+              </span>
+            <% end %>
+            </a>
+              <!-- Dropdown Options-->
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"style="width: 300px;">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Something else here", "#", class: "dropdown-item" %>
+              <% unless @pending_bites.nil? || @pending_bites.empty? %>
+                <%= link_to "⌛ You have pending bites.", dashboard_path, class: "dropdown-item fw-semibold" %>
+              <% else %>
+                <%= link_to "🫡 You have no pending bites.", '#', class: "dropdown-item" %>
+              <% end %>
             </div>
           </div>
 
+          <!--User avatar Dropdown -->
           <li class="nav-item dropdown">
-            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false"
+              title="<%= current_user.first_name + ' ' + current_user.last_name %>">
 
               <% if current_user.photo.attached? %>
                 <%= cl_image_tag current_user.photo.key, class: "avatar",crop: :crop %>
               <% else %>
-                <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar" %>
+                <%= image_tag "unknown", class: "avatar", crop: :crop %>
               <% end %>
 
             </a>

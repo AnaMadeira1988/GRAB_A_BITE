@@ -23,7 +23,7 @@
           <% if bite.photos.attached? %>
             <%= cl_image_tag bite.photos.first.key, class:"d-block w-100", width: 402, height: 268, crop: :fill, style: 'border-radius: 20px;' %>
           <% else %>
-            <%= image_tag 'banner2.jpg', class:"d-block w-100", width: 402, height: 268, crop: :fill, style: 'border-radius: 20px;' %>
+            <%= image_tag 'dish_placeholder', class:"d-block w-100", width: 402, height: 268, crop: :fill, style: 'border-radius: 20px;' %>
           <% end %>
         </div>
         <div class="card w-100" id="map-small" style="height: 190px; border-radius: 20px;" data-controller='geocoder' data-geocoder-city-value='<%= bite.city %>'>
@@ -33,9 +33,9 @@
     <div class="col-lg-4 col-md-6">
       <div class="card rounded-5 h-100">
         <% if bite.photos.attached? %>
-          <%= cl_image_tag bite.photos.second.key, class:"d-block w-100", width: 400, height: 474, style: 'border-radius: 20px;' %>
+          <div class="card rounded-5" style="background-image: url('<%= cl_image_path bite.photos.second.key, width:400, height: 474, crop: :fill %>'); background-size: cover; background-position: center; border-radius: 20px; width: 100%; height: 100%;"></div>
         <% else %>
-          <%= image_tag 'banner2.jpg', class:"d-block w-100", width: 400, height: 474, style: 'border-radius: 20px;', crop: :fill %>
+          <div class="card rounded-5" style="background-image: url('<%= image_path 'dish_placeholder', width:400, height: 474, crop: :fill %>'); background-size: cover; background-position: center; border-radius: 20px; width: 100%; height: 100%;"></div>
         <% end %>
       </div>
     </div>
@@ -43,28 +43,42 @@
       <% if bite.photos.attached? %>
         <div class="card rounded-5" style="background-image: url('<%= cl_image_path bite.photos.third.key, width:400, height: 474, crop: :fill %>'); background-size: cover; background-position: center; border-radius: 20px; width: 100%; height: 100%;">
       <% else %>
-        <div class="card rounded-5" style="background-image: url('<%= image_path 'banner2.jpg', width:400, height: 474, crop: :fill %>'); background-size: cover; background-position: center; border-radius: 20px; width: 100%; height: 100%;">
+        <div class="card rounded-5" style="background-image: url('<%= image_path 'dish_placeholder', width:400, height: 474, crop: :fill %>'); background-size: cover; background-position: center; border-radius: 20px; width: 100%; height: 100%;">
       <% end %>
         <div class="d-flex justify-content-end align-items-center" >
 
-          <div class="p-1 rounded-5 bg-light bg-opacity-50">
-            <% if bite.user.photo.attached? %>
-              <%= link_to '#', class: 'link-class', style: 'text-decoration: none;' do %>
-                <%= cl_image_tag bite.user.photo.key, class:'rounded-circle',width: 80, height: 80,crop: :crop %>
-              <% end %>
-            <% else %>
-                <%= link_to '#', class: 'link-class', style: 'text-decoration: none;' do %>
-                  <%= image_tag 'banner1.jpg',class: 'rounded-circle', width: 80, height: 80, crop: :crop %>
+          <div class="p-2 mt-1 me-1 rounded-5 bg-light bg-opacity-50 d-flex">
+
+            <% if guest %>
+              <% if bite.user.photo.attached? %>  <!-- Host photo -->
+                <%= link_to '#', class: 'link-class', style: 'text-decoration: none;', title: "#{bite.user.first_name} #{bite.user.last_name}" do %>
+                  <%= cl_image_tag bite.user.photo.key, class: "avatar-large",crop: :crop %>
                 <% end %>
-            <% end %>
-            <%= image_tag 'handshake.png', class:"img-fluid", style:"width: 80px; height: 50px; margin-bottom: -3px; z-index: 1;" %>
-            <% if bite.user.photo.attached? %>
-              <%= link_to '#', class: 'link-class', style: 'text-decoration: none;' do %>
-                <%= cl_image_tag guest.user.photo.key, class:'rounded-circle',width: 80, height: 80,crop: :crop %>
+              <% else %>
+                  <%= link_to '#', class: 'link-class', style: 'text-decoration: none;', title: "#{bite.user.first_name} #{bite.user.last_name}" do %>
+                    <%= image_tag 'unknown',class: "avatar-large", crop: :crop %>
+                  <% end %>
+              <% end %>
+
+              <p class="fs-2 text-dark" style="margin: 12px 7px 0"><i class="fa-solid fa-handshake"></i></i></p>
+              <% if guest.user.photo.attached? %>  <!-- Guest photo -->
+                <%= link_to '#', class: 'link-class', style: 'text-decoration: none;', title: "#{guest.user.first_name} #{guest.user.last_name}" do %>
+                  <%= cl_image_tag guest.user.photo.key, class: "avatar-large",crop: :crop %>
+                <% end %>
+              <% else%>
+                <%= link_to '#', class: 'link-class', style: 'text-decoration: none;', title: "#{guest.user.first_name} #{guest.user.last_name}" do %>
+                  <%= image_tag 'unknown',class: "avatar-large", crop: :crop %>
+                <% end %>
               <% end %>
             <% else %>
-              <%= link_to '#', class: 'link-class', style: 'text-decoration: none;' do %>
-                <%= image_tag 'banner1.jpg',class: 'rounded-circle', width: 80, height: 80, crop: :crop %>
+              <% if bite.user.photo.attached? %>  <!-- Host photo -->
+                <%= link_to '#', class: 'link-class', style: 'text-decoration: none;', title: "#{bite.user.first_name} #{bite.user.last_name}" do %>
+                  <%= cl_image_tag bite.user.photo.key, class: "avatar-large",crop: :crop %>
+                <% end %>
+              <% else %>
+                  <%= link_to '#', class: 'link-class', style: 'text-decoration: none;', title: "#{bite.user.first_name} #{bite.user.last_name}" do %>
+                    <%= image_tag 'unknown',class: "avatar-large", crop: :crop %>
+                  <% end %>
               <% end %>
             <% end %>
           </div>
@@ -80,7 +94,7 @@
 
     <div class="col-lg-8 col-md-12">
       <div class="card h-100 rounded-5">
-        <div class="card-header bg-transparent pt-3">
+        <div class="card-header bg-transparent pt-3 bg-secondary">
           <h4 class="card-title ms-2 mb-1">What's so special about this Bite:</h4>
         </div>
         <div class="card-body px-4">
@@ -179,7 +193,7 @@
       <% if @guest && current_user == @guest.user %>  <!-- Guest View -->
         <% if @guest.confirmed == true %>  <!-- if Booking is confirmed -->
           <%= button_to 'Cancel', guest_path(@guest), method: :delete, data: {turbo_confirm: 'Are you sure?'}, class:"btn btn-danger fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
-          <button type="button" class="btn btn-success fs-3 text-light px-4" style="border-radius: 8px;" data-bs-dismiss="modal">Booked</button>
+          <button type="button" class="btn btn-success fs-3 text-light px-4" style="border-radius: 8px;" data-bs-dismiss="modal" disabled>Booked</button>
 
         <% elsif @guest %> <!-- if Booking is pending -->
           <div class="d-flex">
@@ -191,7 +205,7 @@
       <% elsif current_user == @bite.user %>  <!-- Host View -->
         <% if @guest && @guest.confirmed == true %> <!-- if Booking is confirmed -->
           <%= button_to 'Cancel', guest_path(@guest), method: :delete, data: {turbo_confirm: 'This booking has already been finalized. Are you sure you want to cancel it?'}, class:"btn btn-danger fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
-          <button type="button" class="btn btn-primary fs-3 text-light px-4" style="border-radius: 8px;" disabled data-bs-dismiss="modal">Booked</button>
+          <button type="button" class="btn btn-primary fs-3 text-light px-4" style="border-radius: 8px;" disabled data-bs-dismiss="modal" disabled>Booked</button>
 
         <% elsif @guest %> <!-- if Booking is pending -->
           <div class="d-flex">
@@ -200,11 +214,13 @@
           </div>
 
         <% else %>  <!-- if no guest is booked -->
-            <%= link_to 'Dashboard', dashboard_path, class:"btn btn-warning fs-3 text-light px-4", style:"border-radius: 8px;" %>
+            <%= link_to 'Edit', edit_bite_path(bite), class:"btn btn-info bg fs-3 text-dark px-4 me-1", style:"border-radius: 8px;" %>
+            <%= link_to 'Dashboard', dashboard_path, class:"btn btn-warning fs-3 text-dark px-4", style:"border-radius: 8px;" %>
         <% end %>
       <% else %> <!-- if available for booking -->
             <%= button_to 'Book Now', book_bite_path(@bite.id), method: :post, class:"btn btn-primary fs-3 text-light px-4", style:"border-radius: 8px;" %>
       <% end %>
     </div>
   </div>
+</div>
 </div>
