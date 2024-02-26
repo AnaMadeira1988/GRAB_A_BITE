@@ -30,11 +30,12 @@
     <fieldset class="mb-3 check_boxes required bite_dietary_options w-100">
       <legend class="col-form-label pt-0">Dietary options <abbr title="required">*</abbr></legend>
 
-      <div class="btn-group w-100" role="group" aria-label="Basic checkbox toggle button group">
-        <input type="hidden" name="bite[dietary_options][]" value="" autocomplete="off">
-        <% ['vegan', 'vegetarian', 'halal', 'gluten free', 'keto', 'lactose free', 'kosher'].each do |choice| %>
-          <input type="checkbox" class="btn-check" id="bite_dietary_options_<%= choice %>"
-            autocomplete="off" value="<%= choice %>" name="bite[dietary_options][]">
+        <label for="dietary_options" class="fs-6 text-secondary">Choose all that apply</label>
+        <div class="btn-group w-100" role="group" aria-label="Basic checkbox toggle button group">
+          <input type="hidden" name="bite[dietary_options][]" value="" autocomplete="off">
+          <% ['vegan', 'vegetarian', 'halal', 'gluten free', 'keto', 'lactose free', 'kosher'].each do |choice| %>
+            <input type="checkbox" class="btn-check" id="bite_dietary_options_<%= choice %>"
+              autocomplete="off" value="<%= choice %>" name="bite[dietary_options][]">
           <label class="btn btn-outline-success text-success-emphasis" for="bite_dietary_options_<%= choice %>"><%= choice %></label>
         <% end %>
       </div>
@@ -61,5 +62,5 @@
 
     <%# f.input :photos, as: :file,label: 'Add photos', input_html: { multiple: true } %>
 
-    <%= f.button :submit, class: 'btn btn-success text-success-emphasis text-body-secondary me-2' %>
+    <%= f.button :submit, class: 'btn btn-success text-success-emphasis text-body-secondary me-2 rounded-pill' %>
 <% end %>
