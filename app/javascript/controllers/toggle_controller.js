@@ -26,4 +26,8 @@ export default class extends Controller {
   toggleNotif() {
     this.toggleableElemTarget.classList.add('d-none');
   }
+
+  toggleFave() {
+    this.element.classList.toggle('active');
+  }
 }

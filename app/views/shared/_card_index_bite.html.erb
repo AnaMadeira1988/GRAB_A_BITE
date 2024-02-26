@@ -3,7 +3,7 @@
 
     <!-- Carousel -->
     <div id="biteCardIndex<%= bite.id%>" class="carousel slide">
-      <div class="carousel-inner">
+      <div class="carousel-inner position-relative">
         <!-- if photos uploaded -->
         <% if bite.photos.attached? %>
           <% bite.photos.each_with_index do |photo, index| %>
@@ -25,13 +25,19 @@
           </div>
         <% end %>
 
+        <!-- Ad to favourites button -->
+        <div class="button-fave" type="button" data-controller="toggle" data-action="click->toggle#toggleFave">
+          <i class="fa-solid fa-heart"></i>
+        </div>
       </div>
-      <button class="carousel-control-prev" type="button"
+
+      <button class="button-prev" type="button"
         data-bs-target="#biteCardIndex<%= bite.id%>" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button"
+
+      <button class="button-next" type="button"
         data-bs-target="#biteCardIndex<%= bite.id%>" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
