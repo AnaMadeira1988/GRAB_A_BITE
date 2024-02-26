@@ -1,17 +1,26 @@
-<div class="container">
-  <div class="d-flex flex-column justify-content-center align-items-center">
-    <div class="mt-2">
-      <h5><strong>Host Stats</strong></h5>
-    </div>
+<div class="border-profile-box mt-4 mx-4">
+  <div class="d-flex flex-column justify-content-center align-items-center position-relative mt-4">
     <div class="position-relative">
       <%= image_tag "https://avatars.githubusercontent.com/u/145844680?v=4", class: "avatar-extra-large", alt: "avatar-large" %>
-      <div class="d-flex position-absolute justify-content-center align-items-center bottom-0 end-0 pt-2 px-2 bg-white rounded" style="--bs-bg-opacity: .3;">
+      <div class="d-flex position-absolute justify-content-center align-items-center bottom-0 end-0 pt-2 px-2 bg-white rounded-circle" style="--bs-bg-opacity: .3; height: 50px;">
         <% review = @user.review %>
             <% if review.any? %>
               <h5><i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i><span class="text-sm fw-medium"><% experience_avg = review.average(:experience) %></span></h5>
             <% end %>
       </div>
     </div>
+  </div>
+
+    <!-- user name & age & gender & city & country -->
+  <div class="d-flex flex-column justify-content-center align-items-center mt-4 mb-2">
+    <h5><strong><%= @user.first_name %> <%= @user.last_name %></strong></h5>
+    <% if @user.gender == 'male' %>
+      <p style="font-size: 13px;"><%= @user.age %> | <i class="fa-solid fa-mars fa-xs" style="color: #313335;"></i> | <%= @user.city %>, <%= @user.country %></p>
+    <% elsif @user.gender == 'female' %>
+      <p style="font-size: 13px;"><%= @user.age %> | <i class="fa-solid fa-venus fa-xs" style="color: #313335;"></i> | <%= @user.city %>, <%= @user.country %></p>
+    <% else %>
+      <p style="font-size: 13px;"><%= @user.age %> | <%= @user.city %>, <%= @user.country %></p>
+    <% end %>
   </div>
 
   <% review = @user.review %>
@@ -28,7 +37,7 @@
           <div>
             <%= "#{label} (#{rating}/10)" %>
           </div>
-          <div class="bg-secondary bg-gradient rounded">
+        <div class="bg-gradient rounded" style="background-color: #D0D3D8;">
             <div class="bar bg-success" style="width: <%= rating.to_i * 10 %>%;"></div>
           </div>
         </div>

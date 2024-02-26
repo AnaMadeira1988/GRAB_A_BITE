@@ -1,0 +1,11 @@
+.border-profile-box {
+  border: 1px solid #e6e6e6;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, #f0f0f0, #ffffff);
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1), // Top
+              0 0 20px rgba(0, 0, 0, 0.1), // Right
+              0 0 20px rgba(0, 0, 0, 0.1), // Bottom
+              0 0 20px rgba(0, 0, 0, 0.1); // Left
+}
