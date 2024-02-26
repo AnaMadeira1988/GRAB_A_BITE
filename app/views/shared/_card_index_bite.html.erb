@@ -25,10 +25,25 @@
           </div>
         <% end %>
 
-        <!-- Ad to favourites button -->
-        <div class="button-fave" type="button" data-controller="toggle" data-action="click->toggle#toggleFave">
-          <i class="fa-solid fa-heart"></i>
-        </div>
+        <!-- Add to favourites button -->
+        <% if user_signed_in? %>
+          <% if bite.user != current_user %>
+            <% if current_user.favourites.include?(bite.id) %>
+              <%= button_to favourite_bite_path(bite.id), method: :post, class: "button-fave active", data: { controller: "toggle", action: "click->toggle#toggleFave" } do %>
+                <i class="fa-solid fa-heart"></i>
+              <% end %>
+            <% else %>
+              <%= button_to favourite_bite_path(bite.id), method: :post, class: "button-fave", data: { controller: "toggle", action: "click->toggle#toggleFave" } do %>
+                <i class="fa-solid fa-heart"></i>
+              <% end %>
+            <% end %>
+          <% else %>
+              <p class="button-fave" title="My bite">
+                <i class="fa-solid fa-user"></i>
+              </p>
+          <% end %>
+        <% end %>
+
       </div>
 
       <button class="button-prev" type="button"

@@ -1,11 +1,11 @@
 class BitesController < ApplicationController
-  before_action :set_bite, only: %i[show edit update destroy]
+  before_action :set_bite, only: %i[show edit update destroy book favourite]
   before_action :set_pending_bites, only: %i[dashboard index show edit]
   skip_before_action :authenticate_user!, only: :index
 
   def index
     @bites = Bite.where('date >= ?', Date.today)
-
+    # raise
     @bites = filter(@bites, params)
   end
 
@@ -33,6 +33,8 @@ class BitesController < ApplicationController
 
     @guest_history_bites = Bite.joins(:guest).where(guests: { confirmed: true, user: current_user })
                                .select { |bite| bite.date < Date.today }
+
+    @favourites = current_user.favourites.map { |id| Bite.find(id) }
   end
 
   def show
@@ -86,7 +88,6 @@ class BitesController < ApplicationController
   end
 
   def book
-    @bite = Bite.find(params[:id])
     return if @bite.user == current_user
     return redirect_to root_path, alert: "Cannot book! Bite expired!" if @bite.date < Date.today
 
@@ -97,6 +98,12 @@ class BitesController < ApplicationController
     else
       redirect_to root_path, alert: 'Bite could not be booked.'
     end
+  end
+
+  def favourite
+    favourites = current_user.favourites
+    favourites.include?(@bite.id) ? favourites.delete(@bite.id) : favourites << @bite.id
+    current_user.save
   end
 
   private
@@ -125,14 +132,10 @@ class BitesController < ApplicationController
     bites = bites.where('price <= ?', params[:price_max]) if params[:price_max].present?
     bites = bites.where(meal_type: params[:meal_type]) if params[:meal_type].present?
     bites = bites.where('number_of_guests >= ?', params[:number_of_guests]) if params[:number_of_guests].present?
-    bites = bites.where("dietary_options LIKE ?", "%#{params[:dietary_options]}%") if params[:dietary_options].present?
-    bites = bites.where("accessibility LIKE ?", "%#{params[:accessibility]}%") if params[:accessibility].present?
+    bites = bites.where("dietary_options LIKE ?", "%#{params[:dietary_options].split.map(&:capitalize).join}%") if params[:dietary_options].present?
+    bites = bites.where("accessibility LIKE ?", "%#{params[:accessibility].split.map(&:capitalize).join}%") if params[:accessibility].present?
     bites = bites.where(dessert: params[:dessert]) if params[:dessert].present?
     bites = bites.where(local_drinks: params[:local_drinks]) if params[:local_drinks].present?
-    if params[:host].present?
-      host = User.find_by(first_name: params[:host])
-      bites = bites.where(user_id: host.id) if host
-    end
     bites.order(:date)
   end
 end

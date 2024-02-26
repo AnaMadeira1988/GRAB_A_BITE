@@ -1,69 +1,70 @@
 <%= form_tag root_path, method: :get, id: 'filter-index' do %>
   <div class="form-control-lg">
 
-    <div class="mb-3">
-      <%= label_tag :city, "Choose a city" %>
-      <%= select_tag :city, options_for_select(Bite.all.map{|bite| bite.city }.uniq, params[:city]),prompt: "Choose your city", class: 'filter-field' %>
+    <div class="mb-2" style="margin-right: 5px;">
+      <%= label_tag :city, "Choose a city", class:"small" %>
+      <%= select_tag :city, options_for_select(Bite.all.map{|bite| bite.city }.uniq, params[:city]),
+      prompt: "Choose your city", class: 'form-select small custom-form w-100'%>
     </div>
 
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <%= label_tag :date_start, "From" %>
-        <%= date_field_tag :date_start, params[:date_start],class: 'filter-field', min: Date.today %>
+    <div class="row mb-2">
+      <div class="col-md-6 pe-0 ">
+        <%= label_tag :date_start, "From", class:"small"  %>
+        <%= date_field_tag :date_start, params[:date_start],class: 'form-control small custom-form', min: Date.today %>
       </div>
-      <div class="col-md-6 mb-3">
-        <%= label_tag :date_end, "Until" %>
-        <%= date_field_tag :date_end, params[:date_end],class: 'filter-field' %>
+      <div class="col-md-6 ps-0">
+        <%= label_tag :date_end, "Until", class:"small"  %>
+        <%= date_field_tag :date_end, params[:date_end],class: 'form-control small custom-form' %>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <%= label_tag :price_min, "From" %>
-        <%= number_field_tag :price_min, params[:price_min], placeholder: "5€",class: 'filter-field', min: 1 %>
+    <div class="row mb-2">
+      <div class="col-md-6 pe-0">
+        <%= label_tag :price_min, "Price", class:"small"  %>
+        <%= number_field_tag :price_min, params[:price_min], placeholder: "From",class: 'form-control small custom-form', min: 1 %>
       </div>
-      <div class="col-md-6 mb-3">
-        <%= label_tag :price_max, "To" %>
-        <%= number_field_tag :price_max, params[:price_max], placeholder: "10€",class: 'filter-field', min: 1 %>
+      <div class="col-md-6 ps-0">
+        <%= label_tag :price_max, "", class:"small"  %>
+        <%= number_field_tag :price_max, params[:price_max], placeholder: "To",class: 'form-control small custom-form', min: 1 %>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-6 pe-0">
+        <%= label_tag :meal_type, "Meal type", class:"small"  %>
+        <%= select_tag :meal_type, options_for_select(['Breakfast', 'Lunch', 'Brunch', 'Dinner', 'Dessert', 'Snack', 'Drinks', 'Other'], params[:meal_type]), prompt: 'Choose',class: 'form-select small custom-form' %>
+      </div>
+      <div class="col-md-6 ps-0">
+        <%= label_tag :number_field, "Nº of guests", class:"small"  %>
+        <%= number_field_tag :number_of_guests, params[:number_of_guests],class: 'form-control small custom-form', min: 1, value: 1 %>
       </div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-12">
-        <%= label_tag :meal_type, "Meal type" %>
+      <div class="col-md-6 pe-0">
+        <%= label_tag :dietary_options, "Dietary options", class:"small"  %>
+        <%= select_tag :dietary_options, options_for_select(['Vegan', 'Vegetarian','Halal', 'Gluten free', 'Keto', 'Lactose free', 'Kosher'], params[:dietary_options]), prompt: "Choose",class: 'form-select small custom-form' %>
       </div>
-      <div class="col-md-12">
-        <%= select_tag :meal_type, options_for_select(['Breakfast', 'Lunch', 'Brunch', 'Dinner', 'Dessert', 'Snack', 'Drinks', 'Other'], params[:meal_type]), prompt: 'Choose your meal',class: 'filter-field' %>
+      <div class="col-md-6 ps-0">
+        <%= label_tag :accessibility, "Accessibility", class:"small"  %>
+        <%= select_tag :accessibility, options_for_select(['Elevator', 'Ramp', 'Ground floor'], params[:accessibility]), prompt: "Choose",class: 'form-select small custom-form' %>
       </div>
     </div>
 
-    <div class="mb-3 mt-3">
-      <%= label_tag :number_field, "Number of guests" %>
-      <%= number_field_tag :number_of_guests, params[:number_of_guests],class: 'filter-field', min: 1 %>
+    <div class="row justify-content-between mb-2">
+        <div class="col-md-5 form-check form-switch pe-0 ms-4">
+          <input class="form-check-input" type="checkbox" id="dessert" name="dessert" >
+          <label class="form-check-label small" for="dessert">Dessert</label>
+        </div>
+        <div class="col-md-5 form-check form-switch pe-0 me-3">
+          <input class="form-check-input" type="checkbox" id="local_drinks" name="local_drinks">
+          <label class="form-check-label small" for="local_drinks">Drinks</label>
+        </div>
     </div>
 
-    <div class="mb-3">
-      <%= label_tag :dietary_options, "Dietary options" %>
-      <%= select_tag :dietary_options, options_for_select(['vegan', 'vegetarian', 'low_carb','halal', 'gluten_free', 'keto', 'lactose_free', 'kosher'], params[:dietary_options]), prompt: "Choose dietary options",class: 'filter-field' %>
+    <div class="d-flex justify-content-between mt-3">
+      <input type="reset" class="btn btn-outline-danger">
+      <%= submit_tag "Filter", class:"btn btn-outline-secondary" %>
     </div>
-
-    <div class="mb-3">
-      <%= label_tag :accessibility, "Dietary options" %>
-      <%= select_tag :accessibility, options_for_select(['elevator', 'ramp', 'ground_floor'], params[:accessibility]), prompt: "Choose accessibility options",class: 'filter-field' %>
-    </div>
-
-    <div class="mb-3">
-        <i class="fa-solid fa-ice-cream fa-lg" style="color: #050505;"></i>
-        <%= check_box_tag :dessert, '1', params[:dessert] == '1',class: 'filter-field' %>
-        <i class="fa-solid fa-martini-glass"></i>
-        <%= check_box_tag :local_drinks, '1', params[:local_drinks] == '1',class: 'filter-field' %>
-    </div>
-
-    <div class="mb-3">
-      <%= label_tag :host, "Choose a host" %>
-      <%= select_tag :host, options_for_select(User.all.map {|user| "#{user.first_name.capitalize}" if user.bites.present?}.compact, params[:host]), prompt: "Choose your host",class: 'filter-field' %>
-    </div>
-
-    <%= submit_tag "Filter" %>
   </div>
 <% end %>

@@ -1,9 +1,118 @@
 
 <div class="row me-0" data-controller="dashboard">
 
-  <!------------------------------------------------- Host dashboard -------------------------------------------------->
+  <!------------------------------------------------- Guest dashboard -------------------------------------------------->
   <!-- main content -->
   <div class="col-9 pe-0" data-dashboard-target="toggleableDashboard">
+
+    <!-- Guest Tab links -->
+    <div class="mt-4 ms-4 bg-light pb-1 me-0 custom-rounded-top">
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-between align-items-center">
+          <ul class="nav nav-tabs " style="cursor:pointer; border-bottom: none;">
+            <li class="nav-item">
+              <a class="nav-link active text-secondary text-dark booked-bites" style="border-top-left-radius:2em;"
+                data-dashboard-target= 'guestBookedBitesLink' data-action="click->dashboard#guestBookedBites">Booked</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary"
+                data-dashboard-target= 'guestPendingBitesLink' data-action="click->dashboard#guestPendingBites">Pending
+                <strong class="text-dark"><%= "(#{@guest_pending_bites.size})" unless @guest_pending_bites.empty?%></strong></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary"
+              data-dashboard-target= 'guestFavouriteBitesLink' data-action="click->dashboard#guestFavouriteBites">Favourites</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary"
+              data-dashboard-target= 'guestHistoryBitesLink' data-action="click->dashboard#guestHistoryBites">Bites History</a>
+            </li>
+          </ul>
+          <button class="btn btn-secondary rounded-5 mt-1 me-3" data-action="click->dashboard#toggleDashboard">Host Center</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Guest Booked Bites content -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen booked-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3"
+      style="height: 86vh;" data-dashboard-target= 'guestBookedBites'>
+
+      <% if @guest_booked_bites.empty? %>
+        <h3 class="text-secondary w-100"> You have no booked Bites yet! 😭</h3>
+      <% else %>
+        <% @guest_booked_bites.each do |b| %>
+          <%= render 'shared/dashboard_card', bite: b %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- Guest Pending Bites content -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen pending-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
+      style="height: 86vh;" data-dashboard-target= 'guestPendingBites'>
+
+      <% if @guest_pending_bites.empty? %>
+        <h3 class="text-secondary w-100"> No pending bites available 😭</h3>
+      <% else %>
+        <% @guest_pending_bites.each do |b| %>
+          <%= render 'shared/dashboard_card', bite: b %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- Guest favourite Bites content -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen favourite-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
+      style="height: 86vh;" data-dashboard-target= 'guestFavouriteBites'>
+
+      <% if @favourites.empty? %>
+        <h3 class="text-secondary w-100"> No Bites added to your favourites yet 😭</h3>
+      <% else %>
+        <% @favourites.each do |b| %>
+          <%= render 'shared/dashboard_card', bite: b %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- Guest History Bites content -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen other-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
+      style="height: 86vh;" data-dashboard-target= 'guestHistoryBites'>
+
+      <% if @guest_history_bites.empty? %>
+        <h3 class="text-secondary w-100"> No Bites in your history yet! 😭</h3>
+      <% else %>
+        <% @guest_history_bites.each do |b| %>
+          <%= render 'shared/dashboard_card', bite: b %>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+
+  <!-- stats content -->
+  <div class="col-3 h-100 me-0" data-dashboard-target="toggleableDashboard">
+    <div class="container mt-4 bg-light rounded-5" style="height: 91vh;">
+      <div class="card-header text-center p-2">
+        <h2>🍩Stats🍩</h2>
+      </div>
+      <!-- 👆header👆-->
+
+      <!-- 👇stats donut👇-->
+      <div class="card-body" >
+        <div class="chart">
+          <canvas data-controller="charts"
+            data-charts-bites-value="<%= {"Booked Bites": @guest_booked_bites.size,
+                                          "Pending Bites": @guest_pending_bites.size}.to_json %>">
+          <!-- TODO: Display polar area chart below -->
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!------------------------------------------------- Host dashboard -------------------------------------------------->
+  <!-- main content -->
+  <div class="col-9 pe-0 d-none" data-dashboard-target="toggleableDashboard">
 
     <!-- Tab links -->
     <div class="mt-4 ms-4 bg-light me-0 custom-rounded-top pb-1">
@@ -106,7 +215,7 @@
   </div>
 
   <!-- stats content -->
-  <div class="col-3 h-100 me-0" data-dashboard-target="toggleableDashboard">
+  <div class="col-3 h-100 me-0 d-none" data-dashboard-target="toggleableDashboard">
     <div class="container mt-4 bg-light rounded-5" style="height: 91vh;">
       <div class="card-header text-center p-2">
         <h2>🍩Stats🍩</h2>
@@ -120,98 +229,6 @@
             data-charts-bites-value="<%= { "Booked Bites": @booked_bites.size,
                                           "Pending Bites": @pending_bites.size,
                                           "Open Bites": @open_bites.size }.to_json %>">
-          <!-- TODO: Display polar area chart below -->
-          </canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!------------------------------------------------- Guest dashboard -------------------------------------------------->
-  <!-- main content -->
-  <div class="col-9 pe-0 d-none" data-dashboard-target="toggleableDashboard">
-
-    <!-- Guest Tab links -->
-    <div class="mt-4 ms-4 bg-light pb-1 me-0 custom-rounded-top">
-      <div class="row">
-        <div class="col-md-12 d-flex justify-content-between align-items-center">
-          <ul class="nav nav-tabs " style="cursor:pointer; border-bottom: none;">
-            <li class="nav-item">
-              <a class="nav-link active text-secondary text-dark booked-bites" style="border-top-left-radius:2em;"
-                data-dashboard-target= 'guestBookedBitesLink' data-action="click->dashboard#guestBookedBites">Booked</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary"
-                data-dashboard-target= 'guestPendingBitesLink' data-action="click->dashboard#guestPendingBites">Pending
-                <strong class="text-dark"><%= "(#{@guest_pending_bites.size})" unless @guest_pending_bites.empty?%></strong></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary"
-              data-dashboard-target= 'guestHistoryBitesLink' data-action="click->dashboard#guestHistoryBites">Bites History</a>
-            </li>
-          </ul>
-          <button class="btn btn-secondary rounded-5 mt-1 me-3" data-action="click->dashboard#toggleDashboard">Host Center</button>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Guest Booked Bites content -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen booked-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3"
-      style="height: 86vh;" data-dashboard-target= 'guestBookedBites'>
-
-      <% if @guest_booked_bites.empty? %>
-        <h3 class="text-secondary w-100"> You have no booked Bites yet! 😭</h3>
-      <% else %>
-        <% @guest_booked_bites.each do |b| %>
-          <%= render 'shared/dashboard_card', bite: b %>
-        <% end %>
-      <% end %>
-    </div>
-
-    <!-- Guest Pending Bites content -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen pending-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
-      style="height: 86vh;" data-dashboard-target= 'guestPendingBites'>
-
-      <% if @guest_pending_bites.empty? %>
-        <h3 class="text-secondary w-100"> No pending bites available 😭</h3>
-      <% else %>
-        <% @guest_pending_bites.each do |b| %>
-          <%= render 'shared/dashboard_card', bite: b %>
-        <% end %>
-      <% end %>
-    </div>
-
-    <!-- Guest History Bites content -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen other-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
-      style="height: 86vh;" data-dashboard-target= 'guestHistoryBites'>
-
-      <% if @guest_history_bites.empty? %>
-        <h3 class="text-secondary w-100"> No Bites in your history yet! 😭</h3>
-      <% else %>
-        <% @guest_history_bites.each do |b| %>
-          <%= render 'shared/dashboard_card', bite: b %>
-        <% end %>
-      <% end %>
-    </div>
-
-  </div>
-
-  <!-- stats content -->
-  <div class="col-3 h-100 me-0 d-none" data-dashboard-target="toggleableDashboard">
-    <div class="container mt-4 bg-light rounded-5" style="height: 91vh;">
-      <div class="card-header text-center p-2">
-        <h2>🍩Stats🍩</h2>
-      </div>
-      <!-- 👆header👆-->
-
-      <!-- 👇stats donut👇-->
-      <div class="card-body" >
-        <div class="chart">
-          <canvas data-controller="charts"
-            data-charts-bites-value="<%= {"Booked Bites": @guest_booked_bites.size,
-                                          "Pending Bites": @guest_pending_bites.size}.to_json %>">
           <!-- TODO: Display polar area chart below -->
           </canvas>
         </div>
