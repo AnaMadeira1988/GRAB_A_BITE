@@ -5,3 +5,17 @@
 .custom-rounded-bottom {
   border-radius: 0 0 2rem 2rem;
 }
+
+.booked-bites {
+  border: 2px solid #8cbdb9 !important;
+}
+.pending-bites {
+  border: 2px solid #F6B17A !important;
+}
+.open-bites {
+  border: 2px solid #C7DCA7 !important;
+}
+
+.other-bites {
+  border: 2px solid #adadad !important;
+}

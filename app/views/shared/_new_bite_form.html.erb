@@ -1,5 +1,5 @@
 <%= simple_form_for bite do |f| %>
-    <%= f.input :name, as: :string, require: true, input_html: { placeholder: 'e.g: Seafood Spaghetti 🍝' } %>
+    <%= f.input :name, as: :string, require: true, input_html: { placeholder: ['e.g: Seafood Spaghetti 🍝', 'e.g: Cheesecake and Cappuccinos 🍰🍵', 'e.g: Assorted Seasonal Fruits 🍉🍇🍍'].sample } %>
     <%= f.input :date, as: :date, html5: true, required: true, input_html: { min: Date.today + 1, max: Date.today + 6.months } %>
     <%= f.input :number_of_guests, as: :integer, required: true, input_html: { min: 1, value: 1 } %>
     <%= f.input :price, as: :integer, input_html: {min: 1, max: 999}, required: true %>
@@ -11,28 +11,28 @@
                 collection: ['Breakfast', 'Lunch', 'Brunch', 'Dinner', 'Dessert', 'Snack', 'Drinks', 'Other'],
                 prompt: 'Choose your meal' %>
 
-    <!-- Accessibilty options checboxes -->
+    <!-- Accessibilty options checkboxes -->
     <fieldset class="mb-3 check_boxes required bite_accessibility w-100">
       <legend class="col-form-label pt-0">Accessibility <abbr title="required">*</abbr></legend>
 
-        <div class="btn-group w-100" role="group" aria-label="Basic checkbox toggle button group">
-          <input type="hidden" name="bite[accessibility][]" value="" autocomplete="off">
-          <% ['elevator', 'ramp', 'ground floor'].each do |choice| %>
-            <input type="checkbox" class="btn-check" id="bite_accessibility_<%= choice %>"
-              autocomplete="off" value="<%= choice %>" name="bite[accessibility][]">
-            <label class="btn btn-outline-success text-success-emphasis" for="bite_accessibility_<%= choice %>"><%= choice %></label>
-          <% end %>
-        </div>
+      <div class="btn-group w-100" role="group" aria-label="Basic checkbox toggle button group">
+        <input type="hidden" name="bite[accessibility][]" value="" autocomplete="off">
+        <% ['Elevator', 'Ramp', 'Ground Floor'].each do |choice| %>
+          <input type="checkbox" class="btn-check" id="bite_accessibility_<%= choice %>"
+            autocomplete="off" value="<%= choice %>" name="bite[accessibility][]">
+          <label class="btn btn-outline-success text-success-emphasis" for="bite_accessibility_<%= choice %>"><%= choice %></label>
+        <% end %>
+      </div>
     </fieldset>
 
 
-    <!-- Dietary options checboxes -->
+    <!-- Dietary options checkboxes -->
     <fieldset class="mb-3 check_boxes required bite_dietary_options w-100">
       <legend class="col-form-label pt-0">Dietary options <abbr title="required">*</abbr></legend>
 
       <div class="btn-group w-100" role="group" aria-label="Basic checkbox toggle button group">
         <input type="hidden" name="bite[dietary_options][]" value="" autocomplete="off">
-        <% ['vegan', 'vegetarian', 'halal', 'gluten free', 'keto', 'lactose free', 'kosher'].each do |choice| %>
+        <% ['Vegan', 'Vegetarian', 'Halal', 'Gluten Free', 'Keto', 'Lactose Free', 'Kosher'].each do |choice| %>
           <input type="checkbox" class="btn-check" id="bite_dietary_options_<%= choice %>"
             autocomplete="off" value="<%= choice %>" name="bite[dietary_options][]">
           <label class="btn btn-outline-success text-success-emphasis" for="bite_dietary_options_<%= choice %>"><%= choice %></label>
@@ -41,25 +41,27 @@
 
     </fieldset>
 
-        <!-- Alcohol options checboxes -->
+        <!-- Alcohol options checkboxes -->
       <fieldset class="mb-3 check_boxes required bite_local_drinks w-100">
-          <input type="hidden" name="bite[local_drinks]" value="" autocomplete="off">
-          <input type="checkbox" class="btn-check" id="bite_local_drinks"
-            autocomplete="off" value="1" name="bite[local_drinks]">
-          <label class="btn btn-outline-success text-success-emphasis w-100" for="bite_local_drinks">Alcohol included ( Local wines 🍷 | Traditional beer 🍺  )</label>
+        <input type="hidden" name="bite[local_drinks]" value="" autocomplete="off">
+        <input type="checkbox" class="btn-check" id="bite_local_drinks"
+          autocomplete="off" value="1" name="bite[local_drinks]">
+        <label class="btn btn-outline-success text-success-emphasis w-100" for="bite_local_drinks">Alcohol included ( Local wines 🍷 | Traditional beer 🍺  )</label>
       </fieldset>
 
-        <!-- Dessert options checboxes -->
+        <!-- Dessert options checkboxes -->
       <fieldset class="mb-3 check_boxes required bite_dessert w-100">
-          <input type="hidden" name="bite[dessert]" value="" autocomplete="off">
-          <input type="checkbox" class="btn-check" id="bite_dessert"
-            autocomplete="off" value="1" name="bite[dessert]">
-          <label class="btn btn-outline-success text-success-emphasis w-100" for="bite_dessert">Dessert included ( Cheesecake 🍰 | Traditional sweets 🍡 )</label>
+        <input type="hidden" name="bite[dessert]" value="" autocomplete="off">
+        <input type="checkbox" class="btn-check" id="bite_dessert"
+          autocomplete="off" value="1" name="bite[dessert]">
+        <label class="btn btn-outline-success text-success-emphasis w-100" for="bite_dessert">Dessert included ( Cheesecake 🍰 | Traditional sweets 🍡 )</label>
       </fieldset>
 
     <%= f.input :local_experience, as: :text, input_html: { placeholder: 'e.g: I will teach you "Foxtrot" dance 🕺🏽💃🏽' }   %>
 
     <%= f.input :photos, as: :file,label: 'Add photos', input_html: { multiple: true } %>
-
-    <%= f.button :submit, class: 'btn btn-success text-success-emphasis text-body-secondary me-2' %>
+    <div class="d-flex justify-content-between">
+      <%= link_to "Back to homepage", root_path, class:"btn btn-light" %>
+      <%= f.button :submit, class: 'btn btn-success text-success-emphasis text-body-secondary me-2' %>
+    </div>
 <% end %>
