@@ -10,6 +10,7 @@ class BitesController < ApplicationController
   end
 
   def dashboard
+    @hide_notif = true
     @bites_all = Bite.all
     @my_bites = Bite.where(user: current_user)
 
@@ -39,6 +40,7 @@ class BitesController < ApplicationController
 
   def show
     @guest = @bite.guest if @bite.guest.present?
+    @review = Review.new
     @guest.destroy if @guest.present? && @guest.confirmed.nil? && @bite.date < Date.today
     accessing_user = current_user == @bite.user || (@guest && current_user == @guest.user) || (@guest.nil? && @bite.date >= Date.today)
 
@@ -104,6 +106,10 @@ class BitesController < ApplicationController
     favourites = current_user.favourites
     favourites.include?(@bite.id) ? favourites.delete(@bite.id) : favourites << @bite.id
     current_user.save
+  end
+
+  def landing
+    @hide_navbar = true
   end
 
   private

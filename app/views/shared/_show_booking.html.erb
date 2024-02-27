@@ -145,7 +145,9 @@
               <% end %>
             </div>
             <div class="col-12 d-flex justify-content-end align-items-end mt-3">
-              <%= link_to 'Visit profile','#', class:"btn btn-outline-primary rounded-4 me-2 fs-5"  %>
+              <% if guest %>
+                <%= link_to 'Visit profile',user_path(guest.user), class:"btn btn-outline-primary rounded-4 me-2 fs-5"  %>
+              <% end %>
             </div>
           </div>
         <% else %> <%# Guest view %>
@@ -161,7 +163,7 @@
               <% end %>
             </div>
             <div class="col-12 d-flex justify-content-end align-items-end mt-3">
-              <%= link_to 'Visit profile','#', class:"btn btn-outline-primary rounded-4 me-2 fs-5"  %>
+              <%= link_to 'Visit profile',user_path(bite.user), class:"btn btn-outline-primary rounded-4 me-2 fs-5"  %>
             </div>
           </div>
         <% end %>
@@ -170,13 +172,47 @@
   </div>
 
 
-  <!-- MAP line to be shown only if Bite booked-->
-  <% map_access_granted = (guest && current_user == guest.user) || current_user == bite.user %>
-  <% if map_access_granted %>
+  <!-- MAP line & Review form-->
+  <% past_booking = guest && guest.confirmed == true && bite.date < Date.today %>
+  <% if past_booking && current_user == guest.user %> <!-- Guest view -->
     <div class="row rounded-5">
+      <div class="col-6 rounded-5 h-100"> <!-- Half size map -->
+        <div class="card rounded-5">
+          <div class="card-body rounded-5" id="map-big" style="height: 463px;" data-controller='geocoder'
+            data-geocoder-address-value='<%= bite.address %>' >
+          </div>
+        </div>
+      </div>
+      <div class="col-6 rounded-5"> <!-- Review form -->
+        <div class="row bg-body-tertiary rounded-5 p-4">
+          <div class="col col-12">
+              <%= render 'shared/review_form', review: review, guest: guest, person: bite.user.first_name %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% elsif past_booking && current_user == bite.user %> <!-- Host view -->
+    <div class="row rounded-5">
+      <div class="col-6 rounded-5 h-100"> <!-- Half size map -->
+        <div class="card rounded-5">
+          <div class="card-body rounded-5" id="map-big" style="height: 463px;" data-controller='geocoder'
+            data-geocoder-address-value='<%= bite.address %>' >
+          </div>
+        </div>
+      </div>
+      <div class="col-6 rounded-5"> <!-- Review form -->
+        <div class="row bg-body-tertiary rounded-5 p-4">
+          <div class="col col-12">
+              <%= render 'shared/review_form', review: review, guest: guest, person: guest.user.first_name %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% elsif (guest && current_user == guest.user && guest.confirmed == true) || current_user == bite.user %>
+    <div class="row rounded-5"><!-- Large map -->
       <div class="col-12 rounded-5">
         <div class="card rounded-5">
-          <div class="card-body rounded-5" id="map-big" style="height: 400px;" data-controller='geocoder'
+          <div class="card-body rounded-5" id="map-big" style="height: 450px;" data-controller='geocoder'
             data-geocoder-address-value='<%= bite.address %>' >
           </div>
         </div>
@@ -191,7 +227,9 @@
 
 
       <% if guest && current_user == guest.user %>  <!-- Guest View -->
-        <% if guest.confirmed == true %>  <!-- if Booking is confirmed -->
+        <% if guest.confirmed == true && bite.date < Date.today %> <!-- if Booking is in History -->
+          <%= link_to 'Homepage', root_path, class:"btn btn-primary fs-3 text-dark px-4", style:"border-radius: 8px;" %>
+        <% elsif guest.confirmed == true %>  <!-- if Booking is confirmed -->
           <%= button_to 'Cancel', guest_path(guest), method: :delete, data: {turbo_confirm: 'Are you sure?'}, class:"btn btn-danger fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
           <button type="button" class="btn btn-success fs-3 text-light px-4" style="border-radius: 8px;" data-bs-dismiss="modal" disabled>Booked</button>
 
@@ -203,7 +241,9 @@
         <% end %>
 
       <% elsif current_user == bite.user %>  <!-- Host View -->
-        <% if guest && guest.confirmed == true %> <!-- if Booking is confirmed -->
+        <% if guest && guest.confirmed == true && bite.date < Date.today %> <!-- if Booking is in History -->
+          <%= link_to 'Dashboard', dashboard_path, class:"btn btn-warning fs-3 text-dark px-4", style:"border-radius: 8px;" %>
+        <% elsif guest && guest.confirmed == true %> <!-- if Booking is confirmed -->
           <%= button_to 'Cancel', guest_path(guest), method: :delete, data: {turbo_confirm: 'This booking has already been finalized. Are you sure you want to cancel it?'}, class:"btn btn-danger fs-3 text-light px-4 mx-2", style:"border-radius: 8px;" %>
           <button type="button" class="btn btn-primary fs-3 text-light px-4" style="border-radius: 8px;" disabled data-bs-dismiss="modal" disabled>Booked</button>
 

@@ -1,0 +1,15 @@
+<%= simple_form_for [guest, review] do |f| %>
+  <%= f.input :content, label: "Share with us your thoughts about #{person}", input_html: {rows: '5'} %>
+
+  <div class="d-flex justify-content-between mb-3">
+    <%= f.input :food, collection: (1..10).to_a %>
+    <%= f.input :cleanliness, collection: (1..10).to_a %>
+    <%= f.input :location, collection: (1..10).to_a %>
+    <%= f.input :accessibility, collection: (1..10).to_a %>
+  </div>
+    <%= f.input :experience,label: 'How would you rate your overall experience? ', collection: (1..10).to_a %>
+
+  <div class="d-flex justify-content-end">
+    <%= f.button :submit, class: "btn btn-secondary mt-2 rounded-3" %>
+  </div>
+<% end %>

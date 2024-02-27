@@ -21,18 +21,17 @@
           <!--Notification Dropdown -->
           <div class="nav-item dropdown" style="padding: 25px;" data-controller="toggle">
             <a href="#" class="sino" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-action="click->toggle#toggleNotif" >
-            <i class="fa-regular fa-bell fa-lg m-13" id="notification" style="bottom: 23px;position: absolute;right: 23px;color: black;"></i>
+            <i class="fa-regular fa-bell fa-lg m-13" id="notification" style="bottom: 27px;position: absolute;right: 23px;color: white;"></i>
 
-            <% unless @pending_bites.nil? ||  @pending_bites.empty? %>
-              <span  style="position: absolute; bottom: 29px; right: 6px; background: red; color: white; border-radius: 50%; padding: 0 5px; width: 25px; height: 25px; display: flex; justify-content: center; align-items: center;"  data-toggle-target="toggleableElem" >
-                <%= @pending_bites.size <= 9 ? @pending_bites.size : "9+" %>
+            <% unless @hide_notif || @pending_bites.nil? ||  @pending_bites.empty? %>
+              <span  style="position: absolute; bottom: 32px; right: 20px; background: red; color: white; border-radius: 50%; padding: 0 5px; width: 10px; height: 10px; display: flex; justify-content: center; align-items: center;"  data-toggle-target="toggleableElem" >
               </span>
             <% end %>
             </a>
               <!-- Dropdown Options-->
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"style="width: 300px;">
               <% unless @pending_bites.nil? || @pending_bites.empty? %>
-                <%= link_to "⌛ You have pending bites.", dashboard_path, class: "dropdown-item fw-semibold" %>
+                <%= link_to "⌛ You have #{@pending_bites.size} pending bites.", dashboard_path, class: "dropdown-item fw-semibold" %>
               <% else %>
                 <%= link_to "🫡 You have no pending bites.", '#', class: "dropdown-item" %>
               <% end %>
