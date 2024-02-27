@@ -1,18 +1,20 @@
-<div class=" border border-dark mt-4 ms-4">
+<div class="border-profile-box mt-4 mx-4">
   <div class="d-flex flex-column justify-content-center align-items-center position-relative mt-4">
     <div class="position-relative">
       <%= image_tag "https://avatars.githubusercontent.com/u/145844680?v=4", class: "avatar-extra-large", alt: "avatar-large" %>
-      <div class="d-flex position-absolute justify-content-center align-items-center bottom-0 end-0 pt-2 px-2 bg-white rounded" style="--bs-bg-opacity: .3;">
-        <h5><i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i><span class="text-sm fw-medium"><%= 7 %></span></h5>
+      <div class="d-flex position-absolute justify-content-center align-items-center bottom-0 end-0 pt-2 px-2 bg-white rounded-circle" style="--bs-bg-opacity: .3; height: 50px;">
+        <h5 class="star-border"><i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i><span class="text-sm fw-medium"><%= 7 %></span></h5>
       </div>
     </div>
   </div>
 
-  <!-- user name -->
-  <div class="d-flex justify-content-center mt-4 mb-2">
+    <!-- user name & age & gender & city & country -->
+  <div class="d-flex flex-column justify-content-center align-items-center mt-4 mb-2">
     <h5><strong>Ivan Oliynyk</strong></h5>
+    <p style="font-size: 13px;">25 |  <i class="fa-solid fa-mars fa-xs" style="color: #313335;"></i>  | Setúbal, Portugal</p>
   </div>
 
+     <!-- virtual points -->
   <div>
     <% cleanliness_avg = 4%>
     <% location_avg = 7 %>
@@ -28,7 +30,7 @@
         <div>
           <%= "#{label} (#{rating}/10)" %>
         </div>
-        <div class="bg-gradient bg-secondary rounded">
+        <div class="bg-gradient rounded" style="background-color: #D0D3D8;">
           <div class="bar bg-success" style="width: <%= rating.to_i * 10 %>%;"></div>
         </div>
       </div>
