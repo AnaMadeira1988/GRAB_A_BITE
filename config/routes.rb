@@ -2,11 +2,13 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "bites#index"
 
+
   get '/users/:id', to: 'users#show', as: 'user'
 
   resources :bites, only: [:new, :show, :create, :edit, :update, :destroy] do
     member do
       post 'book', to: 'bites#book'
+      post 'favourite', to: 'bites#favourite'
     end
   end
 

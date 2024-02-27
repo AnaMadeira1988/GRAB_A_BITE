@@ -1,9 +1,10 @@
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title fs-4 fw-bolder ms-3 mt-4" id="offcanvasWithBothOptionsLabel">Filter your bites</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<div class="offcanvas offcanvas-start bg-light-subtle" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+  aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas-header p-0">
+    <h5 class="offcanvas-title fs-4 fw-bolder ms-3 mt-3" id="offcanvasWithBothOptionsLabel">Filter your bites</h5>
+    <button type="button" class="btn-close me-3 mt-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body">
+  <div class="offcanvas-body pt-0 pb-0">
     <%= render 'shared/filter_index', bites: @bites %>
   </div>
 </div>
@@ -13,7 +14,7 @@
 
   <div class="d-flex flex-column">
     <div class="d-flex justify-content-end w-100">
-      <%= button_tag "Filter", class: "btn btn-light filter-button", type: "button", "data-bs-toggle": "offcanvas", "data-bs-target": "#offcanvasWithBothOptions", "aria-controls": "offcanvasWithBothOptions" %>
+      <%= button_tag "Filter", class: "btn btn-light filter-button rounded-3", type: "button", "data-bs-toggle": "offcanvas", "data-bs-target": "#offcanvasWithBothOptions", "aria-controls": "offcanvasWithBothOptions" %>
     </div>
 
       <div class="row row-cols-1 row-cols-md-3 row-cols-xxl-4 g-3 mt-1">
