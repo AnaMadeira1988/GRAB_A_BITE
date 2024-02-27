@@ -1,68 +1,78 @@
 <div class="container my-4 rounded">
   <div class="d-flex flex-row">
+    <!--Ratings card-->
     <div class="col col-3 bg-white rounded-start-4">
-      <%= render partial: 'users/testing_profile_partial' %>
+      <%= render partial: 'users/show_profile_partial' %>
     </div>
+    <!--Profile card-->
     <div class="col col-9 bg-white rounded-end-4">
       <div class="d-flex justify-content-end mt-4 me-4 text-secondary">
-        <h3>on Grab'a'Bite since Feb'24! <i class="fa-solid fa-utensils" style="color: #6a6b6c;"></i></h3>
+        <h3>on Grab'a'Bite since <%= @user.created_at.strftime("%b' %y") %>! <i class="fa-solid fa-utensils" style="color: #6a6b6c;"></i></h3>
       </div>
       <div class="d-flex flex-column justify-content-center m-5">
         <div class="mb-2 align-items-start">
           <h5><i class="fa-solid fa-shield-heart" style="color: #3c3d3e;"></i>  Why I joined Grab'a'Bite</h5>
           <div class="text-secondary">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I joined Grab'a'Bite to meet new people and share my love for food with others. I love to cook and I love to eat, so I thought this would be a great way to meet new people and share my passion for food with others.</p>
+
+            <% unless @user.description.empty? %>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= @user.description %></p>
+            <% else %>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User hasn't told us about themselves yet 😥</p>
+            <% end %>
           </div>
         </div>
         <div class="mb-2 align-items-start">
           <h5><i class="fa-solid fa-earth-americas" style="color: #484747;"></i>  I speak</h5>
           <div class="text-secondary">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Portuguese, Ukranian, Spanish, Sign Language</p>
+
+            <% unless @languages && @languages.strip.empty? %>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= @languages %></p>
+            <% else %>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; User hasn't told us what languages they speak yet 😥</p>
+            <% end %>
           </div>
         </div>
         <div class="mb-4 align-items-start">
-          <h5><i class="fa-solid fa-people-arrows" style="color: #484747;"></i>  Ice breakers</h5>
+          <h5><i class="fa-solid fa-people-arrows" style="color: #484747;"></i>  Interests</h5>
           <div class="text-secondary">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hey, I'm Ivan, and I'm all about food, travel, and connecting with people. Last year, in Italy, I stumbled into a trattoria, where I attempted to speak Italian with the chef, only to accidentally order dessert for breakfast. Whether bonding on European trains or joining cooking classes in Vietnam, these experiences fuel my passion for exploration. And when I'm not on the road, my camera preserves these moments. So, that's me – a culinary adventurer, globe-trotting enthusiast, and eternal optimist, hungry for unforgettable experiences and meaningful connections.</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hey, I'm <%= @user.first_name %>, and I'm all about food, travel, and connecting with people. Last year, in Italy, I stumbled into a trattoria, where I attempted to speak Italian with the chef, only to accidentally order dessert for breakfast. Whether bonding on European trains or joining cooking classes in Vietnam, these experiences fuel my passion for exploration. And when I'm not on the road, my camera preserves these moments. So, that's me – a culinary adventurer, globe-trotting enthusiast, and eternal optimist, hungry for unforgettable experiences and meaningful connections.</p>
           </div>
         </div>
-        <div class="d-flex flex-row justify-content-between align-items-end">
-          <div class="d-flex flex-row">
-            <div class="d-flex flex-column justify-content-center align-items-center me-5">
-              <p class="mb-1"><i class="fa-solid fa-house fa-xl" style="color: #484747;"></i></p>
-              <p class="mb-2">Hosted</p>
-              <h5 class="text-secondary fw-bold fs-3">27</h5>
-            </div>
-            <div class="d-flex flex-column justify-content-center align-items-center me-5">
-              <p class="mb-1"><i class="fa-solid fa-person-hiking fa-xl" style="color: #484747;"></i></p>
-              <p class="mb-2">Guested</p>
-              <h5 class="text-secondary fw-bold fs-3">9</h5>
-            </div>
-            <div class="d-flex flex-column justify-content-center align-items-center me-5">
-              <p class="mb-1"><i class="fa-solid fa-feather fa-xl" style="color: #484747;"></i></p>
-              <p class="mb-2">Reviews</p>
-              <h5 class="text-secondary fw-bold fs-3">17</h5>
-            </div>
+
+        <div class="d-flex">
+          <div class="d-flex flex-column justify-content-center align-items-center me-5">
+            <p class="mb-1"><i class="fa-solid fa-house fa-xl" style="color: #484747;"></i></p>
+            <p class="mb-2">Hosted</p>
+            <h5 class="text-secondary fw-bold fs-3"><%= @hosted %></h5>
           </div>
-          <div class="d-flex justify-content-end align-items-end">
-
-            <% unless @user == current_user %>
-            <button type="button" class="btn btn-primary rounded">Add a Review</button>
-            <% end %>
-
+          <div class="d-flex flex-column justify-content-center align-items-center me-5">
+            <p class="mb-1"><i class="fa-solid fa-person-hiking fa-xl" style="color: #484747;"></i></p>
+            <p class="mb-2">Guested</p>
+            <h5 class="text-secondary fw-bold fs-3"><%= @guested %></h5>
+          </div>
+          <div class="d-flex flex-column justify-content-center align-items-center me-5">
+            <p class="mb-1"><i class="fa-solid fa-feather fa-xl" style="color: #484747;"></i></p>
+            <p class="mb-2">Reviews</p>
+            <h5 class="text-secondary fw-bold fs-3"><%= @reviewed %></h5>
           </div>
         </div>
+
       </div>
     </div>
   </div>
+
+
+  <!-- Reviews -->
   <div class="row">
     <div class="col col-12 pt-2 mt-2" style="background-color: transparent !important;">
       <div class="d-flex justify-content-start align-items-center fw-bolder bg-white px-4 pt-3 pb-2" style="border-radius: 2rem 2rem 0 0;">
         <h4 class="m-0"><i class="fa-solid fa-feather" style="color: #484747;"></i>  Reviews</h4>
       </div>
       <div class="p-3 bg-white rounded-bottom-5">
-        <%= render partial: 'users/testing_reviews_profile' %>
+        <%= render partial: 'users/reviews'%>
       </div>
     </div>
   </div>
 </div>
+
+<% interests = []  %>
