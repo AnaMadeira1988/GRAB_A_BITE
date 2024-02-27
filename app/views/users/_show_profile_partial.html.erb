@@ -1,11 +1,19 @@
-<div class="border-profile-box mt-4 mx-4">
+<div class="border-profile-box mt-4 mx-4" style="height:93%">
   <div class="d-flex flex-column justify-content-center align-items-center position-relative mt-4">
     <div class="position-relative">
-      <%= image_tag "https://avatars.githubusercontent.com/u/145844680?v=4", class: "avatar-extra-large", alt: "avatar-large" %>
+
+      <% if @user.photo.attached? %>
+        <%= cl_image_tag @user.photo.key,  class: "avatar-extra-large", alt: "avatar-large"%>
+      <% else %>
+        <%= image_tag "unknown", class: "avatar-extra-large", alt: "avatar-large" %>
+      <% end %>
+
       <div class="d-flex position-absolute justify-content-center align-items-center bottom-0 end-0 pt-2 px-2 bg-white rounded-circle" style="--bs-bg-opacity: .3; height: 50px;">
-        <% review = @user.review %>
-            <% if review.any? %>
-              <h5><i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i><span class="text-sm fw-medium"><% experience_avg = review.average(:experience) %></span></h5>
+            <% if @user.reviews.any? %>
+              <h5>
+                <i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i>
+                <span class="text-sm fw-medium"><%= @experience_avg %></span>
+              </h5>
             <% end %>
       </div>
     </div>
@@ -14,37 +22,78 @@
     <!-- user name & age & gender & city & country -->
   <div class="d-flex flex-column justify-content-center align-items-center mt-4 mb-2">
     <h5><strong><%= @user.first_name %> <%= @user.last_name %></strong></h5>
-    <% if @user.gender == 'male' %>
-      <p style="font-size: 13px;"><%= @user.age %> | <i class="fa-solid fa-mars fa-xs" style="color: #313335;"></i> | <%= @user.city %>, <%= @user.country %></p>
-    <% elsif @user.gender == 'female' %>
-      <p style="font-size: 13px;"><%= @user.age %> | <i class="fa-solid fa-venus fa-xs" style="color: #313335;"></i> | <%= @user.city %>, <%= @user.country %></p>
+    <% if @user.gender == 'Male' %>
+      <p style="font-size: 13px;">
+
+        <% if @age %>
+          <span><%= @age %> yo | </span> <!-- age-->
+        <% end %>
+
+        <i class="fa-solid fa-mars fa-xs" style="color: #313335;"> <!-- gender male icon--></i> |
+
+        <% if @user.city %>
+          <%= @user.city %>
+        <% end %>
+
+        <% if @user.country %>
+          <%= @user.country %>
+        <% end %>
+
+      </p>
+    <% elsif @user.gender == 'Female' %>
+      <p style="font-size: 13px;">
+
+        <% if @age %>
+          <span><%= @age %> yo | </span>
+        <% end %>
+
+        <i class="fa-solid fa-venus fa-xs" style="color: #313335;"> <!-- gender female icon--></i> |
+
+        <% if @user.city %>
+          <%= @user.city %>
+        <% end %>
+
+        <% if @user.country %>
+          <%= @user.country %>
+        <% end %>
+
+      </p>
     <% else %>
-      <p style="font-size: 13px;"><%= @user.age %> | <%= @user.city %>, <%= @user.country %></p>
+      <p style="font-size: 13px;">
+
+        <% if @age %>
+          <span><%= @age %> yo | </span>
+        <% end %>
+
+        <% if @user.city %>
+          <%= @user.city %>
+        <% end %>
+
+        <% if @user.country %>
+          <%= @user.country %>
+        <% end %>
+      </p>
+
     <% end %>
   </div>
 
-  <% review = @user.review %>
-    <% if review.any? %>
-      <% cleanliness_avg = review.average(:cleanliness) %>
-      <% location_avg = review.average(:location) %>
-      <% food_avg = review.average(:food) %>
-      <% accessibility_avg = review.average(:accessibility) %>
+    <% if @user.reviews.any? %>
 
-    <div class="rating-bars p-4">
-      <% ratings = { "Cleanliness" => cleanliness_avg, "Location" => location_avg, "Accessibility" => accessibility_avg, "Food" => food_avg } %>
-      <% ratings.each do |label, rating| %>
-        <div>
+      <div class="rating-bars p-4">
+        <% ratings = { "Cleanliness" => @cleanliness_avg, "Location" => @location_avg, "Accessibility" => @accessibility_avg, "Food" => @food_avg } %>
+        <% ratings.each do |label, rating| %>
           <div>
-            <%= "#{label} (#{rating}/10)" %>
+            <div>
+              <%= "#{label} (#{rating}/10)" %>
+            </div>
+          <div class="bg-gradient rounded" style="background-color: #D0D3D8;">
+              <div class="bar bg-success" style="width: <%= rating * 10 %>%;"></div>
+            </div>
           </div>
-        <div class="bg-gradient rounded" style="background-color: #D0D3D8;">
-            <div class="bar bg-success" style="width: <%= rating.to_i * 10 %>%;"></div>
-          </div>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
 
     <% else %>
-      <h6><%= @user.name %> hasn't hosted yet!</h6>
+      <h6><%= @user.first_name %> hasn't hosted yet! 😥</h6>
     <% end %>
 </div>

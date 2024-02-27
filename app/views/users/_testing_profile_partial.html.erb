@@ -1,7 +1,14 @@
 <div class="border-profile-box mt-4 mx-4">
   <div class="d-flex flex-column justify-content-center align-items-center position-relative mt-4">
     <div class="position-relative">
-      <%= image_tag "https://avatars.githubusercontent.com/u/145844680?v=4", class: "avatar-extra-large", alt: "avatar-large" %>
+
+      <% if @user.photo.attached? %>
+        <%= cl_image_tag @user.photo.key,  class: "avatar-extra-large",crop: :crop, alt: "avatar-large"%>
+      <% else %>
+        <%= image_tag "unknown", class: "avatar-extra-large", alt: "avatar-large" %>
+      <% end %>
+
+
       <div class="d-flex position-absolute justify-content-center align-items-center bottom-0 end-0 pt-2 px-2 bg-white rounded-circle" style="--bs-bg-opacity: .3; height: 50px;">
         <h5 class="star-border"><i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i><span class="text-sm fw-medium"><%= 7 %></span></h5>
       </div>
@@ -10,7 +17,7 @@
 
     <!-- user name & age & gender & city & country -->
   <div class="d-flex flex-column justify-content-center align-items-center mt-4 mb-2">
-    <h5><strong>Ivan Oliynyk</strong></h5>
+    <h5><strong><%= @user.first_name %> <%= @user.last_name %></strong></h5>
     <p style="font-size: 13px;">25 |  <i class="fa-solid fa-mars fa-xs" style="color: #313335;"></i>  | Setúbal, Portugal</p>
   </div>
 

@@ -1,0 +1,47 @@
+<div class="overflow-container bg-white px-2">
+
+
+  <!-- card elements here -->
+
+  <% unless @reviews.empty? %>
+    <div class="d-inline-flex overflow-auto" id="cardContainer">
+      <% @reviews.each do |review| %>
+        <% bite = review.guest.bite %>
+        <div class="d-flex card my-2 me-2" style="width: 25rem; border-radius: 2rem 0 2rem 0;  background-image: url('https://images.unsplash.com/photo-1601662528567-526cd06f6582?q=80&w=3115&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover;">
+          <div class="card-body" style="overflow: hidden;">
+            <!-- bite name -->
+            <h5 class="card-title fw-semibold"><%= bite.name %></h5>
+            <!-- bite location -->
+            <h6 class="card-subtitle mb-2 text-body-secondary"><%= bite.city %></h6>
+            <!-- bite description -->
+            &nbsp;&nbsp;<i class="fa-solid fa-quote-left fa-xl" style="color: #8e8f90;"></i>
+            <div class="ms-2 mt-2">
+              <p class="card-text" style="white-space: normal;"><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= review.content %></em></p>
+            </div>
+            <div class="d-flex justify-content-end center align-items-end me-2">
+              <i class="fa-solid fa-quote-right fa-xl" style="color: #8e8f90;"></i>
+            </div>
+            <!-- link to the guest profile -->
+          </div>
+          <div class="d-flex flex-column align-items-end" style="padding: 16px;">
+
+
+            <% if review.guest.user == review.user %>
+              <%= link_to "#{bite.user.first_name} #{bite.user.last_name}", user_path(bite.user), class: "card-link fw-medium text-secondary" %>
+            <% else %>
+              <%= link_to "#{review.guest.user.first_name} #{review.guest.user.last_name}", user_path(review.guest.user), class: "card-link fw-medium text-secondary" %>
+            <% end %>
+
+
+            <!-- date of the review -->
+            <p><%= review.created_at.strftime("%d %b' %y") %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="d-flex justify-content-center w-100">
+      <h4 class="text-secondary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User hasn't received any reviews yet 😥</h4>
+    </div>
+  <% end %>
+</div>

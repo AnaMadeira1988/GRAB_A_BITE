@@ -183,7 +183,7 @@
           </div>
         </div>
       </div>
-      <div class="col-6 rounded-5"> <!-- Review form -->
+      <div class="col-6 rounded-5" data-controller="counter"> <!-- Review form -->
         <div class="row bg-body-tertiary rounded-5 p-4">
           <div class="col col-12">
               <%= render 'shared/review_form', review: review, guest: guest, person: bite.user.first_name %>
@@ -200,7 +200,7 @@
           </div>
         </div>
       </div>
-      <div class="col-6 rounded-5"> <!-- Review form -->
+      <div class="col-6 rounded-5" data-controller="counter"> <!-- Review form -->
         <div class="row bg-body-tertiary rounded-5 p-4">
           <div class="col col-12">
               <%= render 'shared/review_form', review: review, guest: guest, person: guest.user.first_name %>
