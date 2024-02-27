@@ -9,7 +9,7 @@ class Bite < ApplicationRecord
   validates_numericality_of :number_of_guests, greater_than_or_equal_to: 1
   validates_numericality_of :price, greater_than: 0
 
-  validate :date_must_be_in_future
+  # validate :date_must_be_in_future
 
   private
 

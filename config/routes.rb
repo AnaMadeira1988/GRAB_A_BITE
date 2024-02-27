@@ -13,8 +13,12 @@ Rails.application.routes.draw do
   end
 
   get '/dashboard', to: 'bites#dashboard', as: 'dashboard'
+  get '/landing', to: 'bites#landing', as: 'landing'
 
-  resources :guests, only: [:update, :destroy]
+  resources :guests, only: [:update, :destroy] do
+    resources :reviews, only: [:create]
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
