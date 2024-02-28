@@ -1,51 +1,223 @@
 <div class="banner-landing" style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)), url(https://images.unsplash.com/photo-1684509209374-6cda28b64d6f?q=80&w=3125&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
-  <div class="landing-top-buttons d-flex flex-row justify-content-center align-items-end">
-    <button type="button" class="btn btn-outline-secondary fs-1 m-3 rounded-4">Sign in</button>
-    <button type="button" class="btn btn-outline-secondary fs-1 m-3  rounded-4">Login</button>
+  <div class="d-flex flex-row justify-content-between align-items-center">
+    <div class="m-3">
+      <%= image_tag "logo2.png", style: "width: 150px; height: auto;" %>
+    </div>
+    <div class="landing-top-buttons">
+      <button type="button" class="btn btn-outline-secondary fs-6 m-1 rounded-2">Sign in</button>
+      <button type="button" class="btn btn-outline-secondary fs-6 m-1 rounded-2">Login</button>
+    </div>
   </div>
 
   <div class="d-flex flex-column justify-content-center align-items-center banner-text">
     <h1 id="grababite-name">Grab'a'Bite</h1>
     <h2  id="grababite-moto">- Real Food, Awesome Memories -</h2>
-    <div class="d-flex flex-column justify-content-center align-items-center mt-5">
+    <div class="d-flex flex-column justify-content-center align-items-center mt-3">
       <h4 id="grababite-submoto">Explore local flavors with Grab'a'Bite!</h4>
       <h4 id="grababite-submoto">Book meals cooked by locals and have an authentic culinary experiences.</h4>
       <h4 id="grababite-submoto">Share stories, culture, and delicious dishes.</h4>
       <h4 id="grababite-submoto">Sign up now and taste the world!</h4>
     </div>
-    <button type="button" class="btn btn-success rounded-4 fs-1 m-5 px-4 py-2 mb-1" style="color: white;">choose from our bites</button>
-    <button type="button" class="btn btn-light rounded-4 fs-1 m-5" style="background-color: rgba(255, 255, 255, 0.4); color: #333; border: none;">Check our reviews!</button>
+    <button type="button" class="btn btn-success rounded-4 fs-5 m-5 px-4 py-1 mb-1" style="color: white;">Choose from our bites</button>
+    <button type="button" class="btn btn-light rounded-4 fs-5 m-2 p-1" style="background-color: rgba(255, 255, 255, 0.4); color: #333; border: none;">Check our reviews!</button>
   </div>
 </div>
 
-<div class="container-fluid landing-grid">
+<div class="img-grid">
+<div class="container-landing-img">
   <div class="row">
-    <div class="col">
-      <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-cover" alt="Image 1">
+    <div class="col-2">
+      <%= image_tag "https://images.unsplash.com/photo-1528979375023-c1e3916fe3c3?q=80&w=2624&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.9" %>
     </div>
-    <div class="col">
-      <img src="https://images.unsplash.com/photo-1528543606781-2f6e6857f318?q=80&w=2001&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-co" alt="Image 2">
+    <div class="col-2">
+      <%= image_tag "https://images.unsplash.com/photo-1568849676085-51415703900f?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
     </div>
-    <div class="col">
-      <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=2675&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid" alt="Image 3">
+    <div class="col-2">
+      <%= image_tag "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=2675&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
     </div>
-    <div class="col">
-      <img src="https://images.unsplash.com/photo-1528702748617-c64d49f918af?q=80&w=2927&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid" alt="Image 4">
+    <div class="col-2">
+      <%= image_tag "https://images.unsplash.com/photo-1567533708067-239a2371890b?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
     </div>
-  </div>
-      <div class="row">
-    <div class="col">
-      <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid" alt="Image 1">
+    <div class="col-2">
+      <%= image_tag "https://images.unsplash.com/photo-1528702748617-c64d49f918af?q=80&w=2927&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.9" %>
     </div>
-    <div class="col">
-      <img src="https://images.unsplash.com/photo-1528543606781-2f6e6857f318?q=80&w=2001&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid" alt="Image 2">
-    </div>
-    <div class="col">
-      <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=2675&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid" alt="Image 3">
-    </div>
-    <div class="col">
-      <img src="https://images.unsplash.com/photo-1528702748617-c64d49f918af?q=80&w=2927&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid" alt="Image 4">
+    <div class="col-2">
+      <%= image_tag "https://images.unsplash.com/photo-1682685797168-613fd0cae41d?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
     </div>
   </div>
+  <div class="row">
+    <div class="col-2">
+      <%= image_tag "https://images.unsplash.com/photo-1650964794396-9b9efaccd585?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+    </div>
+    <div class="col-2">
+      <%= image_tag "https://images.unsplash.com/photo-1555876484-a71a693b161b?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+    </div>
+    <div class="col-2">
+      <%= image_tag "https://images.unsplash.com/photo-1560153540-a287fac65d47?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+    </div>
+    <div class="col-2">
+      <%= image_tag "https://images.unsplash.com/photo-1506748566756-07746caecd61?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+    </div>
+    <div class="col-2">
+      <%= image_tag "https://images.unsplash.com/photo-1554710869-95f3df6a3197?q=80&w=2932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+    </div>
+    <div class="col-2">
+      <%= image_tag "https://images.unsplash.com/photo-1576524262503-22a4ee24b3cf?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.9" %>
+    </div>
   </div>
+</div>
+</div>
+
+<div class="d-flex flex-column justify-content-center align-items-center mt-5 pt-4 mb-2">
+  <h1 class="bites-title m-2">Choose from over 7000+ bites around the world</h1>
+  <h2 class="bites-subtitle">Savor Authentic Home-Cooked Meals with Locals Worldwide</h2>
+</div>
+
+<div class="d-flex flex-row align-items-center justify-content-center mx-5">
+  <% displayed_count = 0 %>
+  <% @bites.each do |bite| %>
+    <% unless bite.guest && displayed_count >= 4 %>
+      <!-- Creates a card for each Bite -->
+      <div class="m-2 bite-luminosity">
+        <%= render 'shared/card_index_bite', bite: bite %>
+      </div>
+      <% displayed_count += 1 %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="d-flex flex-column justify-content-center align-items-center mt-5 pt-4 mb-2">
+  <h1 class="bites-title m-2">Feedback from Our Community</h1>
+  <h3 class="bites-subtitle">Insights and Experiences Shared by Our Users Worldwide</h2>
+</div>
+
+<div  class="d-flex flex-row justify-content-center align-items-center mx-5 mb-2">
+      <!-- card elements here -->
+
+      <div class="d-flex card my-2 me-2" style="width: 25rem; border-radius: 2rem 0 2rem 0;  background-image: url('https://images.unsplash.com/photo-1601662528567-526cd06f6582?q=80&w=3115&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover;">
+        <div class="card-body" style="overflow: hidden;">
+          <!-- bite name -->
+          <h5 class="card-title fw-semibold">Pasteis de Nata</h5>
+          <!-- bite location -->
+          <h6 class="card-subtitle mb-2 text-body-secondary">Lisbon</h6>
+          <!-- bite description -->
+          &nbsp;&nbsp;<i class="fa-solid fa-quote-left fa-xl" style="color: #8e8f90;"></i>
+          <div class="ms-2 mt-2">
+            <p class="card-text" style="white-space: normal;"><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It was an awesome experience. The host cooked us a delicious tajine and even guided us through his neighborhood!</em></p>
+          </div>
+          <div class="d-flex justify-content-end center align-items-end me-2">
+            <i class="fa-solid fa-quote-right fa-xl" style="color: #8e8f90;"></i>
+          </div>
+          <!-- link to the guest profile -->
+        </div>
+        <div class="d-flex flex-column align-items-end" style="padding: 16px;">
+          <a href="#" class="card-link fw-medium text-secondary">Ana Madeira</a>
+          <!-- date of the review -->
+          <p>25 February 2024</p>
+        </div>
+      </div>
+
+      <div class="d-flex card my-2 me-2" style="width: 25rem; border-radius: 2rem 0 2rem 0;  background-image: url('https://images.unsplash.com/photo-1601662528567-526cd06f6582?q=80&w=3115&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover;">
+        <div class="card-body" style="overflow: hidden;">
+          <!-- bite name -->
+          <h5 class="card-title fw-semibold">Hummus Falafel</h5>
+          <!-- bite location -->
+          <h6 class="card-subtitle mb-2 text-body-secondary">Turin</h6>
+          <!-- bite description -->
+          &nbsp;&nbsp;<i class="fa-solid fa-quote-left fa-xl" style="color: #8e8f90;"></i>
+          <div class="ms-2 mt-2">
+            <p class="card-text" style="white-space: normal;"><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A memorable night! The host's sushi was superb, and the city tour was fascinating. We'll be back for sure!</em></p>
+          </div>
+          <div class="d-flex justify-content-end center align-items-end me-2">
+            <i class="fa-solid fa-quote-right fa-xl" style="color: #8e8f90;"></i>
+          </div>
+          <!-- link to the guest profile -->
+        </div>
+        <div class="d-flex flex-column align-items-end" style="padding: 16px;">
+          <a href="#" class="card-link fw-medium text-secondary">Ahmed Bouguacha</a>
+          <!-- date of the review -->
+          <p>25 February 2024</p>
+        </div>
+      </div>
+
+      <div class="d-flex card my-2 me-2" style="width: 25rem; border-radius: 2rem 0 2rem 0;  background-image: url('https://images.unsplash.com/photo-1601662528567-526cd06f6582?q=80&w=3115&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover;">
+        <div class="card-body" style="overflow: hidden;">
+          <!-- bite name -->
+          <h5 class="card-title fw-semibold">Cataplana</h5>
+          <!-- bite location -->
+          <h6 class="card-subtitle mb-2 text-body-secondary">Sesimbra</h6>
+          <!-- bite description -->
+          &nbsp;&nbsp;<i class="fa-solid fa-quote-left fa-xl" style="color: #8e8f90;"></i>
+          <div class="ms-2 mt-2">
+            <p class="card-text" style="white-space: normal;"><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Such a great time! The host's pasta was divine, and the countryside tour was delightful. We'll definitely return!</em></p>
+          </div>
+          <div class="d-flex justify-content-end center align-items-end me-2">
+            <i class="fa-solid fa-quote-right fa-xl" style="color: #8e8f90;"></i>
+          </div>
+          <!-- link to the guest profile -->
+        </div>
+        <div class="d-flex flex-column align-items-end" style="padding: 16px;">
+          <a href="#" class="card-link fw-medium text-secondary">André Costa</a>
+          <!-- date of the review -->
+          <p>25 February 2024</p>
+        </div>
+      </div>
+
+      <div class="d-flex card my-2 me-2" style="width: 25rem; border-radius: 2rem 0 2rem 0;  background-image: url('https://images.unsplash.com/photo-1601662528567-526cd06f6582?q=80&w=3115&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover;">
+        <div class="card-body" style="overflow: hidden;">
+          <!-- bite name -->
+          <h5 class="card-title fw-semibold">Boeuf Borguinon</h5>
+          <!-- bite location -->
+          <h6 class="card-subtitle mb-2 text-body-secondary">SeSingapura</h6>
+          <!-- bite description -->
+          &nbsp;&nbsp;<i class="fa-solid fa-quote-left fa-xl" style="color: #8e8f90;"></i>
+          <div class="ms-2 mt-2">
+            <p class="card-text" style="white-space: normal;"><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unforgettable experience! The host's BBQ was mouthwatering, and the beach tour was fantastic. Can't wait to visit again!</em></p>
+          </div>
+          <div class="d-flex justify-content-end center align-items-end me-2">
+            <i class="fa-solid fa-quote-right fa-xl" style="color: #8e8f90;"></i>
+          </div>
+          <!-- link to the guest profile -->
+        </div>
+        <div class="d-flex flex-column align-items-end" style="padding: 16px;">
+          <a href="#" class="card-link fw-medium text-secondary">Ivan Oliynyk</a>
+          <!-- date of the review -->
+          <p>25 February 2024</p>
+        </div>
+      </div>
+</div>
+
+<div class="d-flex flex-column justify-content-center align-items-center mt-5 pt-4 mb-2">
+  <h1 class="bites-title mt-4 mb-5 pb-3" style="font-size: 55px;">Why choose Grab'a'bite</h1>
+</div>
+
+<div class="cartoons mx-5 px-5">
+  <div class="row">
+    <div class="col-4">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <%= image_tag "worldfood.png", style: "max-width: 100%; max-height: 200px; background-color: transparent!" %>
+        <h3 class="mb-3 mt-2 bites-subtitle fw-bold">Cultural Immersion</h3>
+        <h5 class="text-center lh">Experience the heartbeat of a destination through its cuisine. By dining with locals in their homes, travelers gain intimate insights into traditional recipes, cooking techniques, and the stories behind each dish. It's not just about the food; it's about forging connections and understanding the rich tapestry of cultures that make our world vibrant and diverse.</h5>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <%= image_tag "bread.png", style: "max-width: 100%; max-height: 200px; background-color: transparent!" %>
+        <h3 class="mb-3 mt-2 bites-subtitle fw-bold">Community</h3>
+        <h5 class="text-center lh">Breaking bread together has always been a universal symbol of camaraderie and friendship. By dining with locals, travelers not only enjoy delicious meals but also foster genuine connections with people from different walks of life. Whether it's swapping travel stories, learning new languages, or simply sharing a laugh over a meal, our app creates unforgettable moments that transcend borders and unite us as global citizens.</h5>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <%= image_tag "sharefood.png", style: "max-width: 100%; max-height: 200px; background-color: transparent!" %>
+        <h3 class="mb-3 mt-2 bites-subtitle fw-bold">Authenticity Redefined</h3>
+        <h5 class="text-center lh">Say goodbye to tourist traps and generic eateries. Our app connects you with passionate home cooks who take pride in sharing their culinary heritage. From homemade pasta in an Italian nonna's kitchen to spicy curries in a bustling Indian household, every bite tells a tale of tradition, love, and authenticity that simply can't be replicated in restaurants.</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex flex-column justify-content-center align-items-center mt-5 pt-4 mb-4">
+  <h1 class="join-ending mt-5 mb-4">Join our community</h1>
+  <h3 class="text-dark ending mb-5">Let's make memories, one bite at a time!</h2>
 </div>

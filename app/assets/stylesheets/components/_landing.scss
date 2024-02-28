@@ -1,7 +1,9 @@
 .banner-landing {
   background-size: cover;
   background-position: center;
-  padding: 700px 0;
+  height: 800px; /* Set the desired height */
+  width: 100%; /* Occupy the whole width of the screen */
+  padding: 0; /* Remove previous padding */
 }
 
 .landing-top-buttons {
@@ -12,13 +14,13 @@
 
 .banner-text {
   position: absolute;
-  top: 155px;
+  top: 110px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 #grababite-name {
-  font-size: 200px;
+  font-size: 85px;
   color: rgba(100, 100, 100, 0.9);
   font-weight: bold;
   margin: 0;
@@ -29,7 +31,7 @@
 }
 
 #grababite-moto {
-  font-size: 100px;
+  font-size: 40px;
   color: rgba(145, 131, 131, 0.777);
   font-weight: bold;
   margin: 0;
@@ -40,16 +42,71 @@
 }
 
 #grababite-submoto {
-  color: rgba(40, 37, 37, 0.777);
-  font-size: 40px;
+  color: rgba(40, 37, 37, 0.493);
+  font-size: 20px;
   font-weight: bold;
   margin: 0;
-  font-family: "Salsa", cursive;
+  font-family: "Salsa";
   font-weight: 400;
   font-style: normal;
 }
 
-.landing-grid {
-  overflow-x: aut;
-  margin: 0 100px;
+.container-landing-img {
+  max-width: 1200px;
+}
+
+.img-grid {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  margin-top: -130px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bites-title {
+  font-size: 40px;
+  color: rgba(23, 22, 22, 0.911);
+  font-weight: bold;
+  font-family: "PT Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bites-subtitle {
+  font-size: 30px;
+  color: rgba(23, 22, 22, 0.579);
+  font-weight: bold;
+  font-family: "PT Serif";
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bite-luminosity {
+  transition: filter 0.1s ease;
+}
+
+.bite-luminosity:hover {
+  filter: brightness(120%);
+}
+
+.lh {
+  line-height: 1.5;
+}
+
+.join-ending {
+  font-size: 45px;
+  font-weight: bold;
+  font-family: "PT Serif";
+  color: green;
+}
+
+.ending {
+  font-size: 60px;
+  color: rgba(2, 2, 2, 0.613);
+  font-weight: bold;
+  font-family: "PT Serif";
+  font-weight: 400;
+  font-style: normal;
 }
