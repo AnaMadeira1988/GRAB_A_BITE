@@ -1,11 +1,10 @@
 class BitesController < ApplicationController
   before_action :set_bite, only: %i[show edit update destroy book favourite]
   before_action :set_pending_bites, only: %i[dashboard index show edit]
-  skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: %i[index landing]
 
   def index
     @bites = Bite.where('date >= ?', Date.today)
-    # raise
     @bites = filter(@bites, params)
   end
 
@@ -44,7 +43,7 @@ class BitesController < ApplicationController
     @guest.destroy if @guest.present? && @guest.confirmed.nil? && @bite.date < Date.today
     accessing_user = current_user == @bite.user || (@guest && current_user == @guest.user) || (@guest.nil? && @bite.date >= Date.today)
 
-    redirect_to root_path, alert: 'Bite not found' unless accessing_user
+    redirect_to bites_path, alert: 'Bite not found' unless accessing_user
   end
 
   def new
@@ -69,16 +68,16 @@ class BitesController < ApplicationController
 
   def edit
     if @bite.user != current_user
-      return redirect_to root_path, alert: 'You are not authorized to edit this bite.'
+      return redirect_to bites_path, alert: 'You are not authorized to edit this bite.'
     end
     if @bite.guest.present?
-      return redirect_to root_path, alert: 'You cannot edit a bite that has been booked.'
+      return redirect_to bites_path, alert: 'You cannot edit a bite that has been booked.'
     end
   end
 
   def update
     if @bite.update(bite_params)
-      redirect_to root_path, notice: 'Bite was successfully updated.'
+      redirect_to bites_path, notice: 'Bite was successfully updated.'
     else
       render :edit, status: 422
     end
@@ -86,19 +85,19 @@ class BitesController < ApplicationController
 
   def destroy
     @bite.destroy
-    redirect_to root_path, notice: "Bite has been successfully deleted."
+    redirect_to bites_path, notice: "Bite has been successfully deleted."
   end
 
   def book
     return if @bite.user == current_user
-    return redirect_to root_path, alert: "Cannot book! Bite expired!" if @bite.date < Date.today
+    return redirect_to bites_path, alert: "Cannot book! Bite expired!" if @bite.date < Date.today
 
     @guest = Guest.new(user: current_user, bite: @bite)
 
     if @guest.save
       redirect_to @bite, notice: 'Bite was successfully booked. Pending confirmation from host.'
     else
-      redirect_to root_path, alert: 'Bite could not be booked.'
+      redirect_to bites_path, alert: 'Bite could not be booked.'
     end
   end
 
@@ -109,7 +108,8 @@ class BitesController < ApplicationController
   end
 
   def landing
-    @bites = Bite.all
+    redirect_to bites_path if user_signed_in?
+    @bites = Bite.where('date >= ?', Date.today).select { |bite| bite.guest.nil? }.sample(4).sort_by(&:date)
     @hide_navbar = true
   end
 

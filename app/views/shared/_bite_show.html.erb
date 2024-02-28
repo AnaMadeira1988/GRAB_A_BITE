@@ -89,16 +89,35 @@
         <div class="d-flex">
           <div class="d-flex flex-column">
 
-            <% if bite.user.photo.attached? %>
-              <%= cl_image_tag bite.user.photo.key, class: "avatar",crop: :crop %>
-            <% else %>
-              <%= image_tag 'unknown',class: "avatar" %>
+            <%= link_to user_path(bite.user) do %>
+              <% if bite.user.photo.attached? %>
+                  <%= cl_image_tag bite.user.photo.key, class: "avatar",crop: :crop %>
+              <% else %>
+                <%= image_tag 'unknown',class: "avatar" %>
             <% end %>
-            <p class="text-end" style="margin: -12px 0 0 37px;"><i class="fa-solid fa-star" style="color: #ffd500;"></i><span>4</span></p>
+            <% end %>
+            <!-- Star rating -->
+            <% values = bite.user.reviews.map(&:experience).compact %>
+            <% average = values.sum / values.size unless values.empty?%>
+            <% unless values.empty? %>
+              <p class="text-end" style="margin: -12px 0 0 37px;"><i class="fa-solid fa-star" style="color: #ffd500;"></i><span><%= average %></span></p>
+            <% end %>
+
           </div>
           <div class="d-flex flex-column">
-            <p class="fs-5 fw-semibold mb-0"><%= "#{bite.user.first_name} #{bite.user.last_name}" %></p>
-            <p class="text-end">(579 reviews)</p>
+            <p class="fs-5 fw-semibold mb-0">
+                <%= link_to "#{bite.user.first_name} #{bite.user.last_name}", user_path(bite.user), class: "text-decoration-none  text-dark" %>
+              </p>
+            <!-- Review count display -->
+            <% reviews = Review.where(user_id: bite.user.id) %>
+            <% unless reviews.empty?  %>
+              <p class="text-end text-secondary">(<%= reviews.size %> reviews)</p>
+            <% else %>
+              <p class="text-end text-secondary">(No reviews yet)</p>
+            <% end %>
+
+
+
           </div>
         </div>
 
@@ -130,7 +149,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer" style="padding-right: 30px; border-top: none;">
-        <span class="mx-2" style="margin-bottom: -8px;">Only for <span style="font-size: 40px; font-weight: bold;"><%= bite.price %>€</span></span>
+        <span class="mx-2" style="margin-bottom: -8px;">Only for <span style="font-size: 40px; font-weight: bold;"><%= bite.price %>€</span>/pers</span>
 
         <% if bite.user == current_user %>
           <%= button_to 'Dashboard', dashboard_path, method: :get, class: "btn btn-warning fs-3 text-light px-4", style: "border-radius: 8px;" %>

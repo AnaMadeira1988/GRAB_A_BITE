@@ -61,7 +61,7 @@
 
     <%= f.input :photos, as: :file,label: 'Add photos', input_html: { multiple: true } %>
     <div class="d-flex justify-content-between">
-      <%= link_to "Back to homepage", root_path, class:"btn btn-light" %>
+      <%= link_to "Back to homepage", bites_path, class:"btn btn-light" %>
       <%= f.button :submit, class: 'btn btn-success text-success-emphasis text-body-secondary me-2 rounded-pill' %>
     </div>
 <% end %>

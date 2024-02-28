@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "bites#index"
+  root to: "bites#landing"
 
 
   get '/users/:id', to: 'users#show', as: 'user'
 
-  resources :bites, only: [:new, :show, :create, :edit, :update, :destroy] do
+  resources :bites, only: [:index, :new, :show, :create, :edit, :update, :destroy] do
     member do
       post 'book', to: 'bites#book'
       post 'favourite', to: 'bites#favourite'
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   get '/dashboard', to: 'bites#dashboard', as: 'dashboard'
-  get '/landing', to: 'bites#landing', as: 'landing'
+
 
   resources :guests, only: [:update, :destroy] do
     resources :reviews, only: [:create]

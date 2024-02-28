@@ -14,10 +14,15 @@
           <h5><i class="fa-solid fa-shield-heart" style="color: #3c3d3e;"></i>  Why I joined Grab'a'Bite</h5>
           <div class="text-secondary">
 
-            <% unless @user.description.empty? %>
+            <% if @user.description.present? && !@user.description.present?%>
               <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= @user.description %></p>
             <% else %>
-              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User hasn't told us about themselves yet 😥</p>
+              <% if current_user == @user %>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You haven't told us about themselves yet 😥</p>
+              <% else %>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User hasn't told us about themselves yet 😥</p>
+              <% end %>
+
             <% end %>
           </div>
         </div>
@@ -25,10 +30,14 @@
           <h5><i class="fa-solid fa-earth-americas" style="color: #484747;"></i>  I speak</h5>
           <div class="text-secondary">
 
-            <% unless @languages && @languages.strip.empty? %>
+            <% if @languages %>
               <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= @languages %></p>
             <% else %>
-              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; User hasn't told us what languages they speak yet 😥</p>
+              <% if current_user == @user %>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You haven't told us what languages you speak yet 😥</p>
+              <% else %>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; User hasn't told us what languages they speak yet 😥</p>
+              <% end %>
             <% end %>
           </div>
         </div>

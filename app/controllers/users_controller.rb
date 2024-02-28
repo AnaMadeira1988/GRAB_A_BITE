@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     end
     @age = Time.now.year - @user.birth_date.year if @user.birth_date
 
-    @languages = @user.languages.split.join(', ') if @user.languages
+    @languages = @user.languages.split.join(', ') if @user.languages.present? && !@user.languages.empty?
     @hosted = Bite.where(user_id: @user.id).joins(:guest).where(guests: { confirmed: true })
                   .select { |bite| bite.date < Date.today }.length
     @guested = Guest.where(user_id: @user.id, confirmed: true)
