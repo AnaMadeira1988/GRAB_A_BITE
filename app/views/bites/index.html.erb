@@ -13,8 +13,22 @@
 <div class="container justify-content-center my-4">
 
   <div class="d-flex flex-column">
-    <div class="d-flex justify-content-end w-100">
-      <%= button_tag "Filter", class: "btn btn-light filter-button rounded-3", type: "button", "data-bs-toggle": "offcanvas", "data-bs-target": "#offcanvasWithBothOptions", "aria-controls": "offcanvasWithBothOptions" %>
+    <div class="row w-100">
+      <div class="col-10 d-flex justify-content-center">
+        <% if current_user.description.nil? || current_user.description.strip.empty? %>
+          <div class="card w-100 ms-5 rounded-4">
+            <div class="card-body">To enjoy the full experience with us, please
+              <%= link_to 'complete your profile',  edit_user_registration_path, class:"link-offset-2 link-underline link-underline-opacity-25 link-underline-opacity-100-hover"%>.
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+
+      <div class="col-2 d-flex justify-content-end">
+        <%= button_tag "Filter", class: "btn btn-light filter-button", type: "button", "data-bs-toggle": "offcanvas", "data-bs-target": "#offcanvasWithBothOptions", "aria-controls": "offcanvasWithBothOptions" %>
+      </div>
+
     </div>
 
       <div class="row row-cols-1 row-cols-md-3 row-cols-xxl-4 g-3 mt-1">

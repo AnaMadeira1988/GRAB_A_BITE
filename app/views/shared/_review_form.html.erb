@@ -1,7 +1,10 @@
 <%= simple_form_for [guest, review] do |f| %>
 
-  <%= f.input :content, label: "Share with us your thoughts about #{person}", input_html: { rows: '5', data: {counter_target: 'input', action: "keyup->counter#updateCounter"}} %>
-  <div class="fs-6 text-secondary ms-3" data-counter-target="counterDisplay" style = "margin-top: -10px;"></div>
+  <%= f.input :content, label: "Share with us your thoughts about #{person}", input_html: { rows: '6', data: {counter_target: 'input', action: "keyup->counter#updateCounter"}} %>
+  <div class="d-flex justify-content-between">
+    <div class="fs-6 text-secondary ms-3" data-counter-target="counterDisplay" style = "margin-top: -10px;"></div>
+    <div class="fs-6 text-secondary ms-3" data-counter-target="maxDisplay" style = "margin-top: -10px;">(Max: 288 chars)</div>
+  </div>
   <div class="d-flex justify-content-between mb-3 mt-2">
     <%= f.input :food, collection: (1..10).to_a %>
     <%= f.input :cleanliness, collection: (1..10).to_a %>

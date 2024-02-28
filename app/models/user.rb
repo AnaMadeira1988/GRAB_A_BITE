@@ -10,5 +10,5 @@ class User < ApplicationRecord
   has_one_attached :photo
 
   validates_presence_of :first_name, :last_name, :phone_number
-  validates :phone_number, uniqueness: true, format: { with: /\A[0-9]{10}\z/, message: "Please enter a valid phone number" }
+  validates :phone_number, uniqueness: true, format: { with: /\A[0-9]{8,}\z/, message: "Please enter a valid phone number" }
 end

@@ -1,97 +1,103 @@
+
+<!-- Banner section -->
 <div class="banner-landing" style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)), url(https://images.unsplash.com/photo-1684509209374-6cda28b64d6f?q=80&w=3125&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
   <div class="d-flex flex-row justify-content-between align-items-center">
     <div class="m-3">
       <%= image_tag "logo2.png", style: "width: 150px; height: auto;" %>
     </div>
     <div class="landing-top-buttons">
-      <button type="button" class="btn btn-outline-secondary fs-6 m-1 rounded-2">Sign in</button>
-      <button type="button" class="btn btn-outline-secondary fs-6 m-1 rounded-2">Login</button>
+      <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-secondary fs-6 m-1 rounded-2" %>
+      <%= link_to "Login", new_user_session_path, class: "btn btn-outline-secondary fs-6 m-1 rounded-2" %>
     </div>
   </div>
 
+
+<!-- Title & Introduction section -->
   <div class="d-flex flex-column justify-content-center align-items-center banner-text">
     <h1 id="grababite-name">Grab'a'Bite</h1>
     <h2  id="grababite-moto">- Real Food, Awesome Memories -</h2>
     <div class="d-flex flex-column justify-content-center align-items-center mt-3">
-      <h4 id="grababite-submoto">Explore local flavors with Grab'a'Bite!</h4>
-      <h4 id="grababite-submoto">Book meals cooked by locals and have an authentic culinary experiences.</h4>
-      <h4 id="grababite-submoto">Share stories, culture, and delicious dishes.</h4>
-      <h4 id="grababite-submoto">Sign up now and taste the world!</h4>
+      <h4 class="grababite-submoto">Explore local flavors with Grab'a'Bite!</h4>
+      <h4 class="grababite-submoto">Book meals cooked by locals and have an authentic culinary experiences.</h4>
+      <h4 class="grababite-submoto">Share stories, culture, and delicious dishes.</h4>
+      <h4 class="grababite-submoto">Sign up now and taste the world!</h4>
     </div>
-    <button type="button" class="btn btn-success rounded-4 fs-5 m-5 px-4 py-1 mb-1" style="color: white;">Choose from our bites</button>
-    <button type="button" class="btn btn-light rounded-4 fs-5 m-2 p-1" style="background-color: rgba(255, 255, 255, 0.4); color: #333; border: none;">Check our reviews!</button>
+    <%= link_to "Choose from our bites", bites_path, class: "btn btn-success rounded-4 fs-5 m-5 px-4 py-1 mb-1", style: "color: white;" %>
+    <a type="a" href="#reviews" class="btn btn-light rounded-4 fs-5 m-2 p-1" style="background-color: rgba(255, 255, 255, 0.4); color: #333; border: none;">Check our reviews!</a>
   </div>
 </div>
 
+
+<!-- Image grid section -->
 <div class="img-grid">
-<div class="container-landing-img">
-  <div class="row">
-    <div class="col-2">
-      <%= image_tag "https://images.unsplash.com/photo-1528979375023-c1e3916fe3c3?q=80&w=2624&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.9" %>
+  <div class="container-landing-img">
+    <div class="row">
+      <div class="col-2">
+        <%= image_tag "landing_grid_1", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.9" %>
+      </div>
+      <div class="col-2">
+        <%= image_tag "landing_grid_2", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+      </div>
+      <div class="col-2">
+        <%= image_tag "landing_grid_3", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+      </div>
+      <div class="col-2">
+        <%= image_tag "landing_grid_4", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+      </div>
+      <div class="col-2">
+        <%= image_tag "landing_grid_5", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.9" %>
+      </div>
+      <div class="col-2">
+        <%= image_tag "landing_grid_6", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+      </div>
     </div>
-    <div class="col-2">
-      <%= image_tag "https://images.unsplash.com/photo-1568849676085-51415703900f?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
-    </div>
-    <div class="col-2">
-      <%= image_tag "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=2675&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
-    </div>
-    <div class="col-2">
-      <%= image_tag "https://images.unsplash.com/photo-1567533708067-239a2371890b?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
-    </div>
-    <div class="col-2">
-      <%= image_tag "https://images.unsplash.com/photo-1528702748617-c64d49f918af?q=80&w=2927&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.9" %>
-    </div>
-    <div class="col-2">
-      <%= image_tag "https://images.unsplash.com/photo-1682685797168-613fd0cae41d?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+    <div class="row">
+      <div class="col-2">
+        <%= image_tag "landing_grid_7", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+      </div>
+      <div class="col-2">
+        <%= image_tag "landing_grid_8", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+      </div>
+      <div class="col-2">
+        <%= image_tag "landing_grid_9", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+      </div>
+      <div class="col-2">
+        <%= image_tag "landing_grid_10", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+      </div>
+      <div class="col-2">
+        <%= image_tag "landing_grid_11", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
+      </div>
+      <div class="col-2">
+        <%= image_tag "landing_grid_12", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.9" %>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-2">
-      <%= image_tag "https://images.unsplash.com/photo-1650964794396-9b9efaccd585?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
-    </div>
-    <div class="col-2">
-      <%= image_tag "https://images.unsplash.com/photo-1555876484-a71a693b161b?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
-    </div>
-    <div class="col-2">
-      <%= image_tag "https://images.unsplash.com/photo-1560153540-a287fac65d47?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
-    </div>
-    <div class="col-2">
-      <%= image_tag "https://images.unsplash.com/photo-1506748566756-07746caecd61?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
-    </div>
-    <div class="col-2">
-      <%= image_tag "https://images.unsplash.com/photo-1554710869-95f3df6a3197?q=80&w=2932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.7" %>
-    </div>
-    <div class="col-2">
-      <%= image_tag "https://images.unsplash.com/photo-1576524262503-22a4ee24b3cf?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", class: "img-fluid mt-3", alt: "Image 1", style: "border-radius: 35px; height: 270px; opacity: 0.9" %>
-    </div>
-  </div>
-</div>
 </div>
 
+<!-- Bites section -->
 <div class="d-flex flex-column justify-content-center align-items-center mt-5 pt-4 mb-2">
   <h1 class="bites-title m-2">Choose from over 7000+ bites around the world</h1>
   <h2 class="bites-subtitle">Savor Authentic Home-Cooked Meals with Locals Worldwide</h2>
 </div>
 
 <div class="d-flex flex-row align-items-center justify-content-center mx-5">
-  <% displayed_count = 0 %>
   <% @bites.each do |bite| %>
-    <% unless bite.guest && displayed_count >= 4 %>
       <!-- Creates a card for each Bite -->
       <div class="m-2 bite-luminosity">
         <%= render 'shared/card_index_bite', bite: bite %>
       </div>
-      <% displayed_count += 1 %>
-    <% end %>
+
   <% end %>
 </div>
 
-<div class="d-flex flex-column justify-content-center align-items-center mt-5 pt-4 mb-2">
+
+<!-- Reviews section -->
+<div class="d-flex flex-column justify-content-center align-items-center mt-5 pt-4 mb-2" >
   <h1 class="bites-title m-2">Feedback from Our Community</h1>
   <h3 class="bites-subtitle">Insights and Experiences Shared by Our Users Worldwide</h2>
 </div>
 
-<div  class="d-flex flex-row justify-content-center align-items-center mx-5 mb-2">
+<div  class="d-flex flex-row justify-content-center align-items-center mx-5 mb-2" id="reviews">
       <!-- card elements here -->
 
       <div class="d-flex card my-2 me-2" style="width: 25rem; border-radius: 2rem 0 2rem 0;  background-image: url('https://images.unsplash.com/photo-1601662528567-526cd06f6582?q=80&w=3115&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover;">
@@ -168,7 +174,7 @@
           <!-- bite name -->
           <h5 class="card-title fw-semibold">Boeuf Borguinon</h5>
           <!-- bite location -->
-          <h6 class="card-subtitle mb-2 text-body-secondary">SeSingapura</h6>
+          <h6 class="card-subtitle mb-2 text-body-secondary">Singapura</h6>
           <!-- bite description -->
           &nbsp;&nbsp;<i class="fa-solid fa-quote-left fa-xl" style="color: #8e8f90;"></i>
           <div class="ms-2 mt-2">
@@ -187,6 +193,8 @@
       </div>
 </div>
 
+
+<!-- Cartoons section -->
 <div class="d-flex flex-column justify-content-center align-items-center mt-5 pt-4 mb-2">
   <h1 class="bites-title mt-4 mb-5 pb-3" style="font-size: 55px;">Why choose Grab'a'bite</h1>
 </div>
@@ -217,7 +225,8 @@
   </div>
 </div>
 
+<!-- Closing section -->
 <div class="d-flex flex-column justify-content-center align-items-center mt-5 pt-4 mb-4">
-  <h1 class="join-ending mt-5 mb-4">Join our community</h1>
-  <h3 class="text-dark ending mb-5">Let's make memories, one bite at a time!</h2>
+  <%= link_to "Join our community", new_user_registration_path, class: "join-ending mt-5 mb-4" %>
+  <h3 class="text-dark ending mb-5">Let's make memories, one bite at a time!</h3>
 </div>

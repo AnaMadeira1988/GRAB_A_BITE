@@ -1,15 +1,15 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon " style="background-color: rgba(202,157,157);">
   <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "logo2.png" %>
+    <%= link_to bites_path, class: "navbar-brand" do %>
+      <%= image_tag "logo2.png",style: "width: 200px;" %>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto d-flex align-items-center">
         <% if user_signed_in? %>
           <li class="nav-item active">
             <%= link_to "New bite", new_bite_path, class: "nav-link btn btn-outline-light custom-btn" %>
@@ -21,7 +21,7 @@
           <!--Notification Dropdown -->
           <div class="nav-item dropdown" style="padding: 25px;" data-controller="toggle">
             <a href="#" class="sino" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-action="click->toggle#toggleNotif" >
-            <i class="fa-regular fa-bell fa-lg m-13" id="notification" style="bottom: 27px;position: absolute;right: 23px;color: white;"></i>
+            <i class="fa-regular fa-bell fa-lg m-13" id="notification" style="bottom: 22px;position: absolute;right: 23px;color: white;"></i>
 
             <% unless @hide_notif || @pending_bites.nil? ||  @pending_bites.empty? %>
               <span  style="position: absolute; bottom: 32px; right: 20px; background: red; color: white; border-radius: 50%; padding: 0 5px; width: 10px; height: 10px; display: flex; justify-content: center; align-items: center;"  data-toggle-target="toggleableElem" >
@@ -29,7 +29,7 @@
             <% end %>
             </a>
               <!-- Dropdown Options-->
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"style="width: 300px;">
+            <div class="dropdown-menu dropdown-menu-end rounded-4 p-2" aria-labelledby="navbarDropdown"style="width: 300px;">
               <% unless @pending_bites.nil? || @pending_bites.empty? %>
                 <%= link_to "⌛ You have #{@pending_bites.size} pending bites.", dashboard_path, class: "dropdown-item fw-semibold" %>
               <% else %>
@@ -51,7 +51,7 @@
               <% end %>
 
             </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu dropdown-menu-end rounded-4 p-2" aria-labelledby="navbarDropdown">
               <%= link_to "My Profile", user_path(current_user), class: "dropdown-item" %>
               <%= link_to 'Account settings', edit_user_registration_path, class: "dropdown-item" %>
 
