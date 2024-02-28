@@ -67,11 +67,11 @@
               <% end %>
             <% else %>
               <% if bite.user.photo.attached? %>  <!-- Host photo -->
-                <%= link_to '#', class: 'link-class', style: 'text-decoration: none;', title: "#{bite.user.first_name} #{bite.user.last_name}" do %>
+                <%= link_to user_path(bite.user), class: 'link-class', style: 'text-decoration: none;', title: "#{bite.user.first_name} #{bite.user.last_name}" do %>
                   <%= cl_image_tag bite.user.photo.key, class: "avatar-large",crop: :crop %>
                 <% end %>
               <% else %>
-                  <%= link_to '#', class: 'link-class', style: 'text-decoration: none;', title: "#{bite.user.first_name} #{bite.user.last_name}" do %>
+                  <%= link_to user_path(bite.user), class: 'link-class', style: 'text-decoration: none;', title: "#{bite.user.first_name} #{bite.user.last_name}" do %>
                     <%= image_tag 'https://i.pinimg.com/736x/71/f3/51/71f3519243d136361d81df71724c60a0.jpg',class: "avatar-large", crop: :crop %>
                   <% end %>
               <% end %>
