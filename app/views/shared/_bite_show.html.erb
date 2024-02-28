@@ -29,20 +29,26 @@
 
           <% if bite.photos.attached? %>
 
-            <% bite.photos.each_with_index do |photo, index| %>
-              <% if index == 0 %>
-                <div class="carousel-item active">
-                <%= cl_image_tag photo.key, class:"d-block w-100",width: 798, height:532, crop: :fill %>
-                </div>
-              <% else %>
-                <div class="carousel-item">
-                  <%= cl_image_tag photo.key, class:"d-block w-100",width: 798, height:532, crop: :fill %>
-                </div>
+            <% if bite.photos.length == 1 %>
+              <div class="carousel-item active">
+                <%= cl_image_tag bite.photos.first.key, class:"d-block w-100", width: 798, height: 532, crop: :fill %>
+              </div>
+            <% else %>
+              <% bite.photos.each_with_index do |photo, index| %>
+                <% if index == 0 %>
+                  <div class="carousel-item active">
+                    <%= cl_image_tag photo.key, class:"d-block w-100", width: 798, height: 532, crop: :fill %>
+                  </div>
+                <% else %>
+                  <div class="carousel-item">
+                    <%= cl_image_tag photo.key, class:"d-block w-100", width: 798, height: 532, crop: :fill %>
+                  </div>
+                <% end %>
               <% end %>
             <% end %>
           <% else %>
             <div class="carousel-item active">
-              <%= image_tag 'dish_placeholder', class:"d-block w-100",width: 798, height:532 %>
+              <%= image_tag 'https://images.unsplash.com/photo-1580151820172-ae6491498c54?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', class:"d-block w-100",width: 798, height:532 %>
             </div>
 
           <% end %>
@@ -93,7 +99,7 @@
               <% if bite.user.photo.attached? %>
                   <%= cl_image_tag bite.user.photo.key, class: "avatar",crop: :crop %>
               <% else %>
-                <%= image_tag 'unknown',class: "avatar" %>
+                <%= image_tag 'https://i.pinimg.com/736x/71/f3/51/71f3519243d136361d81df71724c60a0.jpg',class: "avatar" %>
             <% end %>
             <% end %>
             <!-- Star rating -->

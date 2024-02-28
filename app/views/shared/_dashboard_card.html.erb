@@ -6,10 +6,10 @@
       <div class="card-image-top">
         <!-- if photos uploaded -->
         <% if bite.photos.attached? %>
-          <%= cl_image_tag bit.photos[0].key, class:"d-block w-100",width: 348, height:230, crop: :fill %>
+          <%= cl_image_tag bite.photos[0].key, class:"d-block w-100",width: 348, height:230, crop: :fill %>
         <!-- if No photos uploaded -->
         <% else %>
-            <%= image_tag 'dish_placeholder', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
+            <%= image_tag 'https://images.unsplash.com/photo-1580151820172-ae6491498c54?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', class: 'd-block w-100', alt: bite.name, style: 'height: 230px;' %>
         <% end %>
       </div>
 

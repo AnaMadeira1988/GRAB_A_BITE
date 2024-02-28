@@ -5,7 +5,7 @@
       <% if @user.photo.attached? %>
         <%= cl_image_tag @user.photo.key,  class: "avatar-extra-large", alt: "avatar-large"%>
       <% else %>
-        <%= image_tag "unknown", class: "avatar-extra-large", alt: "avatar-large" %>
+        <%= image_tag "https://i.pinimg.com/736x/71/f3/51/71f3519243d136361d81df71724c60a0.jpg", class: "avatar-extra-large", alt: "avatar-large" %>
       <% end %>
 
       <div class="d-flex position-absolute justify-content-center align-items-center bottom-0 end-0 pt-2 px-2 bg-white rounded-circle" style="--bs-bg-opacity: .3; height: 50px;">

@@ -47,7 +47,7 @@
               <% if current_user.photo.attached? %>
                 <%= cl_image_tag current_user.photo.key, class: "avatar",crop: :crop %>
               <% else %>
-                <%= image_tag "unknown", class: "avatar", crop: :crop %>
+                <%= image_tag "https://i.pinimg.com/736x/71/f3/51/71f3519243d136361d81df71724c60a0.jpg", class: "avatar", crop: :crop %>
               <% end %>
 
             </a>
