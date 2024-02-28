@@ -109,6 +109,7 @@ class BitesController < ApplicationController
   end
 
   def landing
+    @bites = Bite.all
     @hide_navbar = true
   end
 
