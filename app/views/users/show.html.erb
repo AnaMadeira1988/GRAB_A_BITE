@@ -14,7 +14,7 @@
           <h5><i class="fa-solid fa-shield-heart" style="color: #3c3d3e;"></i>  Why I joined Grab'a'Bite</h5>
           <div class="text-secondary">
 
-            <% if @user.description.present? && !@user.description.present?%>
+            <% if @user.description.present? && !@user.description.empty?%>
               <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= @user.description %></p>
             <% else %>
               <% if current_user == @user %>
