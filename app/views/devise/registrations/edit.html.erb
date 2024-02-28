@@ -62,10 +62,12 @@
                   autofocus: true,
                   input_html: { placeholder: "Tell us why you are joining Grab'a'Bite! 😁" } %>
       <%= f.input :password,
+                label: "New password",
                 hint: "leave it blank if you don't want to change it",
                 required: false,
                 input_html: { autocomplete: "new-password" } %>
       <%= f.input :password_confirmation,
+                label: "New password confirmation",
                 required: false,
                 input_html: { autocomplete: "new-password" } %>
       <%= f.input :current_password,

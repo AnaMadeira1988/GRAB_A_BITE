@@ -76,7 +76,12 @@ class BitesController < ApplicationController
   end
 
   def update
-    if @bite.update(bite_params)
+    modified_params = bite_params
+    modified_params[:dietary_options] = modified_params[:dietary_options].reject(&:empty?)
+                                                                         .map { |str| "##{str}".delete(' ') }.join(' ')
+    modified_params[:accessibility] = modified_params[:accessibility].reject(&:empty?)
+                                                                     .map { |str| "##{str}".delete(' ') }.join(' ')
+    if @bite.update(modified_params)
       redirect_to bites_path, notice: 'Bite was successfully updated.'
     else
       render :edit, status: 422
