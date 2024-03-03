@@ -1,14 +1,12 @@
 import { Controller } from "@hotwired/stimulus";
 import mapboxgl from 'mapbox-gl';
 
-
-mapboxgl.accessToken = 'pk.eyJ1IjoiYm91N21pZCIsImEiOiJjbHI2aWM0NXcxeW0yMmpvMTBoazJidXhkIn0.2x7Rbj3K-JvzqCUVSYI-Pw';
-
 // Connects to data-controller="geocoder"
 export default class extends Controller {
-  static values = { address: String, city: String }
-
+  static values = { address: String, apiToken: String, city: String }
   connect() {
+    mapboxgl.accessToken = this.apiTokenValue;
+    console.log(this.cityValue)
     const urlCity = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.cityValue}.json?access_token=${mapboxgl.accessToken}`;
 
     const urlAddress = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.addressValue}.json?access_token=${mapboxgl.accessToken}`;
@@ -16,6 +14,7 @@ export default class extends Controller {
     fetch(urlCity)
       .then(response => response.json())
       .then((data) => {
+        console.log(data)
         const coordinates = data.features[0].center;
 
         const mapSmall = new mapboxgl.Map({
@@ -24,17 +23,12 @@ export default class extends Controller {
           center: coordinates,
           zoom: 10
         });
-
-        new mapboxgl.Marker()
-          .setLngLat(coordinates)
-          .addTo(mapSmall);
       });
 
     fetch(urlAddress)
       .then(response => response.json())
       .then((data) => {
         const coordinates = data.features[0].center;
-        console.log(data);
 
         const mapBig = new mapboxgl.Map({
           container: 'map-big',
