@@ -2,113 +2,200 @@
 <div class="row me-0" data-controller="dashboard">
 
 
-  <!------------------------------------------------- Host dashboard -------------------------------------------------->
-  <!-- main content -->
-  <div class="col-9 pe-0" data-dashboard-target="toggleableDashboard">
 
-    <!-- Tab links -->
-    <div class="mt-4 ms-4 bg-light me-0 custom-rounded-top pb-1">
+
+
+  <!-- main content -->
+  <div class="col-9 pe-0">
+    <!------------------------------------------------- Guest/Host tab -------------------------------------------------->
+    <div class="mt-4 ms-4 bg-light mb-0 me-0 pb-0 custom-rounded-top">
       <div class="row">
-        <div class="col-md-12 d-flex justify-content-between align-items-center">
-          <ul class="nav nav-tabs" style="cursor:pointer; border-bottom: none;">
-            <li class="nav-item">
-              <a class="nav-link active text-secondary text-dark open-bites" style="border-top-left-radius:2em;" aria-current="page"
-                data-dashboard-target="openBitesLink" data-action="click->dashboard#openBites">Open Bites</a>
+        <div class="col-md-12">
+          <ul class="nav nav-tabs row justify-content-between border border-0" style="cursor:pointer;">
+            <li class="nav-item col-6 pe-0">
+              <a class="nav-link fw-semibold active text-center pe-0" aria-current="page" style="border-top-left-radius: 30px;" data-dashboard-target="hostLink" data-action="click->dashboard#hostDashboard">I'm a Host</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary"
-                data-dashboard-target= 'bookedBitesLink' data-action="click->dashboard#bookedBites">Booked</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary"
-                data-dashboard-target= 'pendingBitesLink' data-action="click->dashboard#pendingBites">Pending
-                <strong class="text-dark"><%= "(#{@pending_bites.size})" unless @pending_bites.empty?%></strong></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary"
-              data-dashboard-target= 'historyBitesLink' data-action="click->dashboard#historyBites">Bites History</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary"
-                data-dashboard-target= 'expiredBitesLink' data-action="click->dashboard#expiredBites">Expired</a>
+            <li class="nav-item col-6 ps-0">
+              <a class="nav-link text-center ps-0 text-body-tertiary" style="border-top-right-radius: 30px;" data-dashboard-target="guestLink" data-action="click->dashboard#guestDashboard">I'm a Guest</a>
             </li>
           </ul>
-          <button class="btn btn-secondary rounded-5 mt-1 me-3" data-action="click->dashboard#toggleDashboard">Guest Center</button>
         </div>
       </div>
     </div>
 
-    <!-- Open Bites content -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen open-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3"
-      style="height: 86vh;" data-dashboard-target= 'openBites'>
 
-      <% if @open_bites.empty? %>
-        <h3 class="text-secondary w-100"> No open bites available 😭</h3>
-      <% else %>
-        <% @open_bites.each do |b| %>
-          <%= render 'shared/dashboard_card', bite: b %>
+    <!------------------------------------------------- Host dashboard -------------------------------------------------->
+    <div class="" data-dashboard-target="hostDashboard">
+      <!-- Tab links -->
+      <div class="mt-0 ms-4 bg-light me-0 pb-1">
+        <div class="row">
+          <div class="col-md-12 d-flex justify-content-start align-items-center">
+            <ul class="nav nav-tabs" style="cursor:pointer; border-bottom: none;">
+              <li class="nav-item">
+                <a class="nav-link active text-secondary text-dark open-bites" aria-current="page"
+                  data-dashboard-target="openBitesLink" data-action="click->dashboard#openBites">Open Bites</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary"
+                  data-dashboard-target= 'bookedBitesLink' data-action="click->dashboard#bookedBites">Booked</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary"
+                  data-dashboard-target= 'pendingBitesLink' data-action="click->dashboard#pendingBites">Pending
+                  <strong class="text-dark"><%= "(#{@pending_bites.size})" unless @pending_bites.empty?%></strong></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary"
+                data-dashboard-target= 'historyBitesLink' data-action="click->dashboard#historyBites">Bites History</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary"
+                  data-dashboard-target= 'expiredBitesLink' data-action="click->dashboard#expiredBites">Expired</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Open Bites content -->
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen open-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3"
+        style="height: 86vh;" data-dashboard-target= 'openBites'>
+        <% if @open_bites.empty? %>
+          <h3 class="text-secondary w-100"> No open bites available 😭</h3>
+        <% else %>
+          <% @open_bites.each do |b| %>
+            <%= render 'shared/dashboard_card', bite: b %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+      <!-- Booked Bites content -->
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen booked-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
+        style="height: 86vh;" data-dashboard-target= 'bookedBites'>
+        <% if @booked_bites.empty? %>
+          <h3 class="text-secondary w-100"> No booked Bites available 😭</h3>
+        <% else %>
+          <% @booked_bites.each do |b| %>
+            <%= render 'shared/dashboard_card', bite: b %>
+          <% end %>
+        <% end %>
+      </div>
+      <!-- Pending Bites content -->
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen pending-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
+        style="height: 86vh;" data-dashboard-target= 'pendingBites'>
+        <% if @pending_bites.empty? %>
+          <h3 class="text-secondary w-100"> No pending Bites available 😭</h3>
+        <% else %>
+          <% @pending_bites.each do |b| %>
+            <%= render 'shared/dashboard_card', bite: b %>
+          <% end %>
+        <% end %>
+      </div>
+      <!-- Expired Bites content -->
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen other-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
+        style="height: 86vh;" data-dashboard-target= 'expiredBites'>
+        <% if @expired_bites.empty? %>
+          <h3 class="text-secondary w-100"> No expired Bites available 😭</h3>
+        <% else %>
+          <% @expired_bites.each do |b| %>
+            <%= render 'shared/dashboard_card', bite: b %>
+          <% end %>
+        <% end %>
+      </div>
+      <!-- History Bites content -->
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen other-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
+        style="height: 86vh;" data-dashboard-target= 'historyBites'>
+        <% if @history_bites.empty? %>
+          <h3 class="text-secondary w-100"> No Bites in your history yet! 😭</h3>
+        <% else %>
+          <% @history_bites.each do |b| %>
+            <%= render 'shared/dashboard_card', bite: b %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
 
-    <!-- Booked Bites content -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen booked-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
-      style="height: 86vh;" data-dashboard-target= 'bookedBites'>
-
-      <% if @booked_bites.empty? %>
-        <h3 class="text-secondary w-100"> No booked Bites available 😭</h3>
-      <% else %>
-        <% @booked_bites.each do |b| %>
-          <%= render 'shared/dashboard_card', bite: b %>
+    <!------------------------------------------------- Guest dashboard -------------------------------------------------->
+    <div class="d-none" data-dashboard-target="guestDashboard">
+      <!-- Guest Tab links -->
+      <div class="ms-4 bg-light pb-1 me-0">
+        <div class="row">
+          <div class="col-md-12 d-flex justify-content-end align-items-center">
+            <ul class="nav nav-tabs " style="cursor:pointer; border-bottom: none;">
+              <li class="nav-item">
+                <a class="nav-link active text-secondary text-dark booked-bites"
+                  data-dashboard-target= 'guestBookedBitesLink' data-action="click->dashboard#guestBookedBites">Booked</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary"
+                  data-dashboard-target= 'guestPendingBitesLink' data-action="click->dashboard#guestPendingBites">Pending
+                  <strong class="text-dark"><%= "(#{@guest_pending_bites.size})" unless @guest_pending_bites.empty?%></strong></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary"
+                data-dashboard-target= 'guestFavouriteBitesLink' data-action="click->dashboard#guestFavouriteBites">Favourites</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary"
+                data-dashboard-target= 'guestHistoryBitesLink' data-action="click->dashboard#guestHistoryBites">Bites History</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Guest Booked Bites content -->
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen booked-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3"
+        style="height: 86vh;" data-dashboard-target= 'guestBookedBites'>
+        <% if @guest_booked_bites.empty? %>
+          <h3 class="text-secondary w-100"> You have no booked Bites yet! 😭</h3>
+        <% else %>
+          <% @guest_booked_bites.each do |b| %>
+            <%= render 'shared/dashboard_card', bite: b %>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-
-    <!-- Pending Bites content -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen pending-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
-      style="height: 86vh;" data-dashboard-target= 'pendingBites'>
-
-      <% if @pending_bites.empty? %>
-        <h3 class="text-secondary w-100"> No pending Bites available 😭</h3>
-      <% else %>
-        <% @pending_bites.each do |b| %>
-          <%= render 'shared/dashboard_card', bite: b %>
+      </div>
+      <!-- Guest Pending Bites content -->
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen pending-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
+        style="height: 86vh;" data-dashboard-target= 'guestPendingBites'>
+        <% if @guest_pending_bites.empty? %>
+          <h3 class="text-secondary w-100"> No pending bites available 😭</h3>
+        <% else %>
+          <% @guest_pending_bites.each do |b| %>
+            <%= render 'shared/dashboard_card', bite: b %>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-
-    <!-- Expired Bites content -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen other-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
-      style="height: 86vh;" data-dashboard-target= 'expiredBites'>
-
-      <% if @expired_bites.empty? %>
-        <h3 class="text-secondary w-100"> No expired Bites available 😭</h3>
-      <% else %>
-        <% @expired_bites.each do |b| %>
-          <%= render 'shared/dashboard_card', bite: b %>
+      </div>
+      <!-- Guest favourite Bites content -->
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen favourite-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
+        style="height: 86vh;" data-dashboard-target= 'guestFavouriteBites'>
+        <% if @favourites.empty? %>
+          <h3 class="text-secondary w-100"> No Bites added to your favourites yet 😭</h3>
+        <% else %>
+          <% @favourites.each do |b| %>
+            <%= render 'shared/dashboard_card', bite: b %>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-
-    <!-- History Bites content -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen other-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
-      style="height: 86vh;" data-dashboard-target= 'historyBites'>
-
-      <% if @history_bites.empty? %>
-        <h3 class="text-secondary w-100"> No Bites in your history yet! 😭</h3>
-      <% else %>
-        <% @history_bites.each do |b| %>
-          <%= render 'shared/dashboard_card', bite: b %>
+      </div>
+      <!-- Guest History Bites content -->
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen other-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
+        style="height: 86vh;" data-dashboard-target= 'guestHistoryBites'>
+        <% if @guest_history_bites.empty? %>
+          <h3 class="text-secondary w-100"> No Bites in your history yet! 😭</h3>
+        <% else %>
+          <% @guest_history_bites.each do |b| %>
+            <%= render 'shared/dashboard_card', bite: b %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-
 
   </div>
 
+
+
+
   <!-- stats content -->
-  <div class="col-3 h-100 me-0" data-dashboard-target="toggleableDashboard">
-    <div class="container mt-4 bg-light rounded-5 overflow-auto" style="height: 92vh;">
+  <div class="col-3 h-100 me-0">
+
+    <div class="container mt-4 bg-light rounded-5 overflow-auto" style="height: 97vh;" data-dashboard-target="hostDashboard">
       <div class="card-header text-center p-2">
         <h2>🍩Stats🍩</h2>
       </div>
@@ -156,103 +243,12 @@
         <% end %>
       </div>
     </div>
-  </div>
 
-  <!------------------------------------------------- Guest dashboard -------------------------------------------------->
-  <!-- main content -->
-  <div class="col-9 pe-0 d-none" data-dashboard-target="toggleableDashboard">
-
-    <!-- Guest Tab links -->
-    <div class="mt-4 ms-4 bg-light pb-1 me-0 custom-rounded-top">
-      <div class="row">
-        <div class="col-md-12 d-flex justify-content-between align-items-center">
-          <ul class="nav nav-tabs " style="cursor:pointer; border-bottom: none;">
-            <li class="nav-item">
-              <a class="nav-link active text-secondary text-dark booked-bites" style="border-top-left-radius:2em;"
-                data-dashboard-target= 'guestBookedBitesLink' data-action="click->dashboard#guestBookedBites">Booked</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary"
-                data-dashboard-target= 'guestPendingBitesLink' data-action="click->dashboard#guestPendingBites">Pending
-                <strong class="text-dark"><%= "(#{@guest_pending_bites.size})" unless @guest_pending_bites.empty?%></strong></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary"
-              data-dashboard-target= 'guestFavouriteBitesLink' data-action="click->dashboard#guestFavouriteBites">Favourites</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary"
-              data-dashboard-target= 'guestHistoryBitesLink' data-action="click->dashboard#guestHistoryBites">Bites History</a>
-            </li>
-          </ul>
-          <button class="btn btn-secondary rounded-5 mt-1 me-3" data-action="click->dashboard#toggleDashboard">Host Center</button>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Guest Booked Bites content -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen booked-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3"
-      style="height: 86vh;" data-dashboard-target= 'guestBookedBites'>
-
-      <% if @guest_booked_bites.empty? %>
-        <h3 class="text-secondary w-100"> You have no booked Bites yet! 😭</h3>
-      <% else %>
-        <% @guest_booked_bites.each do |b| %>
-          <%= render 'shared/dashboard_card', bite: b %>
-        <% end %>
-      <% end %>
-    </div>
-
-    <!-- Guest Pending Bites content -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen pending-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
-      style="height: 86vh;" data-dashboard-target= 'guestPendingBites'>
-
-      <% if @guest_pending_bites.empty? %>
-        <h3 class="text-secondary w-100"> No pending bites available 😭</h3>
-      <% else %>
-        <% @guest_pending_bites.each do |b| %>
-          <%= render 'shared/dashboard_card', bite: b %>
-        <% end %>
-      <% end %>
-    </div>
-
-    <!-- Guest favourite Bites content -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen favourite-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
-      style="height: 86vh;" data-dashboard-target= 'guestFavouriteBites'>
-
-      <% if @favourites.empty? %>
-        <h3 class="text-secondary w-100"> No Bites added to your favourites yet 😭</h3>
-      <% else %>
-        <% @favourites.each do |b| %>
-          <%= render 'shared/dashboard_card', bite: b %>
-        <% end %>
-      <% end %>
-    </div>
-
-    <!-- Guest History Bites content -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4 h-screen other-bites bg-light scrollable-content ms-4 me-0 mb-4 custom-rounded-bottom mt-0 pe-3 d-none"
-      style="height: 86vh;" data-dashboard-target= 'guestHistoryBites'>
-
-      <% if @guest_history_bites.empty? %>
-        <h3 class="text-secondary w-100"> No Bites in your history yet! 😭</h3>
-      <% else %>
-        <% @guest_history_bites.each do |b| %>
-          <%= render 'shared/dashboard_card', bite: b %>
-        <% end %>
-      <% end %>
-    </div>
-
-  </div>
-
-  <!-- stats content -->
-  <div class="col-3 h-100 me-0 d-none" data-dashboard-target="toggleableDashboard">
-    <div class="container mt-4 bg-light rounded-5" style="height: 91vh;">
+    <div class="container mt-4 bg-light rounded-5 d-none" style="height: 97vh;" data-dashboard-target="guestDashboard">
       <div class="card-header text-center p-2">
         <h2>🍩Stats🍩</h2>
       </div>
       <!-- 👆header👆-->
-
       <!-- 👇stats donut👇-->
       <div class="card-body" >
         <% if (@guest_booked_bites + @guest_pending_bites).empty? %>
@@ -265,31 +261,33 @@
             <!-- TODO: Display polar area chart below -->
             </canvas>
           </div>
-
           <div class="px-2 py-2 my-4">
             <ul class="list-group list-group-flush rounded-4">
               <li class="list-group-item d-flex justify-content-between align-items-center py-2">
                 <p class="m-0"><i class="fa-solid fa-house" style="color: #484747;"></i> Hosted:</p><span class="badge rounded-circle text-bg-light fs-6"> <%= hosted || 0 %></span>
               </li>
-
               <li class="list-group-item d-flex justify-content-between align-items-center py-2">
                 <p class="m-0"><i class="fa-solid fa-person-hiking" style="color: #484747;"></i> Guested:</p><span class="badge rounded-circle text-bg-light fs-6"> <%= guested || 0 %></span>
               </li>
-
               <li class="list-group-item d-flex justify-content-between align-items-center py-2">
                 <p class="m-0"><i class="fa-solid fa-feather" style="color: #484747;"></i> Reviews:</p><span class="badge rounded-circle text-bg-light fs-6"> <%= reviews || 0 %></span>
               </li>
-
               <li class="list-group-item d-flex justify-content-between align-items-center py-2">
                 <p class="m-0"><i class="fa-solid fa-clock-rotate-left" style="color: #484747;"></i> Expired:</p><span class="badge rounded-circle text-bg-light fs-6"> <%= @expired_bites.length || 0%></span>
               </li>
             </ul>
           </div>
-
         <% end %>
       </div>
     </div>
+
   </div>
+
+
+
+
+
+
 
 
 </div>

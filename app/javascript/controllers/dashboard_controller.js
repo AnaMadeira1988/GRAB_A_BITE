@@ -2,11 +2,30 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="dashboard"
 export default class extends Controller {
-  static targets = ["openBites", "bookedBites", "pendingBites", "openBitesLink", "bookedBitesLink", "pendingBitesLink", "toggleableDashboard", "guestBookedBites", "guestPendingBites", "guestPendingBitesLink", "guestBookedBitesLink", "expiredBitesLink", "expiredBites", "historyBites", "historyBitesLink", "guestHistoryBites", "guestHistoryBitesLink", "guestFavouriteBites", "guestFavouriteBitesLink"]
+  static targets = ["openBites", "bookedBites", "pendingBites", "openBitesLink", "bookedBitesLink", "pendingBitesLink", "hostLink", "guestLink", "hostDashboard", "guestDashboard", "guestBookedBites", "guestPendingBites", "guestPendingBitesLink", "guestBookedBitesLink", "expiredBitesLink", "expiredBites", "historyBites", "historyBitesLink", "guestHistoryBites", "guestHistoryBitesLink", "guestFavouriteBites", "guestFavouriteBitesLink"]
 
-  toggleDashboard() {
-    this.toggleableDashboardTargets.forEach((target) => {
-      target.classList.toggle("d-none")
+  guestDashboard() {
+    this.hostLinkTarget.classList.remove("active", "fw-semibold")
+    this.hostLinkTarget.classList.add("text-body-tertiary")
+    this.guestLinkTarget.classList.remove("text-body-tertiary")
+    this.guestLinkTarget.classList.add("active", "fw-semibold")
+    this.hostDashboardTargets.forEach((target) => {
+      target.classList.add("d-none")
+    })
+    this.guestDashboardTargets.forEach((target) => {
+      target.classList.remove("d-none")
+    })
+  }
+  hostDashboard() {
+    this.guestLinkTarget.classList.remove("active", "fw-semibold")
+    this.guestLinkTarget.classList.add("text-body-tertiary")
+    this.hostLinkTarget.classList.remove("text-body-tertiary")
+    this.hostLinkTarget.classList.add("active", "fw-semibold")
+    this.guestDashboardTargets.forEach((target) => {
+      target.classList.add("d-none")
+    })
+    this.hostDashboardTargets.forEach((target) => {
+      target.classList.remove("d-none")
     })
   }
 
