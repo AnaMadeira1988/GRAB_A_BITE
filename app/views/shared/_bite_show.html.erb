@@ -155,7 +155,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer" style="padding-right: 30px; border-top: none;">
-        <span class="mx-2" style="margin-bottom: -8px;">Only for <span style="font-size: 40px; font-weight: bold;"><%= bite.price %>€</span>/pers</span>
+        <span class="mx-2" style="margin-bottom: -8px;">Only for <span style="font-size: 40px; font-weight: bold;"><%= bite.price %>€/</span><i class="fa-solid fa-user"></i></span>
 
         <% if bite.user == current_user %>
           <%= button_to 'Dashboard', dashboard_path, method: :get, class: "btn btn-warning fs-3 text-light px-4", style: "border-radius: 8px;" %>
